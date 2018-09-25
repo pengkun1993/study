@@ -1,8 +1,0 @@
-[ 2016-03-03T10:27:31+08:00 ] ::1 /curd_sql/
-ERR: 1292:Incorrect date value: '1456972051' for column 'create_time' at row 1
- [ SQL语句 ] : INSERT INTO `jike_user` (`username`,`password`,`email`,`create_time`,`status`) VALUES ('yao','yao','yao@qq.com','1456972051','1')
-
-[ 2016-03-03T10:27:57+08:00 ] ::1 /curd_sql/
-ERR: 1292:Incorrect date value: '1456972077' for column 'create_time' at row 1
- [ SQL语句 ] : INSERT INTO `jike_user` (`username`,`password`,`email`,`create_time`,`status`) VALUES ('yao','yao','yao@qq.com','1456972077','1')
-
