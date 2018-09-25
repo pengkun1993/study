@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闪电</title>
+	<script type="text/javascript" src="js/react.js"></script>
+	<script type="text/javascript" src="js/react-dom.js"></script>
+	<script type="text/javascript" src="js/browser.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+		var ShowContent=React.createClass({
+			getInitialState:function(){
+				return {
+					strikes:0,
+				}
+			},
+			handleInterval:function(){
+				this.setState({
+					strikes:this.state.strikes+100,
+				});
+			},
+			componentDidMount:function(){
+				setInterval(this.handleInterval,1000);
+			},
+			render:function(){
+				var theStyle={
+					fontSize:34,
+					color:'green',
+					fontWeight:'bold'
+				}
+				return (
+					<h1 style={theStyle}>{this.state.strikes}</h1>
+					);
+			}
+		});
+		var ContentWraper=React.createClass({
+			render:function(){
+				var commonStyle={
+					color:'grey',
+					margin:0,
+				}
+				var textStyles={
+					outer:{
+						width:300,
+						padding:20,
+						backgroundColor:'black',
+						textAlign:'center',
+						borderRadius:20,
+					},
+					ligtning:{
+						fontSize:30,
+						...commonStyle
+					},
+					earth:{
+						fontSize:36,
+						fontWeight:'bold',
+						...commonStyle
+					},
+					little:{
+						fontSize:18,
+						...commonStyle
+					}
+				};
+				return(
+					<div style={textStyles.outer}>
+						<ShowContent />
+						<h2 style={textStyles.ligtning}>雷霆打击</h2>
+						<h2 style={textStyles.earth}>我们的地球</h2>
+						<p style={textStyles.little}>（自从你加载这个组件之后）</p>
+					</div>
+				)
+			}
+		});
+		ReactDOM.render(
+			<ContentWraper />,
+			document.getElementById('container')
+		)
+	</script>
+</body>
+</html>

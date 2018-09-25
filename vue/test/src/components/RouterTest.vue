@@ -1,0 +1,36 @@
+<template>
+	<div>
+		<h1>{{data}}</h1>
+	</div>
+</template>
+<script>
+	export default{
+		name:'routerTest',
+		data(){
+			return {
+				data:'Router导航守卫'
+			}
+		},
+		beforeRouteEnter(to,from,next){
+			console.log('beforeRouteEnter',this)
+			console.log('beforeRouteEnter11111111111')
+			next((vm)=>{
+				console.log('beforeRouteEnter>next:',vm)
+			})
+		},
+		beforeRouteUpdate(to,from,next){
+			console.log('beforeRouteUpdate',this)
+			console.log('beforeRouteUpdate2222222222')
+			next((vm)=>{
+				console.log('beforeRouteUpdate>next:',vm)
+			})
+		},
+		beforeRouteLeave(to,from,next){
+			console.log('beforeRouteLeave33333333333')
+			next()
+		},
+		created(){
+			console.log('created111111111')
+		}
+	}
+</script>

@@ -1,0 +1,105 @@
+<extend name="Public/base"/><block name="body">
+	<div class="fixed-bar" id="Config_Bar">
+		<div class="item-title">
+			<div class="page-header">
+			<h1><a href="{:U('Admin/Config/index')}">配置模型</a>
+				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;编辑</span>
+				</small>
+			</h1>
+		</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Config_Form">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置名称: </label>
+
+				<div class="col-xs-11">
+					<input type="text" placeholder="" class="col-xs-9 col-sm-3" name="name" value="{$_info["name"]}"/>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置类型: </label>
+
+				<div class="col-xs-11">
+					<select name="type" class="easyui-combobox col-xs-8 col-sm-2" style="height:30px;" data-options="value:'{$_info["type"]}',url:'{:U("Admin/Function/get_config")}&cname=CONFIG_TYPE_LIST|type|title&r_type=json',valueField:'type',textField:'title',multiple:false,required:false,editable:false"></select>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置说明: </label>
+				<div class="col-xs-11">
+					<input name="title" type="text" class="easyui-textbox col-xs-9 col-sm-3" style="height:30px;" value="{$_info["title"]}">
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置分组:</label>
+				<div class="col-xs-11">
+					<select name="group" class="easyui-combobox col-xs-8 col-sm-2" style="height:30px;" data-options="value:'{$_info["group"]}',url:'{:U("Admin/Function/get_config")}&cname=CONFIG_GROUP_LIST|group|title&r_type=json',valueField:'group',textField:'title',multiple:false,required:false,editable:false"></select>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置参数: </label>
+				<div class="col-xs-11">
+					<input name="extra" value="{$_info["extra"]}" type="text" class="col-xs-9 col-sm-3" >
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name"> 配置说明: </label>
+				<div class="col-xs-11">
+					<input name="remark" value="{$_info["remark"]}" type="text" class="col-xs-9 col-sm-3" style="height:80px;">
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name">状态: </label>
+				<div class="col-xs-11">
+					<select name="status" class="col-xs-7 col-sm-3" id="s_status"  def-data="{$_info['status']}">
+						<option value="1" selected>启用</option>
+						<option value="0" >禁用</option>
+					</select>
+					<script type="text/javascript">
+						var sel=document.getElementById('s_status');
+						var opt=sel.getElementsByTagName('option');
+						var def=sel.getAttribute('def-data');
+						for(var i=0;i<opt.length;i++){
+							if(def==opt[i].value){
+								opt[i].setAttribute("selected","selected");
+							};
+						}
+					</script>
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name">配置值: </label>
+				<div class="col-xs-11">
+					<input name="value" value="{$_info["value"]}" type="text" class="col-xs-9 col-sm-3" style="height:100px;">
+				</div>
+			</div>
+			<hr/>
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="for_name">排序:</label>
+				<div class="col-xs-11">
+					<input name="sort" value="{$_info["sort"]}" type="text" class="col-xs-9 col-sm-3">
+				</div>
+			</div>
+			<hr/>
+			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Config_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div>
+</block>

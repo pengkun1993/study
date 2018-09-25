@@ -1,0 +1,20 @@
+[ 2016-03-09T09:47:07+08:00 ] 127.0.0.1 /index.php/home/user/register
+ERR: Think\Model:check_hobby方法不存在！
+
+[ 2016-03-09T11:24:08+08:00 ] 127.0.0.1 /index.php/home/user/register
+ERR: 1048:Column 'user_hobby' cannot be null
+ [ SQL语句 ] : INSERT INTO `sw_user` (`username`,`password`,`user_email`,`user_qq`,`user_tel`,`user_sex`,`user_xueli`,`user_hobby`,`user_introduce`) VALUES ('yao','782041896','yao@qq.com','782041896','18333251689','1','4',NULL,'I am yao')
+
+[ 2016-03-09T15:45:50+08:00 ] 127.0.0.1 /index.php/Home/user/login.html
+ERR: 1054:Unknown column 'ada' in 'where clause'
+ [ SQL语句 ] : SELECT * FROM `sw_user` WHERE ( username=ada,password=ada ) 
+
+[ 2016-03-09T17:28:52+08:00 ] 127.0.0.1 /index.php/home/usera
+ERR: 非法操作:index
+
+[ 2016-03-09T17:29:10+08:00 ] 127.0.0.1 /index.php/home/adafa
+ERR: 非法操作:index
+
+[ 2016-03-09T17:33:29+08:00 ] 127.0.0.1 /index.php/home/adafa
+ERR: 非法操作:index
+

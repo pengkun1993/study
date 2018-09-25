@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>柱状图</title>
+	<script src="js/d3.min.js"></script>
+	<style type="text/css">
+		.axis path,
+		.axis line{
+			fill: none;
+			stroke: black;
+			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+			font-family: sans-serif;
+			font-size: 11px;
+		}
+
+		.MyRect {
+			/* fill: steelblue; */
+		}
+
+		.MyText {
+			fill: white;
+			text-anchor: middle;
+		}
+	</style>
+</head>
+<body>
+
+	<script type="text/javascript">
+		var svg_w=600;
+		var svg_h=600;
+
+		var svg=d3.select('body')
+				.append('svg')
+				.attr('width',svg_w)
+				.attr('height',svg_h);	
+		//画布中间的空白
+		var padding={left:30, right:30, top:20, bottom:20};
+		//定义一个数组
+		var dataset = [10, 20, 30, 40, 33, 24, 12, 5];
+		//定义X轴比例尺
+		var xscale=d3.scale.ordinal()
+			.domain(d3.range(dataset.length))
+			.rangeRoundBands([0,svg_w-padding.left-padding.right]);
+		var xAxis=d3.svg.axis()
+			.scale(xscale)
+			.orient('bottom');
+		//定义Y轴比例尺
+		var yscale=d3.scale.linear()
+			.domain([0,d3.max(dataset)])
+			.range([svg_h-padding.top-padding.bottom,0]);
+		var yAxis=d3.svg.axis()
+			.scale(yscale)
+			.orient('left');
+		//矩形之间的空白
+		var rectPadding=4;
+		//添加矩形元素
+		var rects=svg.selectAll('.MyRect')
+			.data(dataset)
+			.enter()
+			.append('rect')
+			.attr('class','MyRect')
+			.attr('transform','translate('+padding.left+','+padding.top+')')
+			.attr('x',function(d,i){
+				return xscale(i)+rectPadding/2;
+			})
+			.attr('y',function(d,i){
+				return yscale(d);
+			})
+			.attr('width',xscale.rangeBand()-rectPadding)
+			.attr('height',function(d){
+				return svg_h-padding.top-padding.bottom-yscale(d);
+			})
+			.attr('fill','steelblue')
+			//交互
+			.on('mouseover',function(d,i){
+				d3.select(this)
+					.attr('fill','yellow');
+			})
+			.on('mouseout',function(d,i){
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.attr('fill','steelblue');
+			});
+		//添加文字
+		var texts=svg.selectAll('.MyText')
+				.data(dataset)
+				.enter()
+				.append('text')
+				.attr('class','MyText')
+				.attr('transform','translate('+padding.left+','+padding.top+')')
+				.attr('x',function(d,i){
+					return xscale(i)+rectPadding/2;
+				})
+				.attr('y',function(d,i){
+					var min = yscale.domain()[0];
+					return yscale(min);
+				})
+				.transition()
+				.delay(function(d,i){
+					return i*200;
+				})
+				.duration(2000)
+				.ease('bounce')
+				.attr('y',function(d,i){
+					return yscale(d);
+				})
+				.attr('dx',function(){
+					return (xscale.rangeBand()-rectPadding)/2;
+				})
+				.attr('dy',function(){
+					return 20;
+				})
+				.text(function(d){
+					return d;
+				});
+		//添加x轴
+		svg.append("g")
+		  .attr("class","axis")
+		  .attr("transform","translate(" + padding.left + "," + (svg_h - padding.bottom) + ")")
+		  .call(xAxis); 
+		//添加y轴
+		svg.append("g")
+		  .attr("class","axis")
+		  .attr("transform","translate(" + padding.left + "," + padding.top + ")")
+		  .call(yAxis);
+		
+	</script>
+</body>
+</html>

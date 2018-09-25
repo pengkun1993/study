@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> {:C('SOFT_NAME')}|ace管理系统</title>
+
+        <!-- basic styles -->
+
+        <link href="__STATIC__/aceAdmin/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="__CSS__/main.css">
+        <!--[if IE 7]>
+          <link rel="stylesheet" href="__STATIC__/aceAdmin/css/font-awesome-ie7.min.css" />
+        <![endif]-->
+
+        <!-- page specific plugin styles -->
+
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/jquery-ui-1.10.3.custom.min.css" />
+        <!-- page specific plugin styles -->
+
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/jquery-ui-1.10.3.custom.min.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/chosen.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/datepicker.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/bootstrap-timepicker.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/daterangepicker.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/colorpicker.css" />
+        <!-- ace styles -->
+
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/ace.min.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/ace-rtl.min.css" />
+        <link rel="stylesheet" href="__STATIC__/aceAdmin/css/ace-skins.min.css" />
+
+        <!--[if lte IE 8]>
+          <link rel="stylesheet" href="__STATIC__/aceAdmin/css/ace-ie.min.css" />
+        <![endif]-->
+
+        <!-- inline styles related to this page -->
+
+        <!-- ace settings handler -->
+
+        <script src="__STATIC__/aceAdmin/js/ace-extra.min.js"></script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+        <!--[if lt IE 9]>
+        <script src="__STATIC__/aceAdmin/js/html5shiv.js"></script>
+        <script src="__STATIC__/aceAdmin/js/respond.min.js"></script>
+        <![endif]-->
+
+    <!-- ----------------------------------- -->
+    
+    <link rel="stylesheet" type="text/css" href="__STATIC__/kindeditor/themes/default/default.css" />
+    <!-- easyUI css样式 -->
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Easyui/themes/metro/easyui.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Easyui/themes/color.css">
+    <link rel="stylesheet" href="__STATIC__/aceAdmin/css/old/skin.css" />
+    <!--/ easyUI css样式 -->
+    <script type="text/javascript" src="__STATIC__/Jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor.js"></script>
+    <script charset="utf-8" src="__STATIC__/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__STATIC__/kindeditor/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="__STATIC__/Echarts/echarts.js"></script>
+    <script charset="utf-8" src="__STATIC__/aceAdmin/js/old/base.js" /></script><script>
+    var ke_pasteType=2;
+    var ke_fileManagerJson="{:U('Admin/FilesUpdata/filemanager')}";
+    var ke_uploadJson="{:U('Admin/FilesUpdata/upload')}";
+    var ke_Uid='{:session(C("AUTH_KEY"));}';
+    var Root='__ROOT__';
+    </script>
+    <!-- ----------------------------------- -->
+</head>
+<body>
+<block name="body"> </block>
+<!-- basic scripts -->
+
+        <!-- <![endif]-->
+
+        <!--[if IE]>
+        <script src="__STATIC__/aceAdmin/js/jquery-2.0.3.min.js"></script>
+        <![endif]-->
+
+        <!--[if !IE]> -->
+
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='__STATIC__/aceAdmin/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+        </script>
+
+        <!-- <![endif]-->
+
+        <!--[if IE]>
+            <script type="text/javascript">
+             window.jQuery || document.write("<script src='__STATIC__/aceAdmin/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+            </script>
+        <![endif]-->
+
+        <script type="text/javascript">
+            if("ontouchend" in document) document.write("<script src='__STATIC__/aceAdmin/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+        </script>
+        <script src="__STATIC__/aceAdmin/js/bootstrap.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/typeahead-bs2.min.js"></script>
+
+        <!-- page specific plugin scripts -->
+        <script src="__STATIC__/aceAdmin/js/jquery.ui.touch-punch.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/markdown/markdown.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/markdown/bootstrap-markdown.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/jquery.hotkeys.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/bootstrap-wysiwyg.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/bootbox.min.js"></script>
+
+        <!-- ace scripts -->
+
+        <script src="__STATIC__/aceAdmin/js/ace-elements.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/ace.min.js"></script>
+        <script src="__STATIC__/aceAdmin/js/editor.js"></script>
+</body>
+</html>
+

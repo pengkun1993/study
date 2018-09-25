@@ -1,0 +1,23 @@
+<taglib name="TagLib\jike"  />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>出生年份</td>
+			<td>{$birthday_year|default="没有数据"}</td>
+		</tr>
+		<tr>
+			<td>年龄</td>
+			<td>{$birthday_year|getAge}</td>
+		</tr>
+	</table>
+	<jike:friends name="jike_user" uid="2" empty="没有数据">
+		{{$jike_user.username}}
+	</jike:friends>
+</body>
+</html>

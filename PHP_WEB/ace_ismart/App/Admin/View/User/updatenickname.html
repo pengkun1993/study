@@ -1,0 +1,39 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="User_Bar">
+	<div class="item-title">
+		<h3>个人资料</h3>
+		<ul class="tab-base">
+			<if condition="Is_Auth('Admin/User/updatenickname')">
+			<li><a href="{:U('Admin/User/updatenickname')}"><span>修改昵称</span></a></li>
+			</if>
+			<if condition="Is_Auth('Admin/User/updatepassword')">
+			<li><a href="{:U('Admin/User/updatepassword')}"><span>修改密码</span></a></li>
+			</if>
+		</ul>
+	</div>
+</div>
+<form id="User_Form" method="post">
+<table class="table tb-type2 nobdb">
+	<tbody>
+		<tr>
+			<td colspan="2" class="required"><label for="for_password">密码:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="password" id="for_password" type="password" class="easyui-textbox" style="height:30px; width:254px" value="" data-options="required:false"></td>
+			<td class="vatop tips"></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="required"><label for="for_nickname">昵称:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="nickname" id="for_nickname" type="text" class="easyui-textbox" style="height:30px;" value="" data-options="required:false"></td>
+			<td class="vatop tips"></td>
+		</tr>
+    </tbody>
+	<tfoot>
+		<tr class="tfoot">
+			<td colspan="2"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="$('#User_Form').submit();" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></td>
+		</tr>
+	 </tfoot>
+</table>
+</form>
+</block>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组的扩展</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//一、扩展运算符
+			// 1、扩展运算符(spread)是三个点(...)。它好比rest参数的逆运算，将一个数组转为逗号分隔的参数序列，该运算符主要用于函数调用。
+			// 2、替代函数的apply方法，由于扩展运算符可以展开数组，所以不再需要apply方法，将数组转为函数的参数了。
+			(function(){
+				console.log('1================1');
+				//（1）、求数组中的最大值，以下三个效果相同
+				console.log(Math.max.apply(null,[14,3,77]));//77
+				console.log(Math.max(...[14,3,77]));//77
+				console.log(Math.max(14,3,77));//77
+				//（2）、连接数组
+				var arr1=[1,3,4];
+				var arr2=[5,6,8];
+				Array.prototype.push.apply(arr1,arr2);//返回数组长度
+				console.log(arr1);//[1,3,4,5,6,8]
+				var arr3=[1,2,3];
+				var arr4=[5,6,7];
+				arr3.push(...arr4);
+				console.log(arr3);//[1,2,3,5,6,7];
+				//（3）、复制数组
+				//es5
+				const a1=[1,2];
+				const a2=a1.concat();//这样是值复制，不是指针复制
+				//es6
+				const a3=[...a1];
+				const [...a4]=a1;//这里a3/a4都是a1的克隆
+				//（4）、 合并数组
+				//es5
+				arr1.concat(arr2,arr3);
+				//es6
+				[...arr1,...arr2,...arr3];
+				//（5）、配合结构赋值使用，只能放在参数的最后一位，否则会报错
+				const [last,...butlast]=[1,2,3,4,5];
+				console.log(last);//1
+				console.log(butlast);//[2,3,4,5];
+				//const [...butlast,last]=[1,2,3,4,5];
+				//报错，Uncaught SyntaxError: Rest element must be last element
+				//（6）、将字符串转换成数组
+				console.log([...'hello']);// ["h", "e", "l", "l", "o"]
+				//（7）、将Iterator接口的对象转换为真正的数组，如Map、Set、Generator等。而类数组对象如果没有部署Iterator接口，扩展运算符就会报错，这是可以使用Array.form方法进行转换为真正的数组
+			})();
+		//二、Array.from();方法用于将两类对象转为真正的数组：类数组的对象(array-like-object)和可遍历(Iterator)对象
+			(function(){
+				console.log('2===============1');
+				// 1、扩展运算符(...)背后调用的是遍历器接口(Symbol.iterator)，如果一个对象没有部署这个接口，就无法转换。Array.from方法还支持类似数组的对象。所谓类似数组的对象，本质特征只有一点，即必须有length属性。因此，任何有length属性的对象，都可以通过Array.from方法转为数组，而此时扩展运算符(...)就无法转换。
+				var arr1=Array.from({length:3});
+				console.log(arr1);//[ undefined, undefined, undefined ]
+				//2、对于还没有部署该方法的浏览器，可以使用Array.prototype.slice方法替代。
+				const toArray=(()=>Array.from ? Array.from : obj=>[].slice.call(obj))();
+				//3、Array.from还可以接收第二个参数，作用类似于map方法，对每个元素处理后的值放入返回的数组。
+				//4、Array.from()的另一个应用是，将字符串转为数组，然后返回字符串的长度。因为它能正确处理各种 Unicode 字符，可以避免 JavaScript 将大于\uFFFF的 Unicode 字符，算作两个字符的 bug。
+				function countSymbols(string) {
+				  return Array.from(string).length;
+				}
+			})()
+		//三、Array.of() 方法用于将一组值，转换为数组。
+			Array.of(3, 11, 8) // [3,11,8]
+			Array.of(3) // [3]
+			Array.of(3).length // 1
+			// 这个方法的主要目的是弥补数组构造函数Array()的不足。因为参数个数的不同，会导致Array()的行为有差异。
+			Array() // []
+			Array(3) // [, , ,]
+			Array(3, 11, 8) // [3, 11, 8]
+			// Array.of基本上可以用来替代Array()或new Array()，并且不存在由于参数不同而导致的重载。它的行为非常统一。
+			// Array.of方法可以用下面的代码模拟实现。
+			function ArrayOf(){
+			  return [].slice.call(arguments);
+			}
+		//四、数组实例的copyWithin方法，在当前数组内部，将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组。也就是说，使用这个方法，会修改当前数组。
+			Array.prototype.copyWithin([1,2,3,4,5], start = 0, end = this.length);
+			// 它接受三个参数。
+				// target（必需）：从该位置开始替换数据。如果为负值，表示倒数。
+				// start（可选）：从该位置开始读取数据，默认为 0。如果为负值，表示倒数。开始位置会改变
+				// end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数。不改变结束位置
+		//五、数组实例的 find() 和 findIndex() 
+			//1、find方法的回调函数可以接受三个参数，依次为当前的值、当前的位置和原数组
+			[1, 5, 10, 15].find(function(value, index, arr) {
+			  return value > 9;
+			});// 10
+			//2、数组实例的findIndex方法的用法与find方法非常类似，返回第一个符合条件的数组成员的位置，如果所有成员都不符合条件，则返回-1。
+			[1, 5, 10, 15].findIndex(function(value, index, arr) {
+			  return value > 9;
+			});//2
+			//3、这两个方法都可以接受第二个参数，用来绑定回调函数的this对象。
+			function f(v){
+			  return v > this.age;
+			}
+			let person = {name: 'John', age: 20};
+			[10, 12, 26, 15].find(f, person);    // 26
+			// 4、indexOf方法无法识别数组的NaN成员，但是findIndex方法可以借助Object.is方法做到。
+			[NaN].indexOf(NaN);//-1
+			[NaN].findIndex(y => Object.is(NaN, y));//0
+		//六、数组实例的fill()方法，使用给定的值，填充一个数组
+			(function(){
+				console.log('6==============1');
+				// 1、fill方法还可以接受第二个和第三个参数，用于指定填充的起始位置和结束位置，不改变结束位置
+				var arr=['a','b','c'].fill(9,1,2);
+				console.log(arr);
+				// 2、如果填充的类型为对象，那么被赋值的是同一个内存地址的对象，而不是深拷贝对象。
+			})()
+		//七、entries()，keys()和values()——用于遍历数组。它们都返回一个遍历器对象(iterator)，可以用for...of循环进行遍历，唯一的区别是keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
+		//八、数组实例的 includes()。Array.prototype.includes方法返回一个布尔值，表示某个数组是否包含给定的值，与字符串的includes方法类似。
+			//1、该方法的第二个参数表示搜索的起始位置，默认为0。如果第二个参数为负数，则表示倒数的位置，如果这时它大于数组长度（比如第二个参数为-4，但数组长度为3），则会重置为从0开始。
+			//2、indexOf方法有两个缺点，一是不够语义化，它的含义是找到参数值的第一个出现位置，所以要去比较是否不等于-1，表达起来不够直观。二是，它内部使用严格相等运算符（===）进行判断，这会导致对NaN的误判。
+		//九、数组的空位，数组的空位指，数组的某一个位置没有任何值。
+			console.log('9===============1');
+			// 1、空位不是undefined，一个位置的值等于undefined，依然是有值的。空位是没有任何值，in运算符可以说明这一点。
+			console.log(0 in [undefined, undefined, undefined]); // true
+			console.log(0 in [, , ,]); // false
+			//2、ES5 对空位的处理，已经很不一致了，大多数情况下会忽略空位。
+				//forEach(), filter(), reduce(), every() 和some()都会跳过空位。
+				//map()会跳过空位，但会保留这个值
+				//join()和toString()会将空位视为undefined，而undefined和null会被处理成空字符串。
+			//3、ES6 则是明确将空位转为undefined。
+				//Array.from方法会将数组的空位，转为undefined
+				//扩展运算符（...）也会将空位转为undefined
+				//copyWithin()会连空位一起拷贝
+				//fill()会将空位视为正常的数组位置
+				//for...of循环也会遍历空位
+				//entries()、keys()、values()、find()和findIndex()会将空位处理成undefined
+			//注意：由于空位的处理规则非常不统一，所以建议避免出现空位
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+

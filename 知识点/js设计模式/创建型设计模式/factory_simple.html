@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单工厂模式——《JavaScript设计模式》</title>
+</head>
+<body>
+	<p>又叫静态工厂方法，由一个工厂对象决定创建某一种产品对象类的实例。主要用于创建同一类对象。</p>
+</body>
+<script type="text/javascript">
+	// 示例
+	(function(){
+		/*将多个基类封装到一个函数中，这样只需要知道这个函数就可以访问多个基类对象，这个函数通常被称为工厂函数，这种模式叫简单工厂模式。*/
+		console.log('示例一');
+		//篮球基类
+		var Basketball=function(){
+			this.intro='篮球盛行于美国';
+		}
+		Basketball.prototype = {
+			getMember:function(){
+				console.log('每个队伍需要5名队员');
+			},
+			getBallSize:function(){
+				console.log('篮球很大');
+			}
+		};
+		//足球基类
+		var Football=function(){
+			this.intro='足球在世界范围内很流行';
+		}
+		Football.prototype={
+			getMember:function(){
+				console.log('每个队伍需要11名队员');
+			},
+			getBallSize:function(){
+				console.log('足球很大');
+			}
+		}
+		// 网球基类
+		var Tennis=function(){
+			this.intro='每年有很多网球系列比赛';
+		}
+		Tennis.prototype={
+			getMember:function(){
+				console.log('每个队伍需要1名队员');
+			},
+			getBallSize:function(){
+				console.log('网球很小');
+			}
+		}
+		//运动工厂
+		var SportFactory=function(name){
+			switch(name){
+				case 'NBA':return new Basketball();
+				case 'wordCup':return new Football();
+				case 'FrenchOpen':return new Tennis();
+			}
+		};
+		var footnall=SportFactory('wordCup');
+		console.log(footnall);
+		footnall.getMember();
+		footnall.getBallSize();
+		/*基类对象中有很多相同的地方可以抽象出来，上面的模式是对不同的类实例化，简单工厂模式的理念就是创建对象，不过出了上面的模式还可以创建相似对象，综合形似的地方。*/
+		var CreateSport=function(balltype){
+			var intro_str;
+			var size_str;
+			var number;
+			switch(balltype){
+				case 'NBA':str='篮球盛行于美国';size_str='篮球很大';number=5;break;
+				case 'wordCup':str='足球在世界范围内很流行';size_str='足球很大';number=11;break;
+				case 'FrenchOpen':str='每年有很多网球系列比赛';size_str='网球很小';number=1;break;
+			}
+			var o=function(){
+				this.intro=str;
+			}
+			o.prototype.getMember=function(){
+				console.log('每个队伍需要'+number+'名队员');
+			};
+			o.prototype.getBallSize=function(){
+				console.log(size_str);
+			};
+			return new o();
+		};
+		var basket=CreateSport('NBA');
+		console.log(basket);
+		basket.getMember();
+		basket.getBallSize();
+		/*可以通过对象实例访问保存在原型中的值，但却不能通过对象实例重写原型中的值*/
+		console.log(basket.prototype);//undefined,实例不可使用prototype,但可以直接点上方法进行访问和修改啊
+		console.log(basket._proto_);//undefined,也不可访问
+	})();
+</script>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+.remove_bold{
+	font-size:0.8em;
+	margin-left:2em;
+}
+.marg-top{
+	margin-top:50px !important;
+}
+.current{
+	background-color:#3483B2;
+	color:#fff;
+}
+.top_a{
+	margin-left:2em;
+}
+.top_a:hover{
+	background-color: #3483B2;
+	color:#fff;
+}
+.marg_right{
+	margin-right: 5px;
+}

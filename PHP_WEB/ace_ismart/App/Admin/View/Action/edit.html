@@ -1,0 +1,71 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="Action_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/Action/index')}">行为</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;编辑</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Action_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">行为唯一标识:</label>
+
+					<div class="col-xs-11">
+						<input name="name" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["name"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">行为说明:</label>
+
+					<div class="col-xs-11">
+						<input name="title" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["title"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">行为描述:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="remark" value="{$_info["remark"]}"  style=" height:80px;">{$_info["remark"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">行为规则:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="rule" value="{$_info["rule"]}"  style=" height:80px;">{$_info["rule"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">日志规则:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="log" value="{$_info["log"]}"  style=" height:80px;">{$_info["log"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="{$_info['status']}"><option value="0">隐藏</option><option value="1">显示</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_status');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Action_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div></block>

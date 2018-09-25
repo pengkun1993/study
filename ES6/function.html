@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数的扩展</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		// 一、函数参数的默认值
+			//1、参数变量是默认声明的，所以不能用let或const再次声明。
+			function foo(x=5){
+				let x=1;//error
+				const x=2;//error
+			}
+			//2、使用参数默认值时，函数不能有同名参数
+			function foo(x,x,y){}//不报错
+			//function foo(x,x,y=1){}//报错，syntaxError:...
+			//3、参数默认值不是传值的，而是每次都重新计算默认值表达式的值。也就是说，参数默认值是惰性求职的。
+			(function(){
+				let x=99;
+				function foo(p=x+1){
+					console.log(p);
+				}
+				foo();//100
+				foo();//100
+				x=200;
+				foo();//201
+			})();
+			//4、与结构赋值默认值结合使用，是传入参数与定义时参数进行解构，如第一个是{x:1}和{x,y=5}进行解构
+			(function(){
+				function foo({x,y=5}){
+					console.log(x,y);
+				}
+				foo({});//undefined 5
+				foo({x:1});//1 5
+				//foo();//TypeError:...
+
+				function foo2({x,y=5}={}){
+					console.log(x,y);
+				}
+				foo2();//undefined 5
+
+				function fetch(url,{body='',method='get',headers={}}){
+					console.log(method);
+					console.log(arguments);
+				}
+				fetch('http://example.com',{});
+				//fetch('http://example.com');//报错，TypeError:...
+				function fetch2(url,{body='',method='get',headers={}}={body:'a',method:'post',headers:'c'}){
+					console.log(method);
+				}
+				fetch2('http://example.com');//'post'
+				//上面的fetch出现了双重默认值，如果没有第二个参数，函数参数的默认值就会生效，然后才是结构赋值的默认值生效。
+				function m1({x=0,y=0}={}){
+					//{x=0,y=0}这个是结构赋值的结构，设置了结构赋值的默认值，没有设置参数的默认值
+					console.log([x,y]);
+				}
+				m1();
+				function m2({x,y}={x:0,y:0}){
+					//设置了参数的默认值{x:0,y:0},没有设置结构赋值的默认值
+					console.log([x,y]);
+				}
+				m2();
+			})();
+			//5、定义了默认值的参数，应该是函数的尾参数。如果非尾参数设置默认值，实际上这个参数是没法省略的
+			(function(){
+				function f(x=1,y){
+					console.log([x,y]);
+				}
+				f();//[1,undefined]
+				f(2);//[2,undefined]
+				//f(,1);//报错
+				f(undefined,1)//[1,1]
+				//如果传入undefined将触发该参数等于默认值，null则没有这个效果
+				f(null,1);//[null,1]
+			})();
+			//6、函数的length属性，将返回没有指定默认值的参数个数。函数的length属性的含义是该函数预期传入的参数个数。
+			console.log((function (a,b,c=1) {}).length);//2
+			//如果设置了默认值的参数不是尾参数，那么length属性也不再计入后面的参数了。
+			console.log((function (a=0,b,c) {}).length);//0
+			console.log((function (a,b=1,c) {}).length);//1
+			//7、一旦设置了参数的默认值，函数进行声明初始化时，参数形成一个单独的作用域(context)。等到初始化结束，这个作用域会消失。这种语法行为，在不设置参数默认值时，是不会出现的。
+			//详解见阮一峰ES6->函数的拓展->作用域
+			(function(){
+				console.log('1=================7')
+				var x=1;
+				function foo(x=x){
+
+				}
+				//foo();//ReferenceError:...
+				//这里是因为参数形成一个临时作用于，则相当于 let x=x;暂时性死去报错
+				function foo1(x,y=function(){
+					x=2;}){
+					var x=3;
+					y();//只作用在了参数作用于，所以对全局和函数作用域都没有影响
+					console.log(x);
+				}
+				foo1();//3
+				console.log(x);//1
+				//对上面的个人理解,但显然并不正确
+				{//外部全局
+					var x=1;
+					{//参数形成作用域
+						var x;
+						console.log(x);//1
+						var y=function(){
+							x=2;
+						}
+						{//函数体作用域
+							var x=3;
+							y();
+							console.log(x);//2
+						}
+						console.log(x);//2
+					}
+					console.log(x);//2
+				}
+			})();
+			// 8、应用，利用参数默认值，可以指定某个参数不得省略，如果省略就抛出一个错误
+			(function(){
+				console.log('1===============8');
+				function throwIfMissing(){
+					throw new Error('Missing parameter');
+				}
+				function foo(mustBeProvided=throwIfMissing()){
+					return mustBeProvided;
+				}
+				//foo();//报错
+				//从上面代码还可以看到，参数mustBeProvided的默认值等于throwIfMissing函数的运行结果（注意函数名throwIfMissing之后有一对圆括号），这表明参数的默认值不是在定义时执行，而是在运行时执行。如果参数已经赋值，默认值中的函数就不会运行。
+				//另外可以将参数设置为undefined，表明这个参数是可以省略的
+			})();
+		// 二、rest参数。ES6引入rest参数（形式为...变量名），用于获取函数多余的参数。rest参数搭配的变量是一个数组，该变量将多余的参数放入数组中。所以rest是一个数组，而argument是一个类数组对象
+			// 1、rest参数之后不能再有其他参数，否则会报错
+			//function f(a,...b,c){}//语法错误，SyntaxError: Rest parameter must be last formal parameter
+			//2函数的length属性不包括rest参数
+			console.log('2=====================2');
+			console.log((function(a){}).length);//1
+			console.log((function(...a){}).length);//0
+			console.log((function(a,...b){}).length);//1
+		//三、只要函数参数使用了默认值、结构赋值、或者扩展运算符，那么函数内部就不能显式设定为严格模式，否则会报错。这样规定的原因是函数内部的严格模式，同样适用于函数参数。但是函数执行的时候，先执行函数参数，然后再执行函数体，这样就有一个不合理的地方，只有从函数体之中，才能知道参数是否应该以严格模式执行，但是参数却应该先于函数体执行。
+			(function(){
+				//报错，SyntaxError: Illegal 'use strict' directive in function with non-simple parameter list
+				/*function doSomething(value = 070) {
+				  'use strict';
+				  return value;
+				}*/
+				// 上面的代码一方面使用了默认值，则不能使用'user strict',另一方面，严格模式下不能用前缀0表示八进制，所以应该报错。但实际报错的是不可以使用严格模式
+			})();
+		//四、函数的name属性返回该函数的函数名
+			// 1、如果将一个匿名函数赋值给一个变量，ES5的name属性，会返回空字符串，而ES6的name属性会返回实际的函数名
+			// 2、如果将一个具名函数赋值给一个变量，则ES5和ES6返回的都是具名函数原本的名字
+			(function(){
+				console.log('4================2');
+				const bar=function baz(){};
+				//ES5
+				console.log(bar.name);//'baz'
+				//ES6
+				console.log(bar.name);//'baz'
+				//Function构造函数返回的函数实例，name属性的值为anonymous
+				console.log((new Function).name);//'anonymous'
+				//bind返回的函数，name属性值会加上bound前缀
+				function foo(){};
+				foo.bind({}).name //"bound foo"
+			})();
+		//五、箭头函数
+			// 1、由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。
+			(function(){
+				console.log('5=============1');
+				//let getTempItem=id=>{id:id,name:'temp'};//报错，SyntaxError: Unexpected token :...
+				let getTempItem=id=>({id:id,name:'temp'})
+				console.log(getTempItem(12));//{id...}
+				//下面的代码，虽然不会报错，但是得不到正确的结果。引擎默认大括号是代码块，所以执行了a:1。这是，a可以被理解成语句的标签，因此实际执行的语句是1；，然后函数就结束了，没有返回值。
+				let foo = () => {a:1}
+				console.log(foo());//undefined
+			})();
+			// 2、使用注意点
+			/*箭头函数有几个使用注意点。
+			（1）函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。原因是箭头函数其实并没有this
+			（2）不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
+			（3）不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。另外super/new.target在箭头函数中也不存在，所以在箭头函数中使用这些，都是去寻找父级的他自己并没有
+			（4）不可以使用yield命令，因此箭头函数不能用作 Generator 函数。*/
+			(function(){
+				console.log('5============2');
+				function foo() {
+				  return () => {
+				    return () => {
+				      return () => {
+				        console.log('id:', this.id);
+				      };
+				    };
+				  };
+				}
+
+				var f = foo.call({id: 1});
+
+				var t1 = f.call({id: 2})()(); // id: 1
+				var t2 = f().call({id: 3})(); // id: 1
+				var t3 = f()().call({id: 4}); // id: 1
+				//上面代码之中，只有一个this，就是函数foo的this，所以t1、t2、t3都输出同样的结果。因为所有的内层函数都是箭头函数，都没有自己的this，它们的this其实都是最外层foo函数的this，而bind自然无效。
+			})();
+			//3、λ演算的写法
+				//fix = λf.(λx.f(λv.x(x)(v)))(λx.f(λv.x(x)(v)))
+
+				// ES6的写法
+				var fix = f => (x => f(v => x(x)(v)))(x => f(v => x(x)(v)));
+		//六、尾调用优化
+		// 1、以下三种情况不属于尾调用
+		(function(){
+			function f(x){
+				let y=g(x);
+				return y;
+			}
+			function f(x){
+				return g(x)+1;
+			}
+			function f(x){
+				g(x);
+			}
+		})();
+		//2、尾调用优化，详见函数扩展->尾调用优化
+		//3、尾递归，详见函数扩展->尾调用优化->尾递归
+		//4、ES6的尾调用优化只在严格模式下启用，正常模式是无效的。这是因为在正常模式下，函数内部有两个变量，可以跟踪函数的调用栈。
+			//func.arguments:返回调用时函数的参数
+			//func.caller:返回调用当前函数的那个函数
+		// 5、尾递归优化的实现，尾递归只有在严格模式下生效，那么正常模式下，或者那些不支持该功能的环境中，我们需要自己实现尾递归优化。尾递归只所以需要优化，原因是调用栈太多，造成栈溢出，那么只要减少调用栈，就不会溢出，就是采用“循环”换掉“递归”。
+			(function(){
+				console.log('6===============5');
+				//正常的递归函数
+				function sum(x,y){
+					if(y>0){
+						return sum(x+1,y-1);
+					}else{
+						return x;
+					}
+				}
+				console.log(sum(1,10));//11
+				//sum(1,100000);//报错，栈溢出：Uncaught RangeError: Maximum call stack size exceeded
+				//蹦床函数(trampoline)
+				function trampoline(f){
+					while(f && f instanceof Function){
+						f=f();
+					}
+					return f;
+				}
+				function sum1(x,y){
+					if(y>0){
+						return sum1.bind(this,x+1,y-1);
+					}else{
+						return x;
+					}
+				}
+				console.log(trampoline(sum1(1,100000)));//100001，没有发生栈溢出
+				//蹦床函数并不是真正的尾递归优化，下面才是，但没看懂
+				function tco(f){
+					var value;
+					var active=false;
+					var accumulated=[];
+
+					return function accumulator(){
+						accumulated.push(arguments);
+						if(!active){
+							active=true;
+							while(accumulated.length){
+								value=f.apply(this,accumulated.shift());
+							}
+							active=false;
+							return value;
+						}
+					}
+				}
+				var sum2=tco(function(x,y){
+					if(y>0){
+						return sum2(x+1,y-1);
+					}else{
+						return x;
+					}
+				});
+				console.log(sum2(1,10));//100001
+				// 上面代码中，tco函数是尾递归优化的实现，它的奥妙就在于状态变量active。默认情况下，这个变量是不激活的。一旦进入尾递归优化的过程，这个变量就激活了。然后，每一轮递归sum返回的都是undefined，所以就避免了递归执行；而accumulated数组存放每一轮sum执行的参数，总是有值的，这就保证了accumulator函数内部的while循环总是会执行。这样就很巧妙地将“递归”改成了“循环”，而后一轮的参数会取代前一轮的参数，保证了调用栈只有一层。
+			})();
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+

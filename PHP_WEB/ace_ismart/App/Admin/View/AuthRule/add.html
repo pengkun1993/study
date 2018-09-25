@@ -1,0 +1,120 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="AuthRule_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/AuthRule/index')}">菜单</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;新增</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="AuthRule_Form">
+			<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">上级菜单:</label>
+
+					<div class="col-xs-11">
+						<select name="pid" class="col-xs-9 col-sm-2  easyui-combotree" data-options="value:'0',url:'{:U("Admin/Function/get_auth_rule")}&r_type=json&pid=-1',multiple:false,required:false,editable:false" style="height:30px;"></select>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">图表:</label>
+
+					<div class="col-xs-11">
+						<select name="icon" class="col-xs-9 col-sm-2   easyui-combobox" data-options="value:'',url:'{:U("Admin/Function/get_icon")}&r_type=json',valueField:'id',textField:'text',multiple:false,required:false,editable:false,formatter: function(row){
+				            var opts = $(this).combobox('options');
+				            return '<i class=\'iconfont '+row[opts.textField]+'\'></i> '+row[opts.textField];
+				            }" style="height:30px;">
+				    </select>											
+				    </div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">节点:</label>
+
+					<div class="col-xs-11">
+						<input name="name" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">标题:</label>
+
+					<div class="col-xs-11">
+						<input name="title" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">菜单类型:</label>
+
+					<div class="col-xs-11">
+						<select name="type" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_type"  def-data="1"><option value="1"
+				>节点</option><option value="2"
+				>菜单</option><option value="3"
+				>外链</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_type');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+														</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">隐藏:</label>
+
+					<div class="col-xs-11">
+						<select name="hide" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_hide"  def-data="0"><option value="0"
+				>否</option><option value="1"
+				>是</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_hide');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+														</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="1"><option value="0"
+				>禁用</option><option value="1"
+				>启用</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_status');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+														</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">排序:</label>
+
+					<div class="col-xs-11">
+						<input name="sort" value="0" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1">附加规则:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="condition" style=" height:80px;"></textarea>											</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#AuthRule_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div></block>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<div id="example1"></div>
+	<div id="example2"></div>
+</body>
+<script type="text/babel">
+	{/*示例一*/}
+	var HelloMessage=React.createClass({
+		getInitialState:function(){
+			return {value:'Hello Runoob!'};
+		},
+		handleChange:function(event){
+			var btnE=this.refs.btn;console.log(btnE);
+			this.setState({value:'菜鸟教程'})
+		},
+		render:function(){
+			var value=this.state.value;
+			return	<div>
+						<button onClick={this.handleChange} ref='btn'>点我</button>
+						<h4>{value}</h4>
+					</div>;
+		}
+	});
+	ReactDOM.render(
+		<HelloMessage />,
+		document.getElementById('example1')
+	);
+	{/*示例二，子组件更新父组件状态*/}
+	var Content = React.createClass({
+		render:function(){
+			return <div>
+					<button onClick={this.props.updateStateProp}>点我</button>
+					<h4>{this.props.myDataProp}</h4>
+				   </div>;
+		}
+	});
+	var HelloMessage1=React.createClass({
+		getInitialState:function(){
+			return {value:'hello Runoob!'};
+		},
+		handleChange:function(event){
+			this.setState({value:'你好菜鸟'});
+		},
+		render:function(){
+			var value=this.state.value;
+			return	<div>
+						<Content updateStateProp={this.handleChange} myDataProp={this.state.value}></Content>
+					</div>;
+		}
+	});
+	ReactDOM.render(
+		<HelloMessage1 />,
+		document.getElementById('example2')
+	);
+</script>
+</html>
+
+
+
+
+
+
+
+

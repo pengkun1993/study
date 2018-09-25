@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>多实例状态模式-前端网-老姚</title>
+	</head>
+	<style>
+	.title{ font-size: 30px; color:red;font-weight:bold;margin-left:30px;}
+	.hotel{	height:100px;}
+	.action{ clear:both;}
+	.room {	width:100px;height:100px;display:table;	float:left;	margin: 0 14px;}
+	input[type=checkbox] {	display: none;}
+	.room span{	display: table-cell;vertical-align:middle;text-align:center;height: inherit;width: inherit;background: green;border: 10px solid black;border-radius: 50px;}
+	.room input[type=checkbox]:checked ~ span{border: 10px solid blue;}
+	input[type=button]{width:100px;border:none;background:#FF6100;margin:26px;color:#fff;padding:10px 20px;cursor:pointer}
+	input[type=button]:hover{background:#FF863E}
+	::selection{color:#FFF;background:#FF6100}
+	</style>
+<body>
+	<section>
+		<!-- 用checkbox来模拟房间是否被用户看上-->
+		<p class="title">注意:先选择房间，再操作</p>
+		<div class="hotel">
+			<label class="room" >
+				<input type="checkbox" />
+				<span>空房</span>
+			</label>
+			<label class="room" >
+				<input type="checkbox" />
+				<span>空房</span>
+			</label>
+			<label class="room" >
+				<input type="checkbox" />
+				<span>空房</span>
+			</label>
+			<label class="room" >
+				<input type="checkbox" />
+				<span>空房</span>
+			</label>
+			<label class="room" >
+				<input type="checkbox" />
+				<span>空房</span>
+			</label>
+		</div>
+		<div class="action">
+			<input data-action="book" type="button" value="预定"/>
+			<input data-action="unsubscribe" type="button" value="取消预定"/>
+			<input data-action="checkIn" type="button" value="入住"/>
+			<input data-action="checkOut" type="button" value="退房"/>
+		</div>
+		
+	</section>
+</body>
+<script>
+
+/**********三个状态类**********/
+
+var FreeTimeState = {
+	init: function(hotel) {
+		this.hotel = hotel;
+		return this;
+	},
+	book: function() {
+		this.hotel.changeToBooked();
+		this.hotel.setState(this.hotel.bookedState);
+	},
+	checkIn: function() {
+		this.hotel.changeToCheckIn();
+		this.hotel.setState(this.hotel.checkInState);
+	},
+	checkOut: function() {
+		
+	},
+	unsubscibe: function() {
+		
+	}
+};
+
+var BookedState = {
+	init: function(hotel) {
+		this.hotel = hotel;
+		return this;
+	},
+	book: function() {
+	},
+	checkIn: function() {
+		this.hotel.changeToCheckIn();
+		this.hotel.setState(this.hotel.checkInState);
+	},
+	checkOut: function() {
+		
+	},
+	unsubscibe: function() {
+		this.hotel.changeToFreeTime();
+		this.hotel.setState(this.hotel.freeTimeState);
+	}
+};
+
+var CheckInState = {
+	init: function(hotel) {
+		this.hotel = hotel;
+		return this;
+	},
+	book: function() {
+	},
+	checkIn: function() {
+	},
+	checkOut: function() {
+		this.hotel.changeToFreeTime();
+		this.hotel.setState(this.hotel.freeTimeState);
+	},
+	unsubscibe: function() {
+		
+	}
+};
+
+/**********状态拥有者类**********/
+
+var Room = {
+	init: function(view) {
+		this.freeTimeState = Object.create(FreeTimeState).init(this);
+		this.checkInState = Object.create(CheckInState).init(this);
+		this.bookedState = Object.create(BookedState).init(this);
+		
+		this.view = view;
+		this.setState(this.freeTimeState);
+		
+		return this;
+	},
+	book: function() {
+		this.state.book();
+	},
+	unsubscribe: function() {
+		this.state.unsubscibe();
+	},
+	checkIn: function() {
+		this.state.checkIn();
+	},
+	checkOut: function() {
+		this.state.checkOut();
+	},
+	setState: function(state) {
+		this.state = state;
+	},
+	changeToFreeTime: function() {
+		this.view.changeToFreeTime();
+	},
+	changeToBooked: function() {
+		this.view.changeToBooked();
+	},
+	changeToCheckIn: function() {
+		this.view.changeToCheckIn();
+	}
+}
+
+/**********新增的类**********/
+var RoomView = {
+	init: function(render) {
+		this.render = render;
+		return this;
+	},
+	changeToFreeTime: function() {
+		var span = this.render.querySelector('span');
+		span.innerHTML = '空房';
+		span.style.background = "green";
+	},
+	changeToBooked: function() {
+		var span = this.render.querySelector('span');
+		span.innerHTML = '有人预定了';
+		span.style.background = "red";
+	},
+	changeToCheckIn: function() {
+		var span = this.render.querySelector('span');
+		span.innerHTML = '已经住人了';
+		span.style.background = "gray";
+	}
+};
+
+/**********客户端**********/
+var hotelRender = document.querySelector('.hotel');
+var hotels = [];
+var roomRenders = hotelRender.querySelectorAll('.room');
+
+// 创建room
+for (var i = 0; i < roomRenders.length; i++) {
+	var render = roomRenders[i];
+	var roomView = Object.create(RoomView).init(render);
+	var room = Object.create(Room).init(roomView);
+	hotels.push(room);
+}
+
+var getCheckedIndex = function() {
+	var indexs = [];
+	var checkBoxs = hotelRender.querySelectorAll('input');
+	for (var i = 0, len = checkBoxs.length; i < len; i++) {
+		if (checkBoxs[i].checked) {
+			indexs.push(i);
+		}
+	}
+	return indexs;
+} 
+
+
+// 先简单抽取策略模式
+var actionsStrategy = {
+	book: function() {
+		var indexs = getCheckedIndex();
+		indexs.forEach(function(value) {
+			hotels[value].book();
+		});
+	},
+	unsubscribe: function() {
+		var indexs = getCheckedIndex();
+		indexs.forEach(function(value) {
+			hotels[value].unsubscribe();
+		});
+	},
+	checkIn: function() {
+		var indexs = getCheckedIndex();
+		indexs.forEach(function(value) {
+			hotels[value].checkIn();
+		});
+	},
+	checkOut: function() {
+		var indexs = getCheckedIndex();
+		indexs.forEach(function(value) {
+			hotels[value].checkOut();
+		});
+	}
+}
+
+
+var actionsRender = document.querySelector('.action');
+// 委托
+actionsRender.addEventListener('click', function(e) {
+	var action = e.target.getAttribute('data-action');
+	actionsStrategy[action] && actionsStrategy[action]();
+	
+},false);
+</script>

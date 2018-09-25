@@ -1,0 +1,90 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="Categroy_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/Categroy/index')}">栏目</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;编辑</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Categroy_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">父级栏目:</label>
+
+					<div class="col-xs-11">
+						<select name="pid" class="col-xs-9 col-sm-2  easyui-combotree" data-options="value:'{$_info["pid"]}',url:'{:U("Admin/Function/get_categroy")}&r_type=json&pid=-1',multiple:false,required:false,editable:false" style="height:30px;"></select>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">图标:</label>
+
+					<div class="col-xs-11">
+						<select name="icon" class="col-xs-9 col-sm-2  easyui-combobox" data-options="value:'{$_info["icon"]}',url:'{:U("Admin/Function/get_icon")}&r_type=json',valueField:'id',textField:'text',multiple:false,required:true,editable:false,formatter: function(row){
+				            var opts = $(this).combobox('options');
+				            return '<i class=\'iconfont '+row[opts.textField]+'\'></i> '+row[opts.textField];
+				            }" style="height:30px;"></select>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">栏目名称:</label>
+
+					<div class="col-xs-11">
+						<input name="catname" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["catname"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">显示顺序:</label>
+
+					<div class="col-xs-11">
+						<input name="sort" value="{$_info["sort"]}" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">导航栏:</label>
+
+					<div class="col-xs-11">
+						<select name="ismenu" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_ismenu"  def-data="{$_info['ismenu']}"><option value="0">非导航</option><option value="1">是导航</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_ismenu');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="{$_info['status']}"><option value="0">隐藏</option><option value="1">显示</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_status');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">节点:</label>
+
+					<div class="col-xs-11">
+						<input name="url_name" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["url_name"]}" >											</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Categroy_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div></block>

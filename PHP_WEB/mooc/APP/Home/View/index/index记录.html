@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	 {//几种不同的xml输出方法}
+	<!--
+	{$me['name']}<br/>
+	{//这是注释，但不能接在变量后面，只能从头开始注释}
+	{$me.sex}<br/>
+	{$me.age|default=0}<br/>
+	{$me.age+1|default='点方法无法输出'}
+	{$me['age']+1}     
+	{$me['name']|md5|substr=0,5}<br/>
+	<?PHP
+		//用php语言作一个等同于上面的语句
+		$name='pengkun';
+		echo substr(md5($name),0,5);
+	?>
+	{$now|date='Y-m-d H:i:s',###}<br/>
+	{//几种常见的thinkPHP自带的}
+	{$Think.now}
+	{$Think.version}
+	{$Think.server.http_host}
+	-->
+	{//循环}
+	<!-- 
+	<volist name='person' id='data' offset='1' length='1' empty='我没数据'>
+		{//offset和length限定输出那一段 empty无数据时默认输出什么}
+		{$data['name']}  {$data['age']}<br/>
+	</volist>
+	<foreach name='person' item='data'>
+		{foreach无法截取输出一段}
+		{$data['name']}  {$data['age']}<br/>
+		}
+	</foreach> 
+	eq= neq!= gt> ngt<= lt< nlt>= heq=== nheq!== <br/>
+	<for name='k' start='1' end='10' comparison='elt'>
+		{//默认是大于等于start小于end，用comparison改为小于等于了}
+		{$k}
+	</for>
+	<foreach name='person' item='data'>
+		<egt name='data.age' value='18'>{$data.name}已经成年了<else/>{$data.name}还未成年</egt>
+		<br/>
+	</foreach> -->
+	{//判断}
+	<!-- <if condition='$num gt 10'>
+		num的值大于10
+		<elseif condition='$num lt 10'/>
+		num的值小于10 
+		<else/>
+		num的值等于10
+	</if>
+	<br/>
+	<switch name='mingzi'>
+		<case value='laoshi'>小明，滚出去</case>
+		<case value='xiaohong|xiaohuang'>小明你滚出去</case>
+		<case value='xiaoming'>我就不出去</case>
+		<default/>小明快滚出去
+	</switch> -->
+	{//比较 eq= neq!= gt> ngt<= lt< nlt>= heq=== nheq!== }
+	<!-- 
+	<eq name='num' value='10'>num=10<else/>num!=10</eq>
+	<neq name='num' value='12'>num!=12</neq>
+	<compare name='num' value='11' type='eq'>num=11<else/>num!=11</compare>
+	{$num>11?'num大于11':'num不大于11'} -->
+	{//区间  in  notin between notbetween range只可以替换in或notin不能替换between}
+	<!--
+	<in name='num' value='1,2,3'>在1,2,3,之间<else/>不在1,2,3之间</in>
+	<notin name='num' value='7,8,9'>不在7,8,9之间</notin> 
+	<between name='num' value='1,10'>在1到10之间<else/>不在1到10之间</between>
+	<notbetween name='num' value='50,100'>不在50到100之间<else/>在50到100之间</notbetween>
+	<range name='num' value='1,2,3' type='in'>在1,2,3之间</range> -->
+	{//使用原生php语言可在php标签中间使用}
+	<!-- <php>.....</php> -->
+</body>
+</html>

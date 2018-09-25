@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js设计模式</title>
+</head>
+<body>
+	该学习主要参考<a href="http://www.qdfuns.com/house/17398/note/class/id/ad49ed9ab252a3506e004002f9b854dc/page/2.html" />前端网-老姚</a>学习整理;
+
+</body>
+<script type="text/javascript">
+	// 1、Module，模块模式
+	/*在js中，Module模式用于进一步模拟类的概念，通过这种方式，能够使一个单独的对象拥有公有、私有方法和变量，从而屏蔽来自全局作用域的特殊部分。
+	产生的结果是：函数名与在页面上其它脚本对的函数冲突的可能性降低。
+	原理：通过命名空间，函数自知行，返回对象，闭包的应用实现私有变量和私有函数。
+	优点：1、对应拥有面向对象背景的开发人员来说更加整洁。2、它支持私有数据。
+	缺点：1、要改变可见性时，必须要修改每一个曾经使用过该成员的地方
+	     2、无法为私有成员创建自动化单元测试。
+	     3、修改bug时，必须覆盖所有与有bug的私有方法进行交互的公有方法。
+	     4、无法轻易地拓展私有方法。*/
+	(function(){
+		//示例一、计数器
+		var testModule=(function(){
+			var counter = 0;
+			return {
+				incrementCounter :function(){
+					return ++counter;
+				},
+				resetCounter:function(){
+					console.log('counter value to reset:'+counter);
+					counter=0;
+				}
+			}
+		})();
+		testModule.incrementCounter();
+		testModule.resetCounter();
+		// 示例二、购物车
+		var basketModule=(function(){
+			//私有
+			var basket=[];
+			function doSomethingPrivate(){
+				//...
+			}
+			function doSomethingElsePrivate(){
+				//...
+			}
+			//返回一个暴露出的公有对象
+			return {
+				//添加item到购物车
+				addItem:function(values){
+					basket.push(values);
+				},
+				// 获取购物车item件数
+				getItemCount:function(){
+					return basket.length;
+				},
+				// 私有函数的公有形式别名
+				doSomething:doSomethingPrivate,
+				//获取购物车里所有item的价格总值
+				getTotal:function(){
+					var itemCount=this.getItemCount();
+					total=0;
+					while(itemCount--){
+						total+=basket[itemCount].price;
+					}
+					return total;
+				}
+			}
+		})();
+		basketModule.addItem({
+			item:'bread',
+			price:0.5
+		});
+		basketModule.addItem({
+			item:'butter',
+			price:0.3
+		});
+		console.log(basketModule.getItemCount());
+		console.log(basketModule.getTotal());
+	})();
+	//Revealing Module，揭示模块模式
+	/*Revealing Module模式是Module模式的一种改进版本。
+	能够在私有范围内简单定义所有的函数和变量，并返回一个匿名对象，它拥有指向私有函数的指针，该函数是你希望展示为公有的方法。
+	优点：脚本语法更加一致。在模块底部代码，很容易指出哪些是函数和变量是可以公开访问的，从而改善可读性。
+	缺点：如果私有函数引用公有函数，打补丁是，公有函数不能被覆盖。*/
+	(function(){
+		// 示例一
+		var myRevealingModule =(function(){
+			var privateVar="Ben Cherry",
+			publicVar="Hey there";
+			function privateFuction(){
+				console.log('name:'+privateVar);
+			}
+			function publicSetName(strName){
+				privateVar=strName;
+			}
+			function publicGetName(){
+				privateFuction();
+			}
+			return {
+				setName:publicSetName,
+				greeting:publicVar,
+				getName:publicGetName,
+			};
+		})();
+		myRevealingModule.getName();
+		myRevealingModule.setName('paul kinlan');
+		myRevealingModule.getName();
+		console.log(myRevealingModule.greeting);
+		myRevealingModule.greeting='hello';
+		console.log(myRevealingModule.greeting);
+		// 示例二
+		var revealingModule=(function(){
+			var privateCounter=0;
+			function privateFunction(){
+				privateCounter++;
+			}
+			function publicFunction(){
+				publicIncrement();
+			}
+			function publicIncrement(){
+				privateFunction();
+			}
+			function publicGetCount(){
+				return privateCounter;
+			}
+			return {
+				start:publicFunction,
+				increment:publicIncrement,
+				count:publicGetCount
+			};
+		})();
+		revealingModule.start();
+		console.log(revealingModule.count());
+	})();
+	// 命名空间模式，namespace
+	(function(){
+		//1、单一全局变量
+		var myApp=(function(){
+			function method1(){
+				//...
+			};
+			return {
+				//...
+				mothod1:method1
+			}
+		})();
+		//2、前缀命名空间
+		var myApp_propertyA={};
+		var myApp_propertyB={};
+		var myApp_method1=function(){};
+		//3、对象字面量表示法
+		var myApp={
+			models:{},
+			views:{},
+			collections:{}
+		};
+		myApp.method1=function(){};
+		//4、嵌套命名空间
+		var myApp=myApp || {};
+		myApp.models=myApp.models || {};
+		myApp.models.modelUtil=myApp.models.modelUtil || {};
+		//5、函数自执行
+		(function(namespace){
+			namespace.propertyA='you...';
+			namespace.method1=function(){};
+		})(window.myApp=window.myApp || {});
+		//6、命名空间注入
+		var myApp=myApp||{};
+		myApp.utils=myApp.utils || {};
+		(function(){
+			this.propertyA='you...';
+			this.method1=function(){};
+		}).apply(myApp.utils);
+		//老姚专属
+		var Utils=(function(window,undefined){
+			//其它通用函数代码
+			var namespace=function(){
+				var a,v,x,o,d,i,j,len1,len2;
+				a=arguments;
+				len1=a.length;
+				//支持多参数，如两个参数(a.b.c,d.e);
+				for(i=0;i<len1;i++){
+					d=a[i].split('.');//分解成数组，如把a.b.c分解成[a,b,c]
+					o=window[d[0]]=window[d[0]] || {};//保证a是对象，如果全局有就用全局对象，如果没有就新建{}
+					x=d.slice(1);//取出[b,c]
+					len2=x.length;
+					//支持嵌套,对b和c
+					for(j=0;j<len2;j++){
+						v=x[j];
+						o=o[v]=o[v] || {};//o逐层深入，保证每层都是对象，如果是b，o变为a.b,如果是c,o最后变为a.b.c；
+					}
+				}
+			}
+			return {
+				namespace:namespace
+			}
+		})(window);
+		Utils.namespace('myApp.models');
+		myApp.models.Cat=function(config){
+			if(typeof config !== 'object'){
+				throw new Error('构造参数对象不能为空');
+				return;
+			}
+			this.name=config.name;
+		};
+		myApp.models.Cat.prototype={
+			sayName:function(){
+				console.log('hello!my name is '+this.name);
+			}
+		}
+		//缓存为局部变量便于多次使用
+		var Cat=myApp.models.Cat;
+		var c1=new Cat({
+			name:'ketty',
+		});
+		c1.sayName();
+	})();
+</script>
+</html
+
+
+
+
+
+
+
+
+
+

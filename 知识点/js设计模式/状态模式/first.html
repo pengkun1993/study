@@ -1,0 +1,142 @@
+<!doctype>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>单实例状态模式-前端网-老姚</title>
+</head>
+<style>
+body{background:#F6F6F6;font:12px 微软雅黑}
+section{width:1000px;padding:30px 0;margin:0 auto;}
+div{width:600px;border:1px solid #e6e6e6;height:220px;font-family:Verdana;background:green;display:table;}
+p{font-size:42px;margin:5px;text-align:center;color:white;font-weight:bold;vertical-align:middle;display:table-cell;}
+div{margin:5px;}
+input[type=button]{width:100px;border:none;background:#FF6100;margin:26px;color:#fff;padding:10px 20px;cursor:pointer}
+input[type=button]:hover{background:#FF863E}
+::selection{color:#FFF;background:#FF6100}
+</style>
+<section>
+<div id="hotel"><p>空房</p></div>
+<input data-action="book" type="button" value="预定"/>
+<input data-action="unsubscribe" type="button" value="取消预定"/>
+<input data-action="checkIn" type="button" value="入住"/>
+<input data-action="checkOut" type="button" value="退房"/>
+</section>
+<script>
+    /*通过该方式减少写 if...else...,平时使用 if...else 时是在做事情之前，去判断状态是啥,然后决定能不能做，而状态模式是根据当前状态决定能去做什么*/
+var FreeTimeState = {
+    init: function(hotel) {
+        this.hotel = hotel;
+        return this;
+    },
+    book: function() {
+        this.hotel.changeToBooked();
+        this.hotel.setState(this.hotel.bookedState);
+    },
+    checkIn: function() {
+        this.hotel.changeToCheckIn();
+        this.hotel.setState(this.hotel.checkInState);
+    },
+    checkOut: function() {
+        
+    },
+    unsubscibe: function() {
+        
+    }
+};
+
+var BookedState = {
+    init: function(hotel) {
+        this.hotel = hotel;
+        return this;
+    },
+    book: function() {
+    },
+    checkIn: function() {
+        this.hotel.changeToCheckIn();
+        this.hotel.setState(this.hotel.checkInState);
+    },
+    checkOut: function() {
+        
+    },
+    unsubscibe: function() {
+        this.hotel.changeToFreeTime();
+        this.hotel.setState(this.hotel.freeTimeState);
+    }
+};
+
+var CheckInState = {
+    init: function(hotel) {
+        this.hotel = hotel;
+        return this;
+    },
+    book: function() {
+    },
+    checkIn: function() {
+    },
+    checkOut: function() {
+        this.hotel.changeToFreeTime();
+        this.hotel.setState(this.hotel.freeTimeState);
+    },
+    unsubscibe: function() {
+        
+    }
+};
+
+var Room = {
+    init: function(render) {
+        this.freeTimeState = FreeTimeState.init(this);
+        this.checkInState = CheckInState.init(this);
+        this.bookedState = BookedState.init(this);
+        
+        this.render = render;
+        this.setState(this.freeTimeState);
+        
+        return this;
+    },
+    book: function() {
+        this.state.book();
+    },
+    unsubscribe: function() {
+        this.state.unsubscibe();
+    },
+    checkIn: function() {
+        this.state.checkIn();
+    },
+    checkOut: function() {
+        this.state.checkOut();
+    },
+    setState: function(state) {
+        this.state = state;
+    },
+    changeToFreeTime: function() {
+        this.render.querySelector('p').innerHTML = "空房";
+        this.render.style.background = "green";
+    },
+    changeToBooked: function() {
+        this.render.querySelector('p').innerHTML = "有人定了";
+        this.render.style.background = "red";
+    },
+    changeToCheckIn: function() {
+        this.render.querySelector('p').innerHTML = "有人住了";
+        this.render.style.background = "gray";
+    }
+}
+
+var $ = function(selector) {
+    return document.querySelector(selector);
+};
+Room.init($("#hotel"));
+$('[data-action=book]').onclick = function() {
+    Room.book();
+};
+$('[data-action=checkIn]').onclick = function() {
+    Room.checkIn();
+};
+$('[data-action=checkOut]').onclick = function() {
+    Room.checkOut();
+};
+$('[data-action=unsubscribe]').onclick = function() {
+    Room.unsubscribe();
+};
+</script>
+</html>

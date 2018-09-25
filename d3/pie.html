@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>饼状图</title>
+	<script src="js/d3.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var svg_w=600;
+		var svg_h=600;
+
+		var svg=d3.select('body')
+				.append('svg')
+				.attr('width',svg_w)
+				.attr('height',svg_h);
+
+		var dataset=[ 30 , 10 , 43 , 55 , 13];
+		//定义一个布局
+		var pie=d3.layout.pie();
+		//将数据转换成合适的数据格式
+		var piedata=pie(dataset);
+		var outerRadius=150;//外半径
+		var innerRadius=0;//内半径
+		//弧生成器
+		var arc=d3.svg.arc()
+			.innerRadius(innerRadius)
+			.outerRadius(outerRadius);
+		//添加图形元素
+		var arcs=svg.selectAll('g')
+			.data(piedata)
+			.enter()
+			.append('g')
+			.attr('transform','translate('+svg_w/2+','+svg_w/2+')');
+		var color = d3.scale.category10();   //有十种颜色的颜色比例尺
+		//给每个g元素添加path
+		arcs.append('path')
+			.attr('fill',function(d,i){
+				return color(i)
+			})
+			.attr('d',function(d){
+				return arc(d);//调用弧生成器，得到路径值
+			});
+		//在每个弧中心添加文本
+		arcs.append('text')
+			.attr('transform',function(d){
+				return 'translate('+arc.centroid(d)+')';
+			})
+			.attr('text-author','right')
+			.text(function(d){
+				return d.data;
+			});
+	</script>
+</body>
+</html>

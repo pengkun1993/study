@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>排序</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	var arr=[12,34,532,1,3,4532,2,5,2,3,43,56,2,1,73,4,63];
+	// 快速排序
+	function quice_sort(arr) {
+		if(arr.length<=1){
+			return arr;
+		}else{
+			var left_arr=[];
+			var right_arr=[];
+			var mid_i=Math.floor(arr.length/2);
+			var now_data=arr.splice(mid_i,1);
+			for(var i=0;i<arr.length;i++){
+				if(arr[i]<now_data){
+					left_arr.push(arr[i]);
+				}else{
+					right_arr.push(arr[i]);
+				}
+			}
+			return quice_sort(left_arr).concat(now_data,quice_sort(right_arr));
+		}
+	}
+	//console.log(quice_sort(arr));
+	// 冒泡排序
+	function pop_sort(arr){
+		for(var i=0;i<arr.length-1;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(arr[i]>arr[j]){
+					var temp_t=arr[j];
+					arr[j]=arr[i];
+					arr[i]=temp_t;
+				}
+			}
+		}
+		return arr;
+	}
+	//console.log(pop_sort(arr));
+	//插入排序
+	function insert_sort(arr){
+		var last_arr=[];
+		last_arr.push(arr.shift());
+		for(var i=0;i<arr.length;i++){
+			if(arr[i]>=last_arr[last_arr.length-1]){
+				last_arr.push(arr[i]);
+			}else if(arr[i] < last_arr[0]){
+				last_arr.unshift(arr[i]);
+			}else {
+				for(var j=0;j<last_arr.length-1;j++){
+					if(arr[i]>=last_arr[j] && arr[i]<last_arr[j+1]){
+						last_arr.splice(j+1,0,arr[i]);
+						break;//此处如不使用break,由于每次插入，使length变大，造成死循环
+					}
+				}
+			}
+		} 
+		return last_arr;
+	}
+	//console.log(insert_sort(arr));
+    // 选择排序
+    function select_sort(arr){
+    	for(var i=0;i<arr.length;i++){
+    		var min_data=arr[i];
+    		var min_index=i;
+    		for(var j=i+1;j<arr.length;j++){
+    			if(min_data>arr[j]){
+    				min_data=arr[j];
+    				min_index=j;
+    			}
+    		}
+    		arr.splice(i,0,min_data);
+    		arr.splice(min_index+1,1);
+    	}
+    	return arr;
+    }
+    //console.log(select_sort(arr));
+</script>
+</html>
+
+
+
+
+
+
+
+

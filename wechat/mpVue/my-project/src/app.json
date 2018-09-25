@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/order/main",
+    "pages/my/main",
+    "pages/land/main"
+     ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "北大荒农宝",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+  	"color":"#000",
+  	"selectedColor":"#0f0",
+  	"backgroundColor":"#fff",
+  	"list":[{
+  		"pagePath":"pages/index/main",
+  		"text":"首页",
+  		"iconPath":"static/image/icon_component.png",
+  		"selectedIconPath":"static/image/icon_component_HL.png"
+  		},{
+  		"pagePath":"pages/land/main",
+  		"text":"地块",
+  		"iconPath":"static/image/icon_component.png",
+  		"selectedIconPath":"static/image/icon_component_HL.png"
+  		},{
+  		"pagePath":"pages/order/main",
+  		"text":"订单",
+  		"iconPath":"static/image/icon_component.png",
+  		"selectedIconPath":"static/image/icon_component_HL.png"
+  		},{
+  		"pagePath":"pages/my/main",
+  		"text":"我",
+  		"iconPath":"static/image/icon_component.png",
+  		"selectedIconPath":"static/image/icon_component_HL.png"
+  		}]
+  }
+}

@@ -1,0 +1,77 @@
+<extend name="Public/base" />
+
+<block name="body">
+<!-- page specific plugin styles -->
+
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/jquery-ui-1.10.3.custom.min.css" />
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/chosen.css" />
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/datepicker.css" />
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/bootstrap-timepicker.css" />
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/daterangepicker.css" />
+	<link rel="stylesheet" href="__STATIC__/aceAdmin/css/colorpicker.css" />
+
+	<div class="fixed-bar" id="Model_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/Model/index')}">模型管理</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;系统化数据模型</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Model_Form">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-2"> 数据表:</label>
+
+				<div class="col-sm-9">
+					<select class="col-sm-2 col-xs-8" id="form-field-select-1" name="table">
+						<volist name="tables" id="tb">
+						<option value="{$tb}">{$tb}</option>
+						</volist>
+					</select>
+					<span class="help-inline col-xs-12 col-sm-7">
+						<span class="middle">当前数据库的所有表</span>
+					</span>
+				</div>
+			</div>
+			<div class="space-20"></div>
+
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 模型标识: </label>
+
+				<div class="col-sm-9">
+					<input type="text" id="form-field-1" placeholder="" class="col-sm-2 col-xs-8" name="name" />
+					<span class="help-inline col-xs-12 col-sm-7">
+						<span class="middle">请输入文档模型标识</span>
+					</span>
+				</div>
+			</div>
+			<div class="space-20"></div>
+
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 模型名称:</label>
+
+				<div class="col-sm-9">
+					<input type="text" id="form-field-2" placeholder="" class="col-sm-2 col-xs-8" name="title" />
+					<span class="help-inline col-xs-12 col-sm-7">
+						<span class="middle">请输入模型名称</span>
+					</span>
+				</div>
+			</div>
+			<div class="space-20"></div>
+
+			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Model_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</block>

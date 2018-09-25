@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽象工厂模式-《JavaScript设计模式》</title>
+</head>
+<body>
+	<p>通过对类的工厂抽象使其业务用于对产品类簇的创建，而不负责创建某一类产品的实例。</p>
+</body>
+<script type="text/javascript">
+	(function(){
+		//抽象类是一种声明但不能使用的类，当你使用时就会报错
+		//汽车抽象类
+		var Car=function(){};
+		Car.prototype={
+			getPrice:function(){
+				return new Error('抽象方法不能调用');
+			},
+			getSpeed:function(){
+				return new Error('抽象方法不能调用');
+			}
+		}
+		/*car类其实什么都不能做，没有任何属性，然而原型上的方法也不能使用，否则会报错，但在继承上却是很有用的，因为定义了一种类，并定义了该类必须具备的方法，如果在子类中灭幼重写这些方法，那么当调用能找到这些类的方法便会报错。*/
+		//抽象工厂方法
+		var VehicleFactory=function(subType,superType){
+			//判断抽象工厂中是否有该抽象类
+			if(typeof VehicleFactory[superType]==='function'){
+				// 缓存类
+				function F(){};
+				//继承父类属性和方法
+				F.prototype=new VehicleFactory[superType]();
+				//将子类原型继承‘父类’
+				subType.prototype=new F();
+				//将子类constructor指向子类
+				subType.constructor=subType;
+			}else{
+				//不存在该抽象类抛出错误
+				throw new Error('未创建该抽象类');
+			}
+		};
+		//小汽车抽象类
+		VehicleFactory.Car=function(){
+			this.type='car';
+		};
+		VehicleFactory.Car.prototype={
+			getPrice:function(){
+				return new Error('抽象方法不能调用');
+			},
+			getSpeed:function(){
+				return new Error('抽象方法不能调用');
+			}
+		};
+		//公交车抽象类
+		VehicleFactory.Bus=function(){
+			this.type='bus';
+		};
+		VehicleFactory.Bus.prototype={
+			getPrice:function(){
+				return new Error('抽象方法不能调用');
+			},
+			getSpeed:function(){
+				return new Error('抽象方法不能调用');
+			}
+		};
+		//货车抽象类
+		VehicleFactory.Truck=function(){
+			this.type='Truck';
+		};
+		VehicleFactory.Truck.prototype={
+			getPrice:function(){
+				return new Error('抽象方法不能调用');
+			},
+			getSpeed:function(){
+				return new Error('抽象方法不能调用');
+			}
+		};
+		/*可以看出抽象工厂其实是一个实现子类继承父类的方法，这个方法中我们需要通过传递子类以及要继承父类（抽象类）的名称。在对过度类的原型继承时，我们不是继承父类的原型，而是通过new关键之赋值的对象的一个实例，这么做是因为过度类不仅要继承父类的原型方法，还要继承父类的对象属性，并且保证实例无法更改原型中的属性和方法。*/
+		// 实现
+		//宝马汽车子类
+		var BMW=function(price,speed){
+			this.price=price;
+			this.speed=speed;
+		};
+		//抽象工厂类实现对Car抽象类的继承
+		VehicleFactory(BMW,'Car');
+		BMW.prototype.getPrice=function(){
+			return this.price;
+		}
+		var bmw=new BMW(10000,100);
+		console.log(bmw);
+		console.log(bmw.type);//car
+		console.log(bmw.getPrice());//10000
+		console.log(bmw.getSpeed());//Error:抽象方法不能调用
+		bmw.type='aaa';
+		console.log(bmw);//自身赋值，不修改proto
+		/*抽象工厂模式是设计模式中最抽象的一种，也是创建模式中唯一一种抽象化创建模式。该模式创建出的结果不是一个真实的对象实例，而是一个类簇，它制定了类的结构，这也就区别于简单工厂模式创建单一对象，工厂方法模式创建多类对象。当然由于JavaScript不支持抽象化创建于虚拟方法，所以导致这种模式不能像其他面向对象语言中应用的那么广泛。*/
+	})();
+</script>
+</html>
+
+
+
+
+
+

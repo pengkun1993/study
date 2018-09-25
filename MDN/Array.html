@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Array</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//Array对象时用于构造数组的全局对象，数组类似于列表的高阶对象。
+	//语法：[element0,element1,...,elementN]
+	//new Array(element0,element1,...,elementN)
+	//new Array(arrayLength)
+	//描述：JavaScript数组的索引从0开始，第一个元素的索引为0，最后一个元素的索引为该数组的长度减1。如果指定的索引是一个无效值，JavaScript数组并不会报错，而是会返回undefined。
+	(function(){
+		//虽然数组元素可以看做是数组对象的属性，就行toString一样，但是“arr.0”的写法是错误的，运行时会抛出SyntaxError异常，而原因是使用了非法的属性名。
+		//并不是JavaScript数组有什么特殊之处，而是因为在JavaScript中，以数字开头的属性不能用点好引用，必须用方括号。比如，如果有个对象的属性是3d，那么只能用方括号来引用它。
+		let years=[1992,1993,1991,1990,1999];
+		console.log(years[2]===years[02])//true
+		console.log(years['2']===years['02']);//false
+		//类似地，如果对象的属性名称是保留字（最好不要这么做），那么就只能通过字符串的形式用方括号来访问（从 firefox 40.0a2 开始也支持用点号访问了）
+		let promise={
+			'var':'text',
+			'array':[1,2,3,4]
+		} 
+		console.log(promise.var);//text
+		console.log(promise.array);//[1, 2, 3, 4]，显然这点在Chrome下不成立
+		
+	})();
+	//属性
+		//length是Array的实例属性。返回或设置一个数组中的元素个数。该值是一个无符号32-bit整数，并且总是大于数组最高项的下标。
+		
+		//Array.length属性的属性特性：writable：true;enumberable:false;configurage:false
+		(function(){
+			console.log('===========Array.length()============')
+			//length属性的值是一个0到2^32-1的整数
+				//let namelistA=new Array(4294967296);//2^32=4294967296
+				//let namelistC=new Array(-100);//这两个都会报错,RangeError: Invalid array length
+				let namelistB=[];
+				namelistB.length=Math.pow(2,32)-1;
+				console.log(namelistB.length);//4294967295 
+			//使用一个合法的下标为数组元素赋值，并且该下标超出了当前数组大小的时候，解释器会同时修改length的值：
+				let arr=[2011,2012,2013,2014,2015];
+				arr[10]=2019;
+				console.log(arr);//[2011, 2012, 2013, 2014, 2015, empty × 5, 2019]
+				console.log(arr[7]);//undefined
+				console.log(arr.length);	//11
+			//可以显式地为length赋一个更大的值，而为length赋一个更小的值则会删掉一部分元素
+				arr.length=3;
+				console.log(arr);//[2011, 2012, 2013]
+			//遍历数组
+		})();
+		//Array.prototype属性表示Array构造函数的原型，并允许向所有Array对象添加新的属性和方法。
+		//描述：Array实例继承自Array.prototype。与所有构造函数一样，可以更改构造函数的原型对象，以对所有Array实例进行更改。
+		//Array.prototype属性的属性特性：writable:false,enumerable:false,configurable:false
+		(function(){
+			console.log('================Array.prototype=============');
+			//Array.prototype本身也是一个Array
+				console.log(Array.isArray(Array.prototype));//true
+			//Array.prototype.length值为0，因为它是一个空数组
+			// Array.prototype.constructor,所有的数组实例都继承了这个属性，它的值就是Array，表明了所有的数组都是由Array构造出来的。
+		})();
+	// 方法
+		//Array.from()方法从一个类似数组或可迭代对象中创建一个新的数组实例。
+		//语法：Array.from(arrayLike[,mapFn[,thisArg]]);
+		//参数：arrayLike，想要转换成数组的伪数组对象或可迭代对象。
+			//mapFn(可选)，如果指定了该参数，新数组中的每个元素会执行该回调函数。
+			//thisArg(可选参数),可选参数，执行回调函数mapFn时this对象
+		//返回值：一个新的数组实例
+		(function(){
+			console.log('============Array.from=========');
+			//描述：Array.from()方法可以通过以下方式来创建数组对象：
+				// 伪数组对象（拥有一个length属性和若干索引属性的任意对象）
+				// 可迭代对象（可以获取对象中的元素，如Map和Set等）
+			//Array.from()方法有一个可选参数mapFn,让你可以在最后生成的数组上再执行一次map方法后再返回。也就是说Array.from(obj,mapFn,thisArg)就相当于Array.from(obj).map(mapFn,thisArg)，除非创建的不是可用的中间数组。
+			//from()的length属性为1，即Array.from.length=1;
+			//在ES2015中，Class语法允许我们为内置类型（比如Array）和自定义类型新建子类（比如叫SubArray)。这些子类也会继承父类的静态方法，比如SubArray.from(),调用该方法后会返回子类SubArray的一个实例，而不是Array的实例
+			//示例
+				console.log(Array.from('foo'));// ["f", "o", "o"]
+				let s=new Set(['foo',window]);
+				console.log(s,Array.from(s));//Set(2) {"foo", Window}; (2) ["foo", Window]
+				let m=new Map([[1,2],[2,4],[4,8]]);
+				console.log(m,Array.from(m));//Map(3) {1 => 2, 2 => 4, 4 => 8} (3) [Array(2), Array(2), Array(2)]
+				function f(){
+					return Array.from(arguments);
+				}
+				console.log(f(1,2,3));//[1, 2, 3]
+				console.log(Array.from([1,2,3],x=>x+x));//[2, 4, 6]
+				console.log(Array.from({length:5},(v,i)=>i));//[0, 1, 2, 3, 4]
+			//数组去重合并
+				function combine(){
+					let arr=[].concat.apply([],arguments);//没有去重复的新数组
+					return Array.from(new Set(arr));
+				}
+				let t=[1,2,3],n=[2,3,3];
+				console.log(combine(t,n));//[1, 2, 3]
+		})();
+		//Array.isArray()用于确定传递的值是否是一个Array。
+		//语法：Array.isArray(obj);
+		//参数：obj需要检测的值
+		//返回值：如果对象是Array，则为true，否则为false
+		(function(){
+			console.log('===========Array.isArray=============');
+			console.log(Array.isArray(Array.prototype));//true
+			console.log(Array.isArray(12));//false
+			console.log(Array.isArray('12'));//false
+			console.log(Array.isArray({__proto__:Array.prototype}));//false
+			//instanceof和isArray；当检测Array实例时，Array.isArray优于instanceof，因为Array.isArray能检测iframes。
+				var iframe=document.createElement('iframe');
+				document.body.appendChild(iframe);
+				xArray=window.frames[window.frames.length-1].Array;
+				var arr = new xArray(1,2,3);
+				console.log(Array.isArray(arr));//true
+				console.log(arr instanceof Array);//false
+			//Polyfill
+				function polyfill_isArray(){
+					if(!Array.isArray){
+						Array.isArray=function(arg){
+							return object.prototype.toString.call(arg)==='[object Array]';
+						}
+					}
+				}
+		})();
+		//Array.of()方法创建一个具有可变参数量参数的新数组实例，而不考虑参数的数量或类型。
+		//语法：Array.of(element0[, element1[, ...[, elementN]]])
+		//参数：elementN任意个参数，将按顺序成为返回数组中的元素
+		//返回值：新Array实例
+		(function(){
+			console.log('=============Array.of===============');
+			//Array.of()和Array构造函数之间的区别在于处理整数参数：Array.of(7)创建一个具有单个元素7的数组，而Array(7)创建一个长度为7的空数组（注意：这是指一个有7个空位的数组，而不是由7个undefined组成的数组）。
+				console.log(Array.of(7));//[7]
+				console.log(Array(7));//(7) [empty × 7] <==> [ , , , , , , ]
+				console.log(Array.of(1,2,3));//[1, 2, 3]
+				console.log(Array(1,2,3));//[1, 2, 3]
+			//Polyfill
+				function polyfill_ArrayOf(){
+					if(!Array.of){
+						Array.of=function(){
+							return Array.prototype.slice.call(arguments);
+						}
+					}
+				}
+		})();
+		//Array.prototype.concat()方法用于合并两个或多个数组。此方法不会更改现有的数组，而是返回一个新数组。
+		//语法：var new_array=old_array.concat(value1,[,value2[,...[,valueN]]]);
+		//参数：valueN将数组和/或值连接成新数组。
+		//返回值：新的Array实例。
+		//描述：concat方法创建一个新的数组，它由被调用的对象中的元素组成，每个参数的顺序依次是该参数的元素（如果参数是数组）或参数本身（如果参数不是数组）。它不会递归到嵌套数组参数中。
+		//concat方法不会改变this或任何作为参数提供的数组，而是返回一个浅拷贝，它包含与原始数组相结合的相同元素的副本。
+		(function(){
+			console.log('========Array.prototype.concat==============')
+			let num1=[[1]];
+			let num2=[2,[3]];
+			let nums=num1.concat(num2);
+			console.log(nums);// [Array(1), 2, Array(1)]；这里num1中的1和num2中的3都是引用赋值，一个变都会变
+			num1[0].push(4);//这个会同样作用到nums
+			num1.push('test');//这个不会作用到nums
+			console.log(nums);//[[1, 4], 2, [3]]
+		})();
+		//Array.prototype.copyWithin()方法浅复制数组的一部分到同一个数组中的另一个位置，并返回它，而不修改其大小。
+		//语法：arr.copyWithin(target[,start[,end]]);
+		//参数：target 0为基底的索引，复制序列到该位置。如果是负数，target将从末尾开始计算
+			//如果target大于等于arr.length，将不会发生拷贝。如果target在start之后，复制的序列将被修改以符合arr.length。
+			//start 0为基底的索引，开始复制元素的起始位置。如果是负数，start将从末尾开始计算。如果start被忽略，copyWithin将会从0开始复制。
+			//end 0位基底的索引，开始复制元素的结束位置。copyWithin将会拷贝到该位置，但不包括end这个位置的元素。如果是负数，end将从末尾开始计算。如果被忽略，copyWithin将会复制到arr.length
+		//返回值：改变了的数组
+		//描述：参数target，star和end必须为整数。如果start为负，则其指定的索引位置等同于length+start，length为数组的长度。end也是如此。
+		//copyWithin方法不要求其this值必须是一个数组对象；除此之外，copyWithin是一个可变方法，它可以改变this对象本身，并且返回它，而不仅仅是它的拷贝。
+		//copyWithin就像C和C++的memcpy函数一样，且它是用来移动Array或者TypedArray数据的一个高性能方法。复制以及粘贴序列这两者是为一体的操作；即使复制和粘贴区域重叠，粘贴的序列也回有拷贝来的值。
+		//copyWithin函数是设计为通用的，其不要求其this值必须是一个数组对象。
+		//copyWithin是一个可变方法，它不会改变this的length，但是会改变this本身的内容，且需要时会创建新的属性。
+		(function(){
+			console.log('============Array.prototype.copyWithin============')
+			console.log([1,2,3,4,5].copyWithin(-2));//[1, 2, 3, 1, 2]
+			console.log([1,2,3,4,5].copyWithin(0,3));//[4, 5, 3, 4, 5]
+			console.log([1,2,3,4,5].copyWithin(0,3,4));//[4, 2, 3, 4, 5]
+			console.log([1,2,3,4,5].copyWithin(-2,-3,-1));// [1, 2, 3, 3, 4]
+			console.log([].copyWithin.call({length:5,3:1},0,3));// {0: 1, 3: 1, length: 5}
+		})();
+		//Array.prototype.entries()方法返回一个新的Array Iterator对象，该对象包含数组中每个索引的键/值对。
+		//语法：arr.entries();
+		//返回值：一个新的Array迭代器对象。Array Iterator是对象，它的原型（__proto__:Array Iterator)上有一个next方法，可用于遍历迭代器取得原数组的[key,value]
+		(function(){
+			console.log('============Array.prototype.entries=============');
+			let arr=['a','b','c'];
+			let iterator = arr.entries();
+			console.log(iterator);
+			/*Array Iterator {}
+			         __proto__:Array Iterator
+			         next:ƒ next()
+			         Symbol(Symbol.toStringTag):"Array Iterator"
+			         __proto__:Object
+			*/
+		
+			console.log(iterator.next());
+			/*{value: Array(2), done: false}
+			          done:false
+			          value:(2) [0, "a"]
+			           __proto__: Object
+			*/
+			//iterator.next()返回一个对象，对于有元素的数组是next{value:Array(2),done:false};
+			//next.done用于指示迭代器是否完成：在每次迭代时进行更新而且都是false，直到迭代器结束done才是true。
+			//next.value是一个['key':'value']的数组，是返回的迭代器中的元素值。
+			let iter=arr.entries();
+			let a=[];
+			for(let i=0;i<arr.length+1;i++){
+				let tem=iter.next();
+				console.log(tem.done);
+				if(tem.done!==true){
+					console.log(tem.value);
+					a[i]=tem.value;
+				}
+			}
+			console.log(a);
+			/*
+			 	false
+			 	[0,"a"]
+				false
+				[1, "b"]
+				false
+				[2, "c"]
+				true*2
+				[Array(2), Array(2),Array(2)]
+					0: (2) [0, "1"]
+					1: (2) [1, "b"]
+					2: (2) [2, "c"]
+					length: 3
+					__proto__: Array(0)
+			 */
+			//二维数组按行排序
+				function sortArr(arr){
+					var goNext = true;
+					var entries = arr.entries();
+					while(goNext){
+						let result = entries.next();
+						if(result.done !== true){
+							result.value[1].sort((a,b)=>a-b);
+							goNext=true;
+						}else{
+							goNext=false;
+						}
+					}
+					return arr;
+				}
+				arr = [[1,34],[456,2,3,44,234],[4567,1,4,5,6],[34,78,23,1]];
+				sortArr(arr);
+				/*(4) [Array(2), Array(5), Array(5), Array(4)]
+				    0:(2) [1, 34]
+				    1:(5) [2, 3, 44, 234, 456]
+				    2:(5) [1, 4, 5, 6, 4567]
+				    3:(4) [1, 23, 34, 78]
+				    length:4
+				    __proto__:Array(0)
+				*/
+			//使用for...of循环
+				for(let e of iter){
+					console.log(e);
+				}
+				// [0, "a"] 
+				// [1, "b"] 
+				// [2, "c"]
+		})();
+		//Array.prototype.keys()方法返回一个新的array迭代器，它包含数组中每个索引的键。
+		//语法：arr.key()；
+		//返回值：一个新的array迭代器对象。
+		(function(){
+			console.log('=============Array.prototype.keys=============');
+			let arr=['a','b','c'];
+			let iterator=arr.keys();
+			console.log(iterator);//Array Iterator {}
+			console.log(iterator.next());//{value: 0, done: false}
+			console.log(iterator.next());//{value: 1, done: false}
+			console.log(iterator.next());//{value: 2, done: false}
+			console.log(iterator.next());//{value: undefined, done: false}
+			//迭代器会包含那些没有对应元素的索引
+			let array=['a',,'c'];
+			let sparseKeys=Object.keys(array);
+			let denseKeys=[...array.keys()];
+			console.log(sparseKeys);// ["0", "2"]
+			console.log(denseKeys);//[0, 1, 2]
+		})();
+		//Array.prototype.every()方法测试数组的所有元素是否都通过了指定函数的测试。
+		//语法：arr.every(callback[,thisArg]);
+		//参数：callback用来测试每个元素的函数。thisArg执行callback时使用的this值
+		//描述：evety方法为数组中的每个元素执行一次callback函数，直到它找到一个使callback返回false的元素。如果返现了一个这样的元素，every方法将会立即返回false。否则，callback为每一个元素返回true,every就会返回true。callback只会为那些已经被赋值的索引调用，不会为那些被删除或从来没有被赋值的索引调用。
+		//callback被调用时传入三个参数：元素值，元素的索引，原数组。
+		//如果为every提供一个thisArg参数，则该参数为调用callback时的this值。如果省略该参数，callback被调用时的this值，在非严格模式下为全局对象，在严格模式下传入undefined。
+		//every不会改变原数组。
+		//every遍历的元素范围在第一次调用callback之前就已确定了。在调用every之后添加到数组中的元素不会被callback访问到。如果数组中存在的元素被更改，则他们传入callback的值是every访问到他们那一刻的值。那些被删除的元素或从来未被赋值的元素将不会被访问到。
+		//every和数学中的“所有”类似，当所有的元素都复合条件才返回true。另外，空数组也是返回true。（空数组中的所有元素都复合给定的条件，注：因为空数组没有元素）。
+		(function(){
+			console.log('==========Array.prototype.every============');
+			//检测所有数组元素的大小是否都大于10
+			function isBigEnough(element,index,array){
+				return (element > 10);
+			}
+			let passed = [12, 5, 8, 130, 44].every(isBigEnough);
+			console.log(passed);//fasle
+			passed = [12, 54, 18, 130, 44].every(isBigEnough);
+			console.log(passed);//ture
+			//polyfill
+			if (!Array.prototype.every)
+			{
+			  Array.prototype.every = function(fun /*, thisArg */)
+			  {
+			    'use strict';
+
+			    if (this === void 0 || this === null)
+			      throw new TypeError();
+
+			    var t = Object(this);
+			    var len = t.length >>> 0;
+			    if (typeof fun !== 'function')
+			        throw new TypeError();
+
+			    var thisArg = arguments.length >= 2 ? arguments[1] : void 0;
+			    for (var i = 0; i < len; i++)
+			    {
+			      if (i in t && !fun.call(thisArg, t[i], i, t))
+			        return false;
+			    }
+
+			    return true;
+			  };
+			}
+		})();
+		//Array.prototype.fill()方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。
+		//语法：arr.fill(value[,start[,end]]);
+		//参数：value 用来填充数组元素的值； start 起始索引，默认为0；end 终止索引，默认为length 
+		//返回值：修改后的数组
+		//描述：具体要填充的元素区间是[start,end），一个半开半闭区间。
+		//如果start是个负数，则开始索引会被自动计算成为length+start，其中length是this对象的length属性值。如果end是个负数，则结束索引会被自动计算成为length+end;
+		//fill方法故意被设计成通用方法，该方法不要求this是数组对象。
+		//fill方法是个可变方法，它会改变调用它的this对象本身，然后返回它，而不是返回一个副本。
+		//当一个对象被传递给fill方法的时候，填充数组的是这个对象的引用。
+		(function(){
+			console.log('===========Array.prototype.fill============');
+			console.log([1,2,3].fill(4));//[4, 4, 4]
+			console.log([1,2,3].fill(4,1));//[1, 4, 4]
+			console.log([1,2,3].fill(4,1,2));//[1, 4, 3]
+			console.log([1,2,3].fill(4,1,1));//[1, 2, 3]
+			console.log([1,2,3].fill(4,3,3));//[1, 2, 3]
+			console.log([1,2,3].fill(4,-3,-2));//[4, 2, 3]
+			console.log([1,2,3].fill(4,NaN,NaN));//[1, 2, 3]
+			console.log([1,2,3].fill(4,3,5));//[1, 2, 3]
+			console.log(Array(3).fill(4)); //[4, 4, 4]
+			console.log([].fill.call({length:3},4));//{0: 4, 1: 4, 2: 4, length: 3}
+			// 填充对象时填充的引用
+			let arr = Array(3).fill({});
+			console.log(arr);//[{}, {}, {}];
+			arr[0].hi='hi';
+			console.log(arr);// [{ hi: "hi" }, { hi: "hi" }, { hi: "hi" }]
+		})();
+		//Array.prototype.filter()方法创建了一个新数组，其包含通过所提供函数实现的测试的所有元素。
+		//语法：var new_array = arr.filter(callback(element[,index[,array]])[,thisArg]);
+		//参数：callback用来测试数组的每个元素的函数。调用时使用参数（element,index,array)返回true表示保留该元素，false则不保留。
+			//thisArg可选，指向callback是的用于this的值
+		//返回值：一个新的通过测试的元素的集合的数组，如果没有通过测试则返回空数组
+		//描述：filter为数组中的每个元素调用一次callback函数，并利用所有使得callback返回true或等价于true的值的元素创建一个新数组。callback只会在已经赋值的索引上被调用，对于那些已经被删除或者从未被赋值的索引不会被调用。那些没有通过callback测试的元素会跳过，不会被包含在新数组中。
+		//如果filter提供一个thisArg参数，则它会被作为callback被调用时的this值。否则，callback的this值在非严格模式下将是全局对象，严格模式下为undefined。
+		//filter不会改变原数组，它返回过滤后的新数组
+		//filter遍历的元素范围在第一次调用callback之前就已经确定了。在调用filter之后被添加到数组中的元素不会被filter遍历到。如果已经存在的元素被改变了，则他们传入callback的值是filter遍历到他们那一刻的值。被删除或者从未被赋值的元素不会被遍历到。
+		(function(){
+			console.log('===========Array.prototype.filter===========');
+			function isBigEnough(element){
+				return element >= 10;
+			}
+			let filtered = [12,5,8,130,44].filter(isBigEnough);
+			console.log(filtered);//[12, 130, 44]
+			//过滤非数值和0
+				let arr=[
+					{ id: 15 },
+					{ id: -1 },
+					{ id: 0 },
+					{ id: 3 },
+					{ id: 12.2 },
+					{ },
+					{ id: null },
+					{ id: NaN },
+					{ id: 'undefined' }
+				]
+				let invalidEntries = 0;
+				function isNumber(obj){
+					return obj !== undefined && typeof(obj) === 'number' && !isNaN(obj);
+				}
+				function filterByID(item){
+					if(isNumber(item.id) && item.id !==0){
+						return true;
+					}
+					invalidEntries++;
+					return false;
+				}
+				let arrByID=arr.filter(filterByID);
+				console.log('Filtered Array',arrByID);// Filtered Array [{ id: 15 }, { id: -1 }, { id: 3 }, { id: 12.2 }]
+				console.log(invalidEntries);//5
+			//选出有固定字符串的数组
+				let fruits = ['apple','banana','grapes','mango','orange'];
+				function filterItems(query){
+					return fruits.filter(function(el){
+						return el.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+				}
+				console.log(filterItems('ap'));["apple", "grapes"]
+		})();
+		//Array.prototype.find()方法返回数组中满足提供的测试函数的第一个元素的值。否则返回undefined。
+		//语法：arr.find(callback[,thisArg]);
+		//参数：callback在数组的每一项上执行的函数，接受3个参数：element,index,array
+			//thisArg可选，callback的this参数
+		// 返回值：当某个元素通过callback的测试时，返回数组中的一个值，否则返回undefined
+		// 描述：find方法对数组中每一项元素执行一次callback函数，直至有一个callback返回true。当找到这样一个元素后，该方法会立即返回这个元素的值，否则返回undefined。注意callback函数会为数组中的每一个索引调用即从0到length-1，而不仅仅是那些被赋值的索引，这意味着对于稀疏数组来说，该方法的效率要低于那些只遍历有值的索引的方法。
+		// find方法不会改变数组
+		// 在第一次调用 callback 函数时会确定元素的索引范围，因此在 find 方法开始执行之后添加到数组的新元素将不会被 callback 函数访问到。如果数组中一个尚未被callback函数访问到的元素的值被callback函数所改变，那么当callback函数访问到它时，它的值是将是根据它在数组中的索引所访问到的当前值。被删除的元素仍旧会被访问到。
+		(function(){
+			console.log('===========Array.prototype.find============');
+			//用对象的属性查找数组里的对象
+				let inventory =[
+					{name: 'apples', quantity: 2},
+				    {name: 'bananas', quantity: 0},
+				    {name: 'cherries', quantity: 5}
+				];
+				function findCherries(fruit){
+					return fruit.name === 'cherries';
+				}
+				console.log(inventory.find(findCherries));//{name: "cherries", quantity: 5}
+			//寻找数组中的质数
+				function isPrime(element,index,array){
+					let start=2;
+					while(start <= Math.sqrt(element)){
+						if(element % start++ < 1){
+							return false;
+						}
+					}
+					return element > 1;
+				}
+				console.log([4,6,8,12].find(isPrime));//undefined，没有找到
+				console.log([4,5,8,12,7].find(isPrime));//5，只找第一个
+			// 当在回调中删除数组中的一个值时，当访问到这个位置时，其传入的值时undefined：
+				let a=[0,1,,,,5,6];
+				a.find(function(value,index){
+					if(index == 1){
+						console.log('Deleting a[5] with value '+a[5]);
+						delete a[5];// 注：这里只是将a[5]设置为undefined，可以试试用a.pop()删除最后一项，依然会遍历到被删的那一项
+					}
+					console.log('Visited index ' + index + ' with value ' +value);
+					/*Visited index 0 with value 0
+					Deleting a[5] with value 5
+					Visited index 1 with value 1
+					Visited index 2 with value undefined
+					Visited index 3 with value undefined
+					Visited index 4 with value undefined
+					Visited index 5 with value undefined
+					Visited index 6 with value 6*/
+				});
+		})();
+		//Array.prototype.findIndex()方法返回数组中满足提供的测试函数的第一个元素的索引。否则返回-1；
+		//语法：arr.findindex(callback[,thisArg])
+		//参数：callback针对数组中的每个元素，都会执行该回调函数，执行时会自动传入下面三个参数element/index/array
+			//thisArg可选。执行callback时作为this对象的值。
+		//描述：findIndex方法对数组中的每个数组索引0...length-1(包括)执行一次callback函数，知道找到一个callback函数返回真实值（强制为true）的值。如果找到这样的元素，findIndex会立即返回该元素的索引。如果回调从不返回真值，或者数组的length为0，则findIndex返回-1.与某些其他数组方法不同，在稀疏数组中，即使对于数组中不存在的条目的索引也回调用回调函数。
+		//Array.prototype.findIndex不会修改所调用的数组
+		//在第一次调用callback函数时会确定元素的索引范围，因此在findIndex方法开始执行之后添加到数组的新元素将不会被callback函数访问到。如果数组中一个尚未被callback函数访问到的元素的值被callback函数所改变，那么当callback函数访问到它时，它的值将是根据它在数组中的索引所访问到的当前值。被删除的元素仍然会被访问到。
+		(function(){
+			console.log('==============Array.prototype.findIndex============');
+			//查找数组中数组中素数的元素的索引（如果不存在素数，则返回-1）。
+			function isPrime(element,index,array){
+				let start=2;
+				while(start <= Math.sqrt(element)){
+					if(element % start++ < 1){
+						return false;
+					}
+				}
+				return element > 1;
+			}
+			console.log([4,6,8,12].findIndex(isPrime));//-1
+			console.log([4,6,7,12].findIndex(isPrime));//2
+		})();
+		//Array.prototype.includes()方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回true,否则返回false
+		//语法：arr.includes(searchElement) arr.includes(searchElement,fromIndex)
+		//参数：searchElement需要查找的元素值
+		//fromIndex从该索引处开始查找searchElement。如果为负值，则按升序从array.length+fromIndex的索引开始搜索。默认为0 。
+		//返回值：Boolean
+		(function(){
+			console.log('=============Array.prototype.includes============');
+			console.log([1,2,2,3].includes(2));//true
+			// 如果fromIndex大于等于数组长度，则返回false。该数组不会被搜索。
+				let arr=['a','b','c'];
+				console.log(arr.includes('c',3));//false
+			//如果fromIndex为负值，计算出的索引将作为开始搜索searchElement的位置。如果计算出的索引小于0，则整个数组都会被搜索。
+				console.log(arr.includes('c',-100));//true
+			//includes作为一个通用方法，不要求this值是数组对象，所以它可以被用于其它类型的对象（比如类数组对象）。
+			(function(){
+				console.log([].includes.call(arguments,'1'));//true
+			})('1','2','3')
+		})();
+		//Array.prototype.indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1
+		//语法 arr.indexOf(searchElement) arr.indexOf(searchElement[,fromIndex=0]);
+		//参数,fromIndex默认值时0，允许使用负数
+		//返回值：首个被找到的元素在数组中的索引位置；若没有则返回-1
+		//描述：indexOf使用strict eauality(无论是===，还是triple-equals操作符都基于同样的方法)进行判断searchElement与数组中包含的元素之间的关系
+		(function(){
+			console.log('=============Array.prototype.indexOf=============');
+			// 找出指定元素出现的所有位置
+				let indices=[];
+				let array = ['a','b','a','c','a','d'];
+				let element = 'a';
+				let idx = array.indexOf(element);
+				while(idx != -1){
+					indices.push(idx);
+					idx = array.indexOf(element,idx+1);
+				}
+				console.log(indices);//[0, 2, 4]
+			//判断一个元素是否在数组里，不在则更新数组
+				function updateVegetablesCollection(veggies,veggie){
+					if(veggies.indexOf(veggie) === -1){
+						veggies.push(veggie);
+						console.log('New Veggies collection is :' + veggies);
+					}else if(veggies.indexOf(veggie) > -1){
+						console.log(veggie+' already exists in the veggies collection.');
+					}
+				}
+				const veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+				updateVegetablesCollection(veggies, 'spinach');
+				// New Veggies collection is :potato,tomato,chillies,green-pepper,spinach
+				updateVegetablesCollection(veggies, 'spinach');
+				//spinach already exists in the veggies collection.
+		})();
+		//Array.prototype.lastIndexOf()方法返回指定元素（也即有效的javascript值或变量）在数组中的最后一个索引，如果不存在则返回-1。从数组的后面向前找。
+		//参数：searchElement被查找的元素
+		//fromIndex从此位置开始逆向查找。默认为数组的长度减1，即整个数组都被查找。如果该值大于或等于数组的长度，则整个数组会被查找。如果为负值，将其视为从数组末尾向前的偏移。即使该值为负，数组仍然会被从后向前查找。如果该值为负时，其绝对值大于数组长度，则方法返回-1，即数组不会被查找。
+		//返回值：数组中最后一个元素的索引，如未找到返回-1
+		//描述：lastIndexOf使用严格相等（strict equality,即===)比较searchElement和数组中的元素
+		(function(){
+			console.log('===========Array.prototype.lastIndexOf============');
+			let array=[2,5,9,2];
+			let index=array.lastIndexOf(2);
+			console.log(index);//3
+			index=array.lastIndexOf(7);
+			console.log(index);//-1
+			index=array.lastIndexOf(2,3);
+			console.log(index);//3
+			index=array.lastIndexOf(2,2);
+			console.log(index);//0
+			index=array.lastIndexOf(2,-2);
+			console.log(index);//0
+			index=array.lastIndexOf(2,-1);
+			console.log(index);//3
+			//查找所有元素
+			 let indices=[];
+			 let arr=['a','b','a','c','a','d'];
+			 let element='a';
+			 let idx=arr.lastIndexOf(element);
+			 while(idx!=-1){
+			 	indices.push(idx);
+			 	idx=(idx>0? arr.lastIndexOf(element,idx-1) : -1);
+			 }
+			 console.log(indices);// [4, 2, 0]
+		})();
+		//Array.prototype.forEach()方法对数组的每个元素执行一次提供的函数。
+		//语法:array.foreach(callback(currentValue,index,array){
+		//do Something
+		//},this);
+		//array.forEach(callback[,thisArg]);
+		//参数：callback为数组中每个元素执行的函数，该函数接收三个参数currentValue/index/array
+			//thisArg可选，当执行回调函数时用作this的值。
+		// 返回值:undefined
+		// 描述：forEach方法按升序为数组中含有效值的每一项执行一次callback函数，那些已删除（使用delete方法等情况）或者未初始化的项将被跳过（但不包括那些值为undefined的项）（例如在稀疏数组上）。
+		// 如果给forEach传递了thisArg参数，当调用时，它将被传给callback函数，作为它的this值。否则，将会传入undefined作为它的this值。
+		// forEach遍历的范围在第一次调用callback前就会确定。调用forEach后添加到数组中的项不会被callback访问到。如果已经存在的值被改变，则传递给callback的值是forEach遍历到他们那一刻的值。已删除的项不会被遍历到。如果已访问的元素在迭代时被删除了，之后的元素将被跳过。
+		// forEach为每个数组元素执行callback函数；不像map()或者redece()，它总是返回undefined值，并且不可链式调用。典型用例是在一个链的最后执行副作用。
+		// 注意：没有办法中止或跳出forEach循环，除了抛出一个异常。如果你需要这样，使用forEach()方法是错误的，你可以用一个简单的循环作为替代。如果正在测试一个数组的元素是否符合某条件，且需要返回一个布尔值，那么可使用Array.every或Array.some。如果可用，新的方法find()或者findIndex()也可以被用于真值测试的提早中止。
+		(function(){
+			console.log('=========Array.prototype.forEach========');
+			//打印出数组的内容
+				function logArrayElements(element,index,array){
+					console.log("a["+index+"]="+element);
+				}
+				[2,5,,7].forEach(logArrayElements);
+				// a[0] = 2
+				// a[1] = 5
+				// a[3] = 9,a[2]被跳过，因为在数组的这个位置没有项
+				[2,5,'',9].forEach(logArrayElements);
+				// a[0] = 2
+				// a[1] = 5
+				// a[2] = 
+				// a[3] = 9
+				[2,5,undefined,9].forEach(logArrayElements);
+				// a[0] = 2
+				// a[1] = 5
+				// a[2] = undefined
+				// a[3] = 9
+				let xxx;
+				[2,5,xxx,9].forEach(logArrayElements);
+				// a[0] = 2
+				// a[1] = 5
+				// a[2] = undefined
+				// a[3] = 9
+			//使用thisArg，从每一个数组元素值中更新一个对象的属性
+				function Counter(){
+					this.sum=0;
+					this.count=0;
+				}
+				Counter.prototype.add=function(array){
+					array.forEach(function(entry){
+						this.sum+=entry;
+						++this.count;
+					},this);
+				}
+				let counterObj=new Counter();
+				counterObj.add([1,3,5,7]);
+				console.log(counterObj.sum);//16
+				console.log(counterObj.count);//4
+			//对象复制函数
+				function copy(obj){
+					let copy = Object.create(Object.getPrototypeOf(obj));
+					let propNames = Object.getOwnPropertyNames(obj);
+					propNames.forEach(function(name){
+						let desc = Object.getOwnPropertyDescriptor(obj,name);
+						Object.defineProperty(copy,name,desc);
+					})
+					return copy;
+				}
+				let obj1={a:1,b:2};
+				let obj2=copy(obj1);
+				console.log(obj2);
+			//如果数组在迭代时被修改了，则其他元素会被跳过
+				let words=['one','two','three','four'];
+				words.forEach(function(word){
+					console.log(word);
+					if(word === 'two'){
+						words.shift();
+					}
+				});
+				// one two four 
+				// 当到达包含值"two"的项时，整个数组的第一个项被移除了，这导致所有剩下的项上移一个位置。因为元素 "four"现在在数组更前的位置，"three"会被跳过。 forEach()不会在迭代之前创建数组的副本。
+		})();
+		//Array.prototype.join()方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。
+		//语法：str=arr.join(separator)
+		//参数：separator指定一个字符串来分隔数组的每个元素，如果省略（），数组元素用逗号分隔。默认为','。如果separator是空字符串("")，则所有元素之间都没有任何字符。
+		//返回值：一个所有数组元素连接的字符串。如果arr.length为0，则返回空字符串
+		//描述：所有的数组元素被转换成字符串，再用一个分隔符将这些字符串连接起来。如果元素是undefined或null，则会转化成空字符串。
+		(function(){
+			console.log('============Array.prototype.join===============');
+			let a=['Wind','Rain','Fire'];
+			let myVar1=a.join();console.log(myVar1);//Wind,Rain,Fire
+			let myVar2=a.join(', ');console.log(myVar2);//Wind, Rain, Fire
+			let myVar3=a.join(' + ');console.log(myVar3);//Wind + Rain + Fire
+			let myVar4=a.join('');console.log(myVar4);//WindRainFire
+			// 连接类数组对象
+				function f(a,b,c){
+					let s=Array.prototype.join.call(arguments);
+					console.log(s);
+				}
+				f(1,'a',true);//1,a,true
+		})();
+		//Array.prototype.map()方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果
+		//语法：let new_array=arr.map(function callback(currentValue,index,array){}[,thisArg]);
+		//参数：。。。
+		//返回值：一个新数组，每个元素都是回调函数的结果
+		//描述：map方法会给原数组中的每个元素都按顺序调用一次callback函数。callback每次执行后的返回值组合起来形成一个新数组。callback函数只会在有值的索引上被调用；那些从来没有被赋值或使用delete删除的索引则不会被调用。
+		//如果thisArg参数有值，则每次callback函数被调用的时候，this都会指向thisArg参数上的这个对象。如果省略了thisArg参数，或者赋值为null或undefined，则this指向全局对象。
+		//map不修改调用它的原数组本身
+		//使用map方法处理数组时，数组元素的范围是在callback方法第一次调用之前就已经确定了。在map方法执行的过程中：原数组中新增加的元素将不会被callback访问到；若已经存在的元素被改变或删除了，则他们的传递到callback的值是map方法遍历到它们的那一刻的值；而被删除的元素将不会被访问到。
+		(function(){
+			console.log('===========Array.prototype.map==============');
+			let numbers=[1,4,9];
+			let roots= numbers.map(Math.sqrt);
+			console.log(numbers);//[1, 4, 9]
+			console.log(roots);//[1, 2, 3]
+			//使用map重新格式化数组中的对象
+		})();
+</script>
+</html>
+
+
+
+
+
+
+
+

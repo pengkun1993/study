@@ -1,0 +1,54 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="Qualification_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/Qualification/index')}">企业资质</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;新增</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Qualification_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">标题:</label>
+
+					<div class="col-xs-11">
+						<input name="title" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">证书:</label>
+
+					<div class="col-xs-11">
+						<input id="img_picture_box" name="picture" value="" class="easyui-textbox col-xs-6 col-sm-2  col-lg-2  col-md-2 " data-options="buttonText:'选择',buttonIcon:'iconfont icon-pic',prompt:'上传图片...',onClickButton:function(){updata_image('img_picture_box')}" style="height:30px;" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="state" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_state"  def-data="1"><option value="0"
+				>不可用</option><option value="1"
+				>可用</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_state');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+														</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Qualification_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div></block>

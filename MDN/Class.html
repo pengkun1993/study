@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Class</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	// class声明一个基于原型继承的具有给定名称的新类
+	// 语法：class name [extends] { class body }
+	// 描述：也可以使用类表达式定义，但是不同于类表达式，类声明不允许再次声明已经存在的类，否则将会抛出一个类型错误。和类表达式一样，类声明体在严格模式下运行。构造函数是可选的。类声明不可以提升（这与函数声明不同）
+	// 类表达式定义
+		(function(){
+			console.log('============类表达式=============')
+			//类表达式是定义类的一种语法。和函数表达式相同的一点是，类表达式可以是命名的也可以是匿名的。如果是命名类表达式，这个名字只能在类体内部才能访问到。JavaScript的类也是基于原型继承的。
+			//语法：const MyClass=class [classname][extends]{ class body }
+			//描述：类表达式的语法和类语句的语法很类似，只是在类表达式中，你可以省略掉类名，而类语句不能
+			//和类声明一样，类表达式中的代码也是强制严格模式的
+			let Foo=class {
+				constructor(){};
+				bar(){
+					return "hello world";
+				}
+			}
+			let instance=new Foo();
+			console.log(instance);//Foo {};__proto__: bar: ƒ bar(); constructor: class ; __proto__: Object
+			//如果想在类体内部也能引用这个类本身，那么你就可以使用命名类表达式，并且这个类名只能在类体内部访问。
+			const NFoo=class NamedFoo {
+				constructor(){};
+				whoIsThere(){
+					return NamedFoo.name;
+				}
+			}
+			let bar = new NFoo();
+			console.log(bar.whoIsThere());// "NamedFoo"
+			//console.log(NamedFoo.name);//ReferenceError: NamedFoo is not defined
+			console.log(NFoo.name);//"NamedFoo"
+		})();
+	//声明一个类
+		(function(){
+			console.log('==========声明类============');
+			//构造函数中使用的super()只能在构造函数中使用，并且必须在使用this关键字前调用。
+			class Polygon{
+				constructor(height,width){
+					this.name='Polygon';
+					this.height=height;
+					this.width=width;
+				}
+			}
+			class Square extends Polygon{
+				constructor(length){
+					super(length,length);
+					this.name='Square';
+				}
+			}
+			let square=new Square(100,100);
+			console.log(square);
+		})();
+	// 构造函数
+		(function(){
+			console.log('========构造函数========');
+			//构造函数constructor是用于创建和初始化类中创建的一个对象的一种特殊方法。
+			//语法：constructor([arguments]){...}
+			//描述：在一个类中只能有一个名为‘constructor’的特殊方法。一个类中出现多次构造函数(constructor)方法将会抛出一个SyntaxError错误
+			//在一个构造方法中可以使用super关键字来调用一个父类的构造方法。
+			//如果没有显式指定构造方法，则会添加默认的constructor方法
+			//如果不指定一个构造函数(constructor)方法，则使用一个默认的构造函数(constuctor)
+			class Polygon{
+				constructor(){
+					this.name='Polygon';
+				}
+			}
+			class Square extends Polygon{
+				constructor(){
+					super();
+				}
+			}
+			class Rectangle{};
+			Object.setPrototypeOf(Square.prototype,Rectangle.prototype);
+			console.log(Object.getPrototypeOf(Square.prototype) === Polygon.prototype); //false
+			console.log(Object.getPrototypeOf(Square.prototype) === Rectangle.prototype); //true
+			let newInstance=new Square();
+			console.log(newInstance.name);
+			//上面的代码中，Square类的原型prototype被改变，但是__proto__还是指向Polygon，所以在正在创键一个新的正方形实例时，仍然调用前一个基类Polygon的构造函数
+			//默认构造方法
+			//对于基类，默认构造函数是：constructor(){};
+			//对于派生类，默认构造函数是：constructor(...args){super(...args)};
+		})();
+	//extends关键字
+		(function(){
+			console.log('==========extends==========')
+			//extends关键字用于类声明或者类表达式中，以创建一个类，该类是另一个类的子类。
+			//语法：class ChildClass extends ParentClass {...}
+			//描述：extends关键字用来创建一个普通类或者内建对象的子类。
+			//继承的.prototype必须是一个Object或者null
+			class nullExtends extends null{
+				constructor(){};
+			}
+			console.log(Object.getPrototypeOf(nullExtends));
+			console.log(Object.getPrototypeOf(nullExtends.prototype));
+			console.dir(nullExtends);
+		})();
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

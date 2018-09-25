@@ -1,0 +1,2940 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>锦尚中国游戏</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+  <script src="index4/js/jquery.min.js" type="text/javascript"></script>
+  <script src="index4/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="index4/js/jquery.event.drag-1.5.min.js" type="text/javascript"></script>
+  <script src="index4/js/jquery.excoloSlider.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="index4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index4/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="index4/css/my.css">
+</head>
+<style>
+  .slide > * {
+    max-width: 100%;
+  }
+  .slider .slide-prev , .slider .slide-next{
+    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+    background-color: rgba(255,255,255,0.8);
+    padding: 0px;
+    opacity: 0.8;
+  }
+  .slider .slide-prev  {
+   left: 0;
+ }
+ .slider .slide-next  {
+   right: 0;
+ }
+ .slider .slide-prev:before, .slider .slide-next:before {
+   display: block;
+   width: 48px;
+   height: 48px;
+   font-size: 40px;
+   line-height: 50px;
+   text-align: center;
+   font-family: 'BenchNine', sans-serif;
+   position: absolute;
+ }
+ .slider .slide-prev:before {
+   content:"<"; 
+ }
+ .slider .slide-next:before {
+  left: 3px;  /* for better central alignment */
+  content:">"; 
+}
+.slider .slide-next:hover, .slider .slide-prev:hover {
+  background-color: rgba(255,255,255,0.9);
+}
+.es-caption {
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 14px;
+  padding: 16px;
+  margin: 10px;
+  width: auto;
+  left: 0;
+  right: 0;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+ul.es-pager {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 7px 0;
+  padding: 0;
+  line-height: 0px;
+  position:absolute; bottom:10px;
+}
+ul.es-pager li {
+  display: inline-block;
+  margin: 2px;
+  padding: 0;
+  height: 10px;
+  width: 10px;
+  cursor: pointer;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -khtml-border-radius: 5px;
+}
+ul.es-pager li:hover, ul.es-pager li.act {
+  background-color: #fff;
+}
+ul.es-pager li.act {
+  cursor: default;
+}
+</style>
+<body>
+  <header class="bar bar-nav"> <a class="icon icon-refresh pull-right"></a>
+    <h1 class="title">锦尚中国游戏</h1>
+  </header>
+  <div class="content">
+    <div id="sliderA" class="slider">
+            <a href="games/qcds">
+      <img src="games/qcds/icon.png" />
+      </a>
+            <a href="games/yrjhb">
+      <img src="games/yrjhb/icon.png" />
+      </a>
+            <a href="games/yxct">
+      <img src="games/yxct/icon.png" />
+      </a>
+            <a href="games/ktfx">
+      <img src="games/ktfx/icon.png" />
+      </a>
+            <a href="games/hdcs">
+      <img src="games/hdcs/icon.png" />
+      </a>
+        </div>
+  <script>
+    $(function () {
+      $("#sliderA").excoloSlider();
+    });
+  </script>
+</div>
+<div class="container">
+  <div class="row">
+      
+    <div class="game-item">
+      <a href="games/qcds"><img src="games/qcds/icon.png" alt="切菜大师"></a>
+      <div class="gamename">
+        <h5>切菜大师</h5>
+        <p>2016.3.17<br /><em>88437</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qcds">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yrjhb"><img src="games/yrjhb/icon.png" alt="愚人节红包"></a>
+      <div class="gamename">
+        <h5>愚人节红包</h5>
+        <p>2016.3.16<br /><em>46187</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yrjhb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yxct"><img src="games/yxct/icon.png" alt="圆形池塘"></a>
+      <div class="gamename">
+        <h5>圆形池塘</h5>
+        <p>2016.3.15<br /><em>47029</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yxct">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ktfx"><img src="games/ktfx/icon.png" alt="卡通飞行"></a>
+      <div class="gamename">
+        <h5>卡通飞行</h5>
+        <p>2016.3.14<br /><em>90235</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ktfx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hdcs"><img src="games/hdcs/icon.png" alt="海盗传说"></a>
+      <div class="gamename">
+        <h5>海盗传说</h5>
+        <p>2016.3.12<br /><em>92372</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hdcs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qpz"><img src="games/qpz/icon.png" alt="强迫症矫正棍"></a>
+      <div class="gamename">
+        <h5>强迫症矫正棍</h5>
+        <p>2016.3.11<br /><em>20305</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qpz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ajkyq"><img src="games/ajkyq/icon.png" alt="爱就快一起吧"></a>
+      <div class="gamename">
+        <h5>爱就快一起吧</h5>
+        <p>2016.3.10<br /><em>36218</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ajkyq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gwlm"><img src="games/gwlm/icon.png" alt="怪物连萌"></a>
+      <div class="gamename">
+        <h5>怪物连萌</h5>
+        <p>2016.3.9<br /><em>85920</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gwlm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/nm"><img src="games/nm/icon.png" alt="鸟萌"></a>
+      <div class="gamename">
+        <h5>鸟萌</h5>
+        <p>2016.3.8<br /><em>47626</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/nm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/msts"><img src="games/msts/icon.png" alt="密室逃生"></a>
+      <div class="gamename">
+        <h5>密室逃生</h5>
+        <p>2016.3.7<br /><em>39593</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/msts">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hnm"><img src="games/hnm/icon.png" alt="划你妹"></a>
+      <div class="gamename">
+        <h5>划你妹</h5>
+        <p>2016.3.6<br /><em>40349</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hnm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dlgt"><img src="games/dlgt/icon.png" alt="叠了个塔"></a>
+      <div class="gamename">
+        <h5>叠了个塔</h5>
+        <p>2016.3.4<br /><em>47165</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dlgt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/lgcs"><img src="games/lgcs/icon.png" alt="老公测试"></a>
+      <div class="gamename">
+        <h5>老公测试</h5>
+        <p>2016.3.3<br /><em>62287</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/lgcs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ssq"><img src="games/ssq/icon.png" alt="双色球"></a>
+      <div class="gamename">
+        <h5>双色球</h5>
+        <p>2016.3.2<br /><em>38261</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ssq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yjsk"><img src="games/yjsk/icon.png" alt="眼疾手快"></a>
+      <div class="gamename">
+        <h5>眼疾手快</h5>
+        <p>2016.3.1<br /><em>82788</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yjsk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkct"><img src="games/fkct/icon.png" alt="疯狂拼图"></a>
+      <div class="gamename">
+        <h5>疯狂拼图</h5>
+        <p>2016.2.29<br /><em>73104</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkct">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jjdfk"><img src="games/jjdfk/icon.png" alt="进击的方块"></a>
+      <div class="gamename">
+        <h5>进击的方块</h5>
+        <p>2016.2.26<br /><em>77213</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jjdfk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dzt"><img src="games/dzt/icon.png" alt="小球吃钻石"></a>
+      <div class="gamename">
+        <h5>小球吃钻石</h5>
+        <p>2016.2.25<br /><em>26218</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dzt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/2048sz"><img src="games/2048sz/icon.png" alt="2048骰子版"></a>
+      <div class="gamename">
+        <h5>2048骰子版</h5>
+        <p>2016.2.24<br /><em>74145</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/2048sz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gqds"><img src="games/gqds/icon.png" alt="钢琴大师"></a>
+      <div class="gamename">
+        <h5>钢琴大师</h5>
+        <p>2016.2.23<br /><em>82481</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gqds">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tdpsld"><img src="games/tdpsld/icon.png" alt="泰迪牌手榴弹"></a>
+      <div class="gamename">
+        <h5>泰迪牌手榴弹</h5>
+        <p>2016.2.19<br /><em>48489</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tdpsld">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qmfjdz"><img src="games/qmfjdz/icon.png" alt="全民飞机大战"></a>
+      <div class="gamename">
+        <h5>全民飞机大战</h5>
+        <p>2016.2.19<br /><em>55805</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qmfjdz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ssdxc"><img src="games/ssdxc/icon.png" alt="算术大师"></a>
+      <div class="gamename">
+        <h5>算术大师</h5>
+        <p>2016.2.19<br /><em>37178</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ssdxc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tzwys"><img src="games/tzwys/icon.png" alt="挑战无影手"></a>
+      <div class="gamename">
+        <h5>挑战无影手</h5>
+        <p>2016.2.4<br /><em>60873</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tzwys">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bntz"><img src="games/bntz/icon.png" alt="不能停止"></a>
+      <div class="gamename">
+        <h5>不能停止</h5>
+        <p>2016.2.4<br /><em>60496</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bntz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pmdtw"><img src="games/pmdtw/icon.png" alt="pm大逃亡"></a>
+      <div class="gamename">
+        <h5>pm大逃亡</h5>
+        <p>2016.2.4<br /><em>54142</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pmdtw">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sdyjq"><img src="games/sdyjq/icon.png" alt="速度与激情"></a>
+      <div class="gamename">
+        <h5>速度与激情</h5>
+        <p>2016.2.4<br /><em>77301</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sdyjq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pkq"><img src="games/pkq/icon.png" alt="暴打皮卡丘"></a>
+      <div class="gamename">
+        <h5>暴打皮卡丘</h5>
+        <p>2016.2.4<br /><em>44906</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pkq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tcdnt"><img src="games/tcdnt/icon.png" alt="停车大难题"></a>
+      <div class="gamename">
+        <h5>停车大难题</h5>
+        <p>2016.2.4<br /><em>24573</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tcdnt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zqdzjs"><img src="games/zqdzjs/icon.png" alt="足球大战僵尸"></a>
+      <div class="gamename">
+        <h5>足球大战僵尸</h5>
+        <p>2016.1.28<br /><em>27893</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zqdzjs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/chdzz"><img src="games/chdzz/icon.png" alt="吃货大战"></a>
+      <div class="gamename">
+        <h5>吃货大战</h5>
+        <p>2016.1.28<br /><em>21225</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/chdzz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ttdd"><img src="games/ttdd/icon.png" alt="弹跳豆豆"></a>
+      <div class="gamename">
+        <h5>弹跳豆豆</h5>
+        <p>2016.1.28<br /><em>13010</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ttdd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gfql"><img src="games/gfql/icon.png" alt="干翻情敌"></a>
+      <div class="gamename">
+        <h5>干翻情敌</h5>
+        <p>2016.1.13<br /><em>63081</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gfql">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yhzy"><img src="games/yhzy/icon.png" alt="春节烟花"></a>
+      <div class="gamename">
+        <h5>春节烟花</h5>
+        <p>2016.1.13<br /><em>57255</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yhzy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pklxj"><img src="games/pklxj/icon.png" alt="跑酷历险记"></a>
+      <div class="gamename">
+        <h5>跑酷历险记</h5>
+        <p>2015.1.13<br /><em>92245</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pklxj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/kdos"><img src="games/kdos/icon.png" alt="快点偶数"></a>
+      <div class="gamename">
+        <h5>快点偶数</h5>
+        <p>2015.12.28<br /><em>55453</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/kdos">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/snrjjc60m"><img src="games/snrjjc60m/icon.png" alt="是男人坚持60秒"></a>
+      <div class="gamename">
+        <h5>是男人坚持60秒</h5>
+        <p>2015.12.28<br /><em>66560</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/snrjjc60m">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mxtzr"><img src="games/mxtzr/icon.png" alt="明星投资人"></a>
+      <div class="gamename">
+        <h5>明星投资人</h5>
+        <p>2015.12.28<br /><em>28463</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mxtzr">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yqrxsdb"><img src="games/yqrxsdb/icon.png" alt="有钱任性圣诞版"></a>
+      <div class="gamename">
+        <h5>有钱任性圣诞版</h5>
+        <p>2015.12.23<br /><em>41372</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yqrxsdb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sdmj"><img src="games/sdmj/icon.png" alt="圣诞母鸡"></a>
+      <div class="gamename">
+        <h5>圣诞母鸡</h5>
+        <p>2015.12.23<br /><em>14186</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sdmj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hxsdlr"><img src="games/hxsdlr/icon.png" alt="唤醒圣诞老人"></a>
+      <div class="gamename">
+        <h5>唤醒圣诞老人</h5>
+        <p>2015.12.23<br /><em>57056</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hxsdlr">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/shengdanpengpengle"><img src="games/shengdanpengpengle/icon.png" alt="圣诞碰碰乐"></a>
+      <div class="gamename">
+        <h5>圣诞碰碰乐</h5>
+        <p>2015.12.15<br /><em>70722</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/shengdanpengpengle">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/santalicious"><img src="games/santalicious/icon.png" alt="圣诞消消乐"></a>
+      <div class="gamename">
+        <h5>圣诞消消乐</h5>
+        <p>2015.12.15<br /><em>50352</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/santalicious">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/epicsnowman"><img src="games/epicsnowman/icon.png" alt="堆雪人"></a>
+      <div class="gamename">
+        <h5>堆雪人</h5>
+        <p>2015.12.15<br /><em>19343</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/epicsnowman">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sdtg"><img src="games/sdtg/icon.png" alt="这个圣诞要脱光!"></a>
+      <div class="gamename">
+        <h5>这个圣诞要脱光!</h5>
+        <p>2015.12.6<br /><em>97984</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sdtg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/huaxuetiaozhan"><img src="games/huaxuetiaozhan/icon.png" alt="滑雪挑战"></a>
+      <div class="gamename">
+        <h5>滑雪挑战</h5>
+        <p>2015.12.6<br /><em>33139</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/huaxuetiaozhan">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/rocket"><img src="games/rocket/icon.png" alt="疯狂火箭哥"></a>
+      <div class="gamename">
+        <h5>疯狂火箭哥</h5>
+        <p>2015.12.6<br /><em>81448</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/rocket">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkdfk"><img src="games/fkdfk/icon.png" alt="疯狂的方块"></a>
+      <div class="gamename">
+        <h5>疯狂的方块</h5>
+        <p>2015.11.30<br /><em>75196</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkdfk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/flyhouse"><img src="games/flyhouse/icon.png" alt="让屋子飞"></a>
+      <div class="gamename">
+        <h5>让屋子飞</h5>
+        <p>2015.11.30<br /><em>48358</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/flyhouse">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wjsw"><img src="games/wjsw/icon.png" alt="我就是我"></a>
+      <div class="gamename">
+        <h5>我就是我</h5>
+        <p>2015.11.30<br /><em>55593</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wjsw">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qwcg"><img src="games/qwcg/icon.png" alt="青蛙闯关"></a>
+      <div class="gamename">
+        <h5>青蛙闯关</h5>
+        <p>2015.11.24<br /><em>57676</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qwcg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wjss"><img src="games/wjss/icon.png" alt="全民洗碗"></a>
+      <div class="gamename">
+        <h5>全民洗碗</h5>
+        <p>2015.11.24<br /><em>85847</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wjss">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/brainie"><img src="games/brainie/icon.png" alt="神算子"></a>
+      <div class="gamename">
+        <h5>神算子</h5>
+        <p>2015.11.16<br /><em>11397</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/brainie">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wmsj"><img src="games/wmsj/icon.png" alt="亡命射箭"></a>
+      <div class="gamename">
+        <h5>亡命射箭</h5>
+        <p>2015.11.16<br /><em>83855</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wmsj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cutfruit"><img src="games/cutfruit/icon.png" alt="切水果"></a>
+      <div class="gamename">
+        <h5>切水果</h5>
+        <p>2015.11.16<br /><em>46720</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cutfruit">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/golfblast"><img src="games/golfblast/icon.png" alt="阳光高尔夫"></a>
+      <div class="gamename">
+        <h5>阳光高尔夫</h5>
+        <p>2015.11.10<br /><em>60893</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/golfblast">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/stacking"><img src="games/stacking/icon.png" alt="堆堆乐"></a>
+      <div class="gamename">
+        <h5>堆堆乐</h5>
+        <p>2015.11.10<br /><em>37996</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/stacking">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ninjas"><img src="games/ninjas/icon.png" alt="忍者突袭"></a>
+      <div class="gamename">
+        <h5>忍者突袭</h5>
+        <p>2015.11.10<br /><em>24020</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ninjas">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/htsys"><img src="games/htsys/icon.png" alt="合体实验室"></a>
+      <div class="gamename">
+        <h5>合体实验室</h5>
+        <p>2015.11.2<br /><em>94800</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/htsys">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mahjonglink"><img src="games/mahjonglink/icon.png" alt="麻将连连看"></a>
+      <div class="gamename">
+        <h5>麻将连连看</h5>
+        <p>2015.11.2<br /><em>51569</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mahjonglink">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sudoku"><img src="games/sudoku/icon.png" alt="数独"></a>
+      <div class="gamename">
+        <h5>数独</h5>
+        <p>2015.11.2<br /><em>40914</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sudoku">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gtzp"><img src="games/gtzp/icon.png" alt="龟兔再跑"></a>
+      <div class="gamename">
+        <h5>龟兔再跑</h5>
+        <p>2015.10.27<br /><em>16025</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gtzp">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gdty"><img src="games/gdty/icon.png" alt="果冻跳跃"></a>
+      <div class="gamename">
+        <h5>果冻跳跃</h5>
+        <p>2015.10.27<br /><em>53579</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gdty">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/where"><img src="games/where/icon.png" alt="脚印地图"></a>
+      <div class="gamename">
+        <h5>脚印地图</h5>
+        <p>2015.10.27<br /><em>92996</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/where">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/3dfkyx"><img src="games/3dfkyx/icon.png" alt="3D反恐精英"></a>
+      <div class="gamename">
+        <h5>3D反恐精英</h5>
+        <p>2015.10.11<br /><em>62280</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/3dfkyx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/1942"><img src="games/1942/icon.png" alt="1942"></a>
+      <div class="gamename">
+        <h5>1942</h5>
+        <p>2015.10.11<br /><em>45824</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/1942">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tmhy"><img src="games/tmhy/icon.png" alt="甜蜜花园"></a>
+      <div class="gamename">
+        <h5>甜蜜花园</h5>
+        <p>2015.9.29<br /><em>48448</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tmhy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/rwcz"><img src="games/rwcz/icon.png" alt="让我成长"></a>
+      <div class="gamename">
+        <h5>让我成长</h5>
+        <p>2015.9.29<br /><em>28839</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/rwcz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/knnfdd"><img src="games/knnfdd/icon.png" alt="看你能飞多高"></a>
+      <div class="gamename">
+        <h5>看你能飞多高</h5>
+        <p>2015.9.24<br /><em>63287</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/knnfdd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ltjz"><img src="games/ltjz/icon.png" alt="雷霆战机"></a>
+      <div class="gamename">
+        <h5>雷霆战机</h5>
+        <p>2015.9.22<br /><em>78821</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ltjz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/68xn"><img src="games/68xn/icon.png" alt="68小鸟"></a>
+      <div class="gamename">
+        <h5>68小鸟</h5>
+        <p>2015.9.22<br /><em>32026</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/68xn">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sxygs"><img src="games/sxygs/icon.png" alt="下一个数字"></a>
+      <div class="gamename">
+        <h5>下一个数字</h5>
+        <p>2015.9.22<br /><em>20343</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sxygs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gldsys"><img src="games/gldsys/icon.png" alt="格鲁的实验室"></a>
+      <div class="gamename">
+        <h5>格鲁的实验室</h5>
+        <p>2015.9.15<br /><em>49543</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gldsys">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sbd"><img src="games/sbd/icon.png" alt="数不独"></a>
+      <div class="gamename">
+        <h5>数不独</h5>
+        <p>2015.9.11<br /><em>71378</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sbd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mml"><img src="games/mml/icon.png" alt="挑战记忆力"></a>
+      <div class="gamename">
+        <h5>挑战记忆力</h5>
+        <p>2015.9.4<br /><em>28686</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mml">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/maya"><img src="games/maya/icon.png" alt="玛雅传奇"></a>
+      <div class="gamename">
+        <h5>玛雅传奇</h5>
+        <p>2015.8.27<br /><em>47526</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/maya">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mlss"><img src="games/mlss/icon.png" alt="小心女司机"></a>
+      <div class="gamename">
+        <h5>小心女司机</h5>
+        <p>2015.8.24<br /><em>93518</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mlss">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xmxx"><img src="games/xmxx/icon.png" alt="消灭星星"></a>
+      <div class="gamename">
+        <h5>消灭星星</h5>
+        <p>2015.8.19<br /><em>99134</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xmxx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hcrdtw"><img src="games/hcrdtw/icon.png" alt="火柴人大逃亡"></a>
+      <div class="gamename">
+        <h5>火柴人大逃亡</h5>
+        <p>2015.8.14<br /><em>22721</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hcrdtw">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jxcc"><img src="games/jxcc/icon.png" alt="极限超车"></a>
+      <div class="gamename">
+        <h5>极限超车</h5>
+        <p>2015.8.13<br /><em>41875</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jxcc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jellyslice"><img src="games/jellyslice/icon.png" alt="切割果冻片"></a>
+      <div class="gamename">
+        <h5>切割果冻片</h5>
+        <p>2015.7.31<br /><em>54726</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jellyslice">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jidan"><img src="games/jidan/icon.png" alt="跑鸡蛋"></a>
+      <div class="gamename">
+        <h5>跑鸡蛋</h5>
+        <p>2015.7.29<br /><em>69398</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jidan">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fangyuzjz"><img src="games/fangyuzjz/icon.png" alt="防御阻击站"></a>
+      <div class="gamename">
+        <h5>防御阻击站</h5>
+        <p>2015.7.27<br /><em>27722</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fangyuzjz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gd2048"><img src="games/gd2048/icon.png" alt="搞定2048"></a>
+      <div class="gamename">
+        <h5>搞定2048</h5>
+        <p>2015.7.24<br /><em>55124</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gd2048">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/rhino"><img src="games/rhino/icon.png" alt="犀牛溜冰场"></a>
+      <div class="gamename">
+        <h5>犀牛溜冰场</h5>
+        <p>2015.7.22<br /><em>53252</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/rhino">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/maxarea"><img src="games/maxarea/icon.png" alt="全民抢房子"></a>
+      <div class="gamename">
+        <h5>全民抢房子</h5>
+        <p>2015.7.20<br /><em>63442</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/maxarea">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/farm"><img src="games/farm/icon.png" alt="农场练练看"></a>
+      <div class="gamename">
+        <h5>农场练练看</h5>
+        <p>2015.7.17<br /><em>16017</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/farm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ddx"><img src="games/ddx/icon.png" alt="猜大小"></a>
+      <div class="gamename">
+        <h5>猜大小</h5>
+        <p>2015.7.15<br /><em>80248</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ddx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/soccermove"><img src="games/soccermove/icon.png" alt="滚滚足球"></a>
+      <div class="gamename">
+        <h5>滚滚足球</h5>
+        <p>2015.7.13<br /><em>76463</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/soccermove">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/monstersunion"><img src="games/monstersunion/icon.png" alt="怪物连萌"></a>
+      <div class="gamename">
+        <h5>怪物连萌</h5>
+        <p>2015.7.10<br /><em>99817</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/monstersunion">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/evolution"><img src="games/evolution/icon.png" alt="进化"></a>
+      <div class="gamename">
+        <h5>进化</h5>
+        <p>2015.7.8<br /><em>31817</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/evolution">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hldy"><img src="games/hldy/icon.png" alt="欢乐钓鱼"></a>
+      <div class="gamename">
+        <h5>欢乐钓鱼</h5>
+        <p>2015.7.6<br /><em>17377</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hldy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jumpjump"><img src="games/jumpjump/icon.png" alt="我跳我跳我跳跳跳"></a>
+      <div class="gamename">
+        <h5>我跳我跳我跳跳跳</h5>
+        <p>2015.7.3<br /><em>15841</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jumpjump">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zpfff"><img src="games/zpfff/icon.png" alt="字牌翻翻看"></a>
+      <div class="gamename">
+        <h5>字牌翻翻看</h5>
+        <p>2015.6.29<br /><em>74396</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zpfff">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/demoncastle"><img src="games/demoncastle/icon.png" alt="魔兽城堡"></a>
+      <div class="gamename">
+        <h5>魔兽城堡</h5>
+        <p>2015.6.26<br /><em>99373</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/demoncastle">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hmk"><img src="games/hmk/icon.png" alt="划木块"></a>
+      <div class="gamename">
+        <h5>划木块</h5>
+        <p>2015.6.24<br /><em>67122</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hmk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/get36"><img src="games/get36/icon.png" alt="得到36"></a>
+      <div class="gamename">
+        <h5>得到36</h5>
+        <p>2015.6.22<br /><em>20220</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/get36">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yblc"><img src="games/yblc/icon.png" alt="一笔连成"></a>
+      <div class="gamename">
+        <h5>一笔连成</h5>
+        <p>2015.6.19<br /><em>47821</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yblc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bdfm"><img src="games/bdfm/icon.png" alt="棒打疯猫"></a>
+      <div class="gamename">
+        <h5>棒打疯猫</h5>
+        <p>2015.6.17<br /><em>84962</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bdfm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dct"><img src="games/dct/icon.png" alt="大长腿"></a>
+      <div class="gamename">
+        <h5>大长腿</h5>
+        <p>2015.6.15<br /><em>72507</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dct">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mmsz"><img src="games/mmsz/icon.png" alt="萌萌水贼"></a>
+      <div class="gamename">
+        <h5>萌萌水贼</h5>
+        <p>2015.6.12<br /><em>26641</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mmsz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tdlxj"><img src="games/tdlxj/icon.png" alt="土豆历险记"></a>
+      <div class="gamename">
+        <h5>土豆历险记</h5>
+        <p>2015.6.10<br /><em>16987</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tdlxj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jkgqx"><img src="games/jkgqx/icon.png" alt="解开感情线"></a>
+      <div class="gamename">
+        <h5>解开感情线</h5>
+        <p>2015.6.8<br /><em>81850</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jkgqx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fndxhm"><img src="games/fndxhm/icon.png" alt="愤怒的小红帽"></a>
+      <div class="gamename">
+        <h5>愤怒的小红帽</h5>
+        <p>2015.6.5<br /><em>65184</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fndxhm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/grfhy"><img src="games/grfhy/icon.png" alt="高尔夫花园"></a>
+      <div class="gamename">
+        <h5>高尔夫花园</h5>
+        <p>2015.6.1<br /><em>77365</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/grfhy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xjmt"><img src="games/xjmt/icon.png" alt="星际摩托"></a>
+      <div class="gamename">
+        <h5>星际摩托</h5>
+        <p>2015.5.30<br /><em>99537</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xjmt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jtlq"><img src="games/jtlq/icon.png" alt="街头篮球"></a>
+      <div class="gamename">
+        <h5>街头篮球</h5>
+        <p>2015.5.27<br /><em>12710</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jtlq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mrg1"><img src="games/mrg1/icon.png" alt="英雄难过美人关"></a>
+      <div class="gamename">
+        <h5>英雄难过美人关</h5>
+        <p>2015.5.25<br /><em>70882</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mrg1">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ssrz"><img src="games/ssrz/icon.png" alt="生死忍者"></a>
+      <div class="gamename">
+        <h5>生死忍者</h5>
+        <p>2015.5.22<br /><em>98671</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ssrz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xmyfk"><img src="games/xmyfk/icon.png" alt="熊猫也疯狂"></a>
+      <div class="gamename">
+        <h5>熊猫也疯狂</h5>
+        <p>2015.5.20<br /><em>24432</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xmyfk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cwdyj"><img src="games/cwdyj/icon.png" alt="宠物大营救"></a>
+      <div class="gamename">
+        <h5>宠物大营救</h5>
+        <p>2015/5/18<br /><em>12757</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cwdyj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cdzj"><img src="games/cdzj/icon.png" alt="拆弹专家"></a>
+      <div class="gamename">
+        <h5>拆弹专家</h5>
+        <p>2015/5/15<br /><em>53397</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cdzj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/candyrain"><img src="games/candyrain/icon.png" alt="糖果粉碎世界"></a>
+      <div class="gamename">
+        <h5>糖果粉碎世界</h5>
+        <p>2015/5/13<br /><em>82831</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/candyrain">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bzylls"><img src="games/bzylls/icon.png" alt="八爪鱼与手拉手"></a>
+      <div class="gamename">
+        <h5>八爪鱼与手拉手</h5>
+        <p>2015/5/11<br /><em>29479</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bzylls">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/Bubblefish"><img src="games/Bubblefish/icon.png" alt="泡泡鱼与螃蟹"></a>
+      <div class="gamename">
+        <h5>泡泡鱼与螃蟹</h5>
+        <p>2015/5/8<br /><em>97521</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/Bubblefish">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bmbmt"><img src="games/bmbmt/icon.png" alt="斑马斑马跳"></a>
+      <div class="gamename">
+        <h5>斑马斑马跳</h5>
+        <p>2015/5/6<br /><em>36082</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bmbmt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/blockgame"><img src="games/blockgame/icon.png" alt="合体积木"></a>
+      <div class="gamename">
+        <h5>合体积木</h5>
+        <p>2015.5.4<br /><em>81921</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/blockgame">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/blfc"><img src="games/blfc/icon.png" alt="暴力飞车"></a>
+      <div class="gamename">
+        <h5>暴力飞车</h5>
+        <p>2015/4/29<br /><em>13537</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/blfc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/blackjack"><img src="games/blackjack/icon.png" alt="21点"></a>
+      <div class="gamename">
+        <h5>21点</h5>
+        <p>2015/4/27<br /><em>16330</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/blackjack">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ai"><img src="games/ai/icon.png" alt="糖果丘比特"></a>
+      <div class="gamename">
+        <h5>糖果丘比特</h5>
+        <p>2015.4.23<br /><em>58384</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ai">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/freekick"><img src="games/freekick/icon.png" alt="任意球大师"></a>
+      <div class="gamename">
+        <h5>任意球大师</h5>
+        <p>2015.4.14<br /><em>13354</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/freekick">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/3dboxing"><img src="games/3dboxing/icon.png" alt="3d拳击"></a>
+      <div class="gamename">
+        <h5>3d拳击</h5>
+        <p>2015.4.13<br /><em>37147</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/3dboxing">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/100c"><img src="games/100c/icon.png" alt="是男人就下100层"></a>
+      <div class="gamename">
+        <h5>是男人就下100层</h5>
+        <p>2015.4.12<br /><em>64761</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/100c">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/coreball"><img src="games/coreball/icon.png" alt="coreball"></a>
+      <div class="gamename">
+        <h5>coreball</h5>
+        <p>2015.4.11<br /><em>18196</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/coreball">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hgy"><img src="games/hgy/icon.png" alt="画个圆"></a>
+      <div class="gamename">
+        <h5>画个圆</h5>
+        <p>2015.4.6<br /><em>11543</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hgy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yd"><img src="games/yd/icon.png" alt="圆点"></a>
+      <div class="gamename">
+        <h5>圆点</h5>
+        <p>2015.4.2<br /><em>64133</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dwlx"><img src="games/dwlx/icon.png" alt="动物连线"></a>
+      <div class="gamename">
+        <h5>动物连线</h5>
+        <p>2015.3.27<br /><em>74318</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dwlx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hjby"><img src="games/hjby/icon.png" alt="火箭兔奔月"></a>
+      <div class="gamename">
+        <h5>火箭兔奔月</h5>
+        <p>2015.3.23<br /><em>20763</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hjby">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/feiyu"><img src="games/feiyu/icon.png" alt="小猪飞飞"></a>
+      <div class="gamename">
+        <h5>小猪飞飞</h5>
+        <p>2015.3.18<br /><em>11954</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/feiyu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xzhsdmx"><img src="games/xzhsdmx/icon.png" alt="新召唤师峡谷冒险"></a>
+      <div class="gamename">
+        <h5>新召唤师峡谷冒险</h5>
+        <p>2015.3.17<br /><em>59280</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xzhsdmx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xxcbdwf"><img src="games/xxcbdwf/icon.png" alt="炫炫翅膀带我飞"></a>
+      <div class="gamename">
+        <h5>炫炫翅膀带我飞</h5>
+        <p>2015.3.16<br /><em>82270</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xxcbdwf">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ttxdszm"><img src="games/ttxdszm/icon.png" alt="天天炫斗"></a>
+      <div class="gamename">
+        <h5>天天炫斗</h5>
+        <p>2015.3.15<br /><em>27595</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ttxdszm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ttfc"><img src="games/ttfc/icon.png" alt="天天飞车"></a>
+      <div class="gamename">
+        <h5>天天飞车</h5>
+        <p>2015.3.14<br /><em>65267</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ttfc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qsj"><img src="games/qsj/icon.png" alt="枪神记"></a>
+      <div class="gamename">
+        <h5>枪神记</h5>
+        <p>2015.3.13<br /><em>64120</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qsj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/minixd"><img src="games/minixd/icon.png" alt="mini炫斗"></a>
+      <div class="gamename">
+        <h5>mini炫斗</h5>
+        <p>2015.3.12<br /><em>81780</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/minixd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/luoke"><img src="games/luoke/icon.png" alt="洛克王国"></a>
+      <div class="gamename">
+        <h5>洛克王国</h5>
+        <p>2015.3.11<br /><em>42631</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/luoke">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/horsegame"><img src="games/horsegame/icon.png" alt="跳圈圈"></a>
+      <div class="gamename">
+        <h5>跳圈圈</h5>
+        <p>2015.3.10<br /><em>63657</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/horsegame">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dbj"><img src="games/dbj/icon.png" alt="大宝剑"></a>
+      <div class="gamename">
+        <h5>大宝剑</h5>
+        <p>2015.3.9<br /><em>83491</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dbj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cyb"><img src="games/cyb/icon.png" alt="插月饼"></a>
+      <div class="gamename">
+        <h5>插月饼</h5>
+        <p>2015.3.8<br /><em>13513</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cyb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cbd"><img src="games/cbd/icon.png" alt="抽绷带"></a>
+      <div class="gamename">
+        <h5>抽绷带</h5>
+        <p>2015.3.7<br /><em>62327</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cbd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bdxpg"><img src="games/bdxpg/bdxpg.jpg" alt="魂之利刃"></a>
+      <div class="gamename">
+        <h5>魂之利刃</h5>
+        <p>2015.3.4<br /><em>96923</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bdxpg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gdzmn"><img src="games/gdzmn/icon.png" alt="搞定丈母娘"></a>
+      <div class="gamename">
+        <h5>搞定丈母娘</h5>
+        <p>2015.3.4<br /><em>15270</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gdzmn">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bbqdf"><img src="games/bbqdf/icon.png" alt="爸爸去兜风"></a>
+      <div class="gamename">
+        <h5>爸爸去兜风</h5>
+        <p>2015.3.3<br /><em>15723</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bbqdf">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fcys"><img src="games/fcys/icon.png" alt="废柴勇士"></a>
+      <div class="gamename">
+        <h5>废柴勇士</h5>
+        <p>2015.3.2更新<br /><em>79753</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fcys">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkcsg"><img src="games/fkcsg/icon.png" alt="疯狂猜水果"></a>
+      <div class="gamename">
+        <h5>疯狂猜水果</h5>
+        <p>2015.3.1更新<br /><em>33749</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkcsg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jntt"><img src="games/jntt/icon.png" alt="贱鸟跳跳"></a>
+      <div class="gamename">
+        <h5>贱鸟跳跳</h5>
+        <p>2015.2.28更新<br /><em>13244</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jntt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wzdz"><img src="games/wzdz/icon.png" alt="蚊子大战"></a>
+      <div class="gamename">
+        <h5>蚊子大战</h5>
+        <p>2015.2.27更新<br /><em>15835</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wzdz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dtsl"><img src="games/dtsl/dtsl.png" alt="动态视力"></a>
+      <div class="gamename">
+        <h5>动态视力</h5>
+        <p>2015.2.26更新<br /><em>15670</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dtsl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mwzne"><img src="games/mwzne/icon.png" alt="萌娃在哪儿"></a>
+      <div class="gamename">
+        <h5>萌娃在哪儿</h5>
+        <p>2015.2.13更新<br /><em>15782</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mwzne">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pmp"><img src="games/pmp/icon.png" alt="拍马屁"></a>
+      <div class="gamename">
+        <h5>拍马屁</h5>
+        <p>2015.2.11更新<br /><em>21165</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pmp">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xyfs"><img src="games/xyfs/icon.png" alt="星爷粉丝大考验"></a>
+      <div class="gamename">
+        <h5>星爷粉丝大考验</h5>
+        <p>2015.2.6更新<br /><em>63054</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xyfs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mspt"><img src="games/mspt/icon.png" alt="美女拼图"></a>
+      <div class="gamename">
+        <h5>美女拼图</h5>
+        <p>2015.2.4更新<br /><em>18136</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mspt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cjmla"><img src="games/cjmla/icon.png" alt="超级马里奥"></a>
+      <div class="gamename">
+        <h5>超级马里奥</h5>
+        <p>2015.2.2更新<br /><em>47313</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cjmla">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkbttz"><img src="games/fkbttz/icon.png" alt="疯狂冰桶挑战"></a>
+      <div class="gamename">
+        <h5>疯狂冰桶挑战</h5>
+        <p>2015.2.1更新<br /><em>27815</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkbttz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jksz"><img src="games/jksz/icon.png" alt="解开绳子"></a>
+      <div class="gamename">
+        <h5>解开绳子</h5>
+        <p>2015.1.30更新<br /><em>25333</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jksz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ckf"><img src="games/ckf/icon.png" alt="查开房"></a>
+      <div class="gamename">
+        <h5>查开房</h5>
+        <p>2015.1.27更新<br /><em>47856</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ckf">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dbcs"><img src="games/dbcs/icon.png" alt="逗比测试"></a>
+      <div class="gamename">
+        <h5>逗比测试</h5>
+        <p>2015.1.25更新<br /><em>80948</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dbcs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ftz"><img src="games/ftz/icon.png" alt="挑战繁体字"></a>
+      <div class="gamename">
+        <h5>挑战繁体字</h5>
+        <p>2015.1.20更新<br /><em>88651</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ftz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wzdz"><img src="games/wzdz/icon.png" alt="蚊子大战"></a>
+      <div class="gamename">
+        <h5>蚊子大战</h5>
+        <p>11月14日更新<br /><em>57619</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wzdz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkcsg"><img src="games/fkcsg/icon.png" alt="疯狂猜水果"></a>
+      <div class="gamename">
+        <h5>疯狂猜水果</h5>
+        <p>11月13日更新<br /><em>81903</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkcsg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dtsl"><img src="games/dtsl/icon.png" alt="动态视力"></a>
+      <div class="gamename">
+        <h5>动态视力</h5>
+        <p>11月11日更新<br /><em>47930</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dtsl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/symdsb"><img src="games/symdsb/icon.png" alt="随意门（屌丝版）"></a>
+      <div class="gamename">
+        <h5>随意门（屌丝版）</h5>
+        <p>9月24日<br /><em>39889</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/symdsb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zwdzjs"><img src="games/zwdzjs/icon.png" alt="植物大战僵尸"></a>
+      <div class="gamename">
+        <h5>植物大战僵尸</h5>
+        <p>9月23日<br /><em>98498</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zwdzjs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bsqpz2"><img src="games/bsqpz2/icon.png" alt="逼死强迫症2"></a>
+      <div class="gamename">
+        <h5>逼死强迫症2</h5>
+        <p>9月22日<br /><em>13197</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bsqpz2">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xksds"><img src="games/xksds/icon.png" alt="胸口碎大石"></a>
+      <div class="gamename">
+        <h5>胸口碎大石</h5>
+        <p>9月19日<br /><em>93010</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xksds">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/flnu"><img src="games/flnu/icon.png" alt="粉绿男女"></a>
+      <div class="gamename">
+        <h5>粉绿男女</h5>
+        <p>9月18日<br /><em>80278</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/flnu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/djz"><img src="games/djz/icon.png" alt="打击者"></a>
+      <div class="gamename">
+        <h5>打击者</h5>
+        <p>9月17日<br /><em>44829</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/djz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hjkg"><img src="games/hjkg/icon.png" alt="黄金矿工"></a>
+      <div class="gamename">
+        <h5>黄金矿工</h5>
+        <p>9月17日<br /><em>56666</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hjkg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bljqzffxwz"><img src="games/bljqzffxwz/icon.png" alt="反腐小王子"></a>
+      <div class="gamename">
+        <h5>反腐小王子</h5>
+        <p>9月15日<br /><em>63768</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bljqzffxwz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/znm"><img src="games/znm/icon.png" alt="转你妹"></a>
+      <div class="gamename">
+        <h5>转你妹</h5>
+        <p>9月14日<br /><em>47342</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/znm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zfj"><img src="games/zfj/icon.png" alt="纸飞机"></a>
+      <div class="gamename">
+        <h5>纸飞机</h5>
+        <p>9月14日<br /><em>18993</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zfj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ksiphone6"><img src="games/ksiphone6/icon.png" alt="狂射iphone6"></a>
+      <div class="gamename">
+        <h5>狂射iphone6</h5>
+        <p>9月14日<br /><em>60690</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ksiphone6">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tuzi"><img src="games/tuzi/icon.png" alt="小兔子快快跑"></a>
+      <div class="gamename">
+        <h5>小兔子快快跑</h5>
+        <p>9月13日<br /><em>51613</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tuzi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ttg"><img src="games/ttg/icon.png" alt="跳跳狗"></a>
+      <div class="gamename">
+        <h5>跳跳狗</h5>
+        <p>9月13日<br /><em>23717</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ttg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/saolei"><img src="games/saolei/icon.png" alt="扫雷"></a>
+      <div class="gamename">
+        <h5>扫雷</h5>
+        <p>9月13日<br /><em>40443</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/saolei">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qbllk"><img src="games/qbllk/icon.png" alt="奇葩连连看"></a>
+      <div class="gamename">
+        <h5>奇葩连连看</h5>
+        <p>9月13日<br /><em>74363</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qbllk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/maomi"><img src="games/maomi/icon.png" alt="看你有多花"></a>
+      <div class="gamename">
+        <h5>看你有多花</h5>
+        <p>9月13日<br /><em>25961</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/maomi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/kaixinlian"><img src="games/kaixinlian/icon.png" alt="开心消消乐"></a>
+      <div class="gamename">
+        <h5>开心消消乐</h5>
+        <p>9月13日<br /><em>45278</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/kaixinlian">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jinhua"><img src="games/jinhua/icon.png" alt="进化"></a>
+      <div class="gamename">
+        <h5>进化</h5>
+        <p>9月13日<br /><em>79034</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jinhua">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jingzi"><img src="games/jingzi/icon.png" alt="拯救精子"></a>
+      <div class="gamename">
+        <h5>拯救精子</h5>
+        <p>9月13日<br /><em>30743</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jingzi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dalaohu"><img src="games/dalaohu/icon.png" alt="打老虎"></a>
+      <div class="gamename">
+        <h5>打老虎</h5>
+        <p>9月13日<br /><em>55444</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dalaohu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/symh"><img src="games/symh/icon.png" alt="色域迷惑人"></a>
+      <div class="gamename">
+        <h5>色域迷惑人</h5>
+        <p>9月13日<br /><em>42087</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/symh">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/chezhi"><img src="games/chezhi/icon.png" alt="厕纸挑战"></a>
+      <div class="gamename">
+        <h5>厕纸挑战</h5>
+        <p>9月13日<br /><em>37880</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/chezhi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qqppp"><img src="games/qqppp/icon.png" alt="气球砰砰砰"></a>
+      <div class="gamename">
+        <h5>气球砰砰砰</h5>
+        <p>9月13日<br /><em>91757</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qqppp">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hczz"><img src="games/hczz/icon.png" alt="横冲直闯"></a>
+      <div class="gamename">
+        <h5>横冲直闯</h5>
+        <p>9月7号<br /><em>58902</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hczz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/biaoche"><img src="games/biaoche/icon.png" alt="疯狂飙车"></a>
+      <div class="gamename">
+        <h5>疯狂飙车</h5>
+        <p>9月7号<br /><em>52213</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/biaoche">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/baba"><img src="games/baba/icon.png" alt="粑粑去哪儿"></a>
+      <div class="gamename">
+        <h5>粑粑去哪儿</h5>
+        <p>9月6号<br /><em>39612</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/baba">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ceast"><img src="games/ceast/icon.png" alt="嫦娥爱色兔"></a>
+      <div class="gamename">
+        <h5>嫦娥爱色兔</h5>
+        <p>9月6号<br /><em>39850</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ceast">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dwy"><img src="games/dwy/icon.png" alt="打我呀打我呀"></a>
+      <div class="gamename">
+        <h5>打我呀打我呀</h5>
+        <p>9月6号<br /><em>40864</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dwy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gudaye"><img src="games/gudaye/icon.png" alt="股票你大爷"></a>
+      <div class="gamename">
+        <h5>股票你大爷</h5>
+        <p>9月5号<br /><em>86232</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gudaye">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jyfy"><img src="games/jyfy/icon.png" alt="监狱风云"></a>
+      <div class="gamename">
+        <h5>监狱风云</h5>
+        <p>9月5号<br /><em>21752</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jyfy">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jyfy2"><img src="games/jyfy2/icon.png" alt="监狱风云2"></a>
+      <div class="gamename">
+        <h5>监狱风云2</h5>
+        <p>9月5号<br /><em>77795</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jyfy2">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/lbyhbyc"><img src="games/lbyhbyc/icon.png" alt="路边的野花不要采"></a>
+      <div class="gamename">
+        <h5>路边的野花不要采</h5>
+        <p>9月5号<br /><em>26121</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/lbyhbyc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/nddsc"><img src="games/nddsc/icon.png" alt="能打多少下"></a>
+      <div class="gamename">
+        <h5>能打多少下</h5>
+        <p>9月5号<br /><em>20250</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/nddsc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/njdsb"><img src="games/njdsb/icon.png" alt="能接多少杯"></a>
+      <div class="gamename">
+        <h5>能接多少杯</h5>
+        <p>9月5号<br /><em>79992</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/njdsb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pxfzm"><img src="games/pxfzm/icon.png" alt="泼醒小房子"></a>
+      <div class="gamename">
+        <h5>泼醒小房子</h5>
+        <p>9月5号<br /><em>19130</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pxfzm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xiaosan"><img src="games/xiaosan/icon.png" alt="她是小三吗"></a>
+      <div class="gamename">
+        <h5>她是小三吗</h5>
+        <p>9月4号<br /><em>89529</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xiaosan">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ybdz"><img src="games/ybdz/icon.png" alt="月饼大战"></a>
+      <div class="gamename">
+        <h5>月饼大战</h5>
+        <p>9月4号<br /><em>24820</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ybdz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zhaonige"><img src="games/zhaonige/icon.png" alt="麦皇争霸《找你歌》"></a>
+      <div class="gamename">
+        <h5>麦皇争霸《找你歌》</h5>
+        <p>9月3号<br /><em>64797</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zhaonige">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mmttt"><img src="games/mmttt/icon.png" alt="萌萌跳跳兔"></a>
+      <div class="gamename">
+        <h5>萌萌跳跳兔</h5>
+        <p>9月3号<br /><em>53296</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mmttt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dlxfk"><img src="games/dlxfk/icon.png" alt="强力小方块"></a>
+      <div class="gamename">
+        <h5>强力小方块</h5>
+        <p>9月2日<br /><em>61163</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dlxfk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ndtnrgclm"><img src="games/ndtnrgclm/icon.png" alt="你的童年让狗吃了吗？"></a>
+      <div class="gamename">
+        <h5>你的童年让狗吃了吗？</h5>
+        <p>9月2日<br /><em>72791</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ndtnrgclm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bsqpz"><img src="games/bsqpz/icon.png" alt="憋死强迫症"></a>
+      <div class="gamename">
+        <h5>憋死强迫症</h5>
+        <p>9月2日<br /><em>13986</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bsqpz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tzbp"><img src="games/tzbp/icon.png" alt="挑战憋屁"></a>
+      <div class="gamename">
+        <h5>挑战憋屁</h5>
+        <p>9月2日<br /><em>12776</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tzbp">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wbk"><img src="games/wbk/icon.png" alt="挖鼻孔"></a>
+      <div class="gamename">
+        <h5>挖鼻孔</h5>
+        <p>8月31日<br /><em>85508</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wbk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/daoguo"><img src="games/daoguo/icon.png" alt="岛国么么哒"></a>
+      <div class="gamename">
+        <h5>岛国么么哒</h5>
+        <p>8月29号更新<br /><em>43429</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/daoguo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zqdn"><img src="games/zqdn/icon.png" alt="最强大脑"></a>
+      <div class="gamename">
+        <h5>最强大脑</h5>
+        <p>8月26日更新<br /><em>76139</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zqdn">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dlss"><img src="games/dlss/icon.png" alt="大力射X"></a>
+      <div class="gamename">
+        <h5>大力射X</h5>
+        <p>8月24日更新<br /><em>11469</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dlss">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bbjx"><img src="games/bbjx/icon.png" alt="步步惊心"></a>
+      <div class="gamename">
+        <h5>步步惊心</h5>
+        <p>8月24日更新<br /><em>77708</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bbjx">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sqs"><img src="games/sqs/icon.png" alt="神枪手"></a>
+      <div class="gamename">
+        <h5>神枪手</h5>
+        <p>8月24日更新<br /><em>55172</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sqs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xz120"><img src="games/xz120/icon.png" alt="寻找120"></a>
+      <div class="gamename">
+        <h5>寻找120</h5>
+        <p>8月23日更新<br /><em>31213</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xz120">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/monkey"><img src="games/monkey/icon.png" alt="微信抢桃"></a>
+      <div class="gamename">
+        <h5>微信抢桃</h5>
+        <p>8月23日更新<br /><em>33151</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/monkey">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cscg"><img src="games/cscg/icon.png" alt="测试你的出轨率"></a>
+      <div class="gamename">
+        <h5>测试你的出轨率</h5>
+        <p>8月23日更新<br /><em>86260</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cscg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mzpk"><img src="games/mzpk/icon.png" alt="名字大作战"></a>
+      <div class="gamename">
+        <h5>名字大作战</h5>
+        <p>8月23日更新<br /><em>58093</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mzpk">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fkfzm"><img src="games/fkfzm/icon.png" alt="放开房祖名"></a>
+      <div class="gamename">
+        <h5>放开房祖名</h5>
+        <p>8月21日更新<br /><em>24908</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fkfzm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ymhddzc"><img src="games/ymhddzc/icon.png" alt="樱木花道在主场"></a>
+      <div class="gamename">
+        <h5>樱木花道在主场</h5>
+        <p>8月21日更新<br /><em>45162</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ymhddzc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gqtz"><img src="games/gqtz/icon.png" alt="哥，请挺住18秒！"></a>
+      <div class="gamename">
+        <h5>哥，请挺住18秒！</h5>
+        <p>8月21日更新<br /><em>99306</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gqtz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/blglez"><img src="games/blglez/icon.png" alt="帮龙叔捞儿子"></a>
+      <div class="gamename">
+        <h5>帮龙叔捞儿子</h5>
+        <p>8月21日更新<br /><em>53520</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/blglez">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xindonglian"><img src="games/xindonglian/icon.png" alt="心动连连看"></a>
+      <div class="gamename">
+        <h5>心动连连看</h5>
+        <p>8月20日更新<br /><em>74012</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xindonglian">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/liankan"><img src="games/liankan/icon.png" alt="连连看"></a>
+      <div class="gamename">
+        <h5>连连看</h5>
+        <p>8月20日更新<br /><em>40170</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/liankan">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qedfc"><img src="games/qedfc/icon.png" alt="企鹅大复仇"></a>
+      <div class="gamename">
+        <h5>企鹅大复仇</h5>
+        <p>8月20日更新<br /><em>39752</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qedfc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qpjzg"><img src="games/qpjzg/icon.png" alt="强迫校正辊"></a>
+      <div class="gamename">
+        <h5>强迫校正辊</h5>
+        <p>8月20日更新<br /><em>84765</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qpjzg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fytkzc"><img src="games/fytkzc/icon.png" alt="飞跃天空之城"></a>
+      <div class="gamename">
+        <h5>飞跃天空之城</h5>
+        <p>8月20日更新<br /><em>17964</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fytkzc">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cpp"><img src="games/cpp/icon.png" alt="戳破泡泡"></a>
+      <div class="gamename">
+        <h5>戳破泡泡</h5>
+        <p>8月20日更新<br /><em>54873</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cpp">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/wzxgz"><img src="games/wzxgz/icon.png" alt="围住小鬼子"></a>
+      <div class="gamename">
+        <h5>围住小鬼子</h5>
+        <p>8月20日更新<br /><em>94016</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/wzxgz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/rjd"><img src="games/rjd/icon.png" alt="扔鸡蛋"></a>
+      <div class="gamename">
+        <h5>扔鸡蛋</h5>
+        <p>8月20日更新<br /><em>86957</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/rjd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qwt"><img src="games/qwt/icon.png" alt="青蛙跳"></a>
+      <div class="gamename">
+        <h5>青蛙跳</h5>
+        <p>8月20日更新<br /><em>63004</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qwt">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jolin"><img src="games/jolin/icon.png" alt="一起寻找蔡依林"></a>
+      <div class="gamename">
+        <h5>一起寻找蔡依林</h5>
+        <p>8月20日更新<br /><em>83544</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jolin">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mnygl"><img src="games/mnygl/icon.png" alt="木乃伊归来"></a>
+      <div class="gamename">
+        <h5>木乃伊归来</h5>
+        <p>8月20日更新<br /><em>11776</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mnygl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cdd"><img src="games/cdd/icon.png" alt="吃豆豆"></a>
+      <div class="gamename">
+        <h5>吃豆豆</h5>
+        <p>8月20日更新<br /><em>27800</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cdd">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cube"><img src="games/cube/icon.png" alt="变态俄罗斯方块"></a>
+      <div class="gamename">
+        <h5>变态俄罗斯方块</h5>
+        <p>8月20日更新<br /><em>36840</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cube">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mtl"><img src="games/mtl/icon.png" alt="摩天楼"></a>
+      <div class="gamename">
+        <h5>摩天楼</h5>
+        <p>8月20日更新<br /><em>61940</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mtl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zhizhuxia"><img src="games/zhizhuxia/icon.png" alt="蜘蛛侠"></a>
+      <div class="gamename">
+        <h5>蜘蛛侠</h5>
+        <p>8月20日更新<br /><em>89591</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zhizhuxia">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/tangguo"><img src="games/tangguo/icon.png" alt="糖果乐园"></a>
+      <div class="gamename">
+        <h5>糖果乐园</h5>
+        <p>8月20日更新<br /><em>39826</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/tangguo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xiaoshuai"><img src="games/xiaoshuai/icon.png" alt="飞翔吧小帅"></a>
+      <div class="gamename">
+        <h5>飞翔吧小帅</h5>
+        <p>8月20日更新<br /><em>63716</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xiaoshuai">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ice_bucket"><img src="games/ice_bucket/icon.png" alt="冰桶挑战"></a>
+      <div class="gamename">
+        <h5>冰桶挑战</h5>
+        <p>8月20日更新<br /><em>75099</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ice_bucket">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bttz"><img src="games/bttz/icon.png" alt="冰桶挑战-2B版"></a>
+      <div class="gamename">
+        <h5>冰桶挑战-2B版</h5>
+        <p>8月20日更新<br /><em>72256</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bttz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qmxzfzm2"><img src="games/qmxzfzm2/icon.png" alt="摇一摇寻找房祖名"></a>
+      <div class="gamename">
+        <h5>摇一摇寻找房祖名</h5>
+        <p>8月20日更新<br /><em>39855</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qmxzfzm2">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yzcs"><img src="games/yzcs/icon.png" alt="影子传说"></a>
+      <div class="gamename">
+        <h5>影子传说</h5>
+        <p>8月20号更新<br /><em>75568</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yzcs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qmykl"><img src="games/qmykl/icon.png" alt="全民寻摇可乐"></a>
+      <div class="gamename">
+        <h5>全民寻摇可乐</h5>
+        <p>8月19日更新<br /><em>49964</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qmykl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sqsdscj"><img src="games/sqsdscj/icon.png" alt="数钱数到手抽筋"></a>
+      <div class="gamename">
+        <h5>数钱数到手抽筋</h5>
+        <p>9月13日更新<br /><em>84027</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sqsdscj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qmxzfzm/icon.png"><img src="games/qmxzfzm/icon.png" alt="全民寻找房祖名"></a>
+      <div class="gamename">
+        <h5>全民寻找房祖名</h5>
+        <p>8月18日更新<br /><em>95781</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qmxzfzm/icon.png">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mnbyg"><img src="games/mnbyg/icon.png" alt="美女啵一个"></a>
+      <div class="gamename">
+        <h5>美女啵一个</h5>
+        <p>8月17日更新<br /><em>72116</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mnbyg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/llll"><img src="games/llll/icon.png" alt="萝莉来了"></a>
+      <div class="gamename">
+        <h5>萝莉来了</h5>
+        <p>8月16日更新<br /><em>70287</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/llll">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jssjm"><img src="games/jssjm/icon.png" alt="激射神经猫"></a>
+      <div class="gamename">
+        <h5>激射神经猫</h5>
+        <p>8月16号更新<br /><em>53874</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jssjm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yuebing"><img src="games/yuebing/icon.png" alt="吃月饼大赛"></a>
+      <div class="gamename">
+        <h5>吃月饼大赛</h5>
+        <p>8月15号更新<br /><em>86024</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yuebing">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qie"><img src="games/qie/icon.png" alt="疯狂打企鹅"></a>
+      <div class="gamename">
+        <h5>疯狂打企鹅</h5>
+        <p>8月15号更新<br /><em>15448</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qie">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cs"><img src="games/cs/icon.png" alt="财神"></a>
+      <div class="gamename">
+        <h5>财神</h5>
+        <p>8月12日更新<br /><em>53180</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cs">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bdsjm"><img src="games/bdsjm/icon.png" alt="暴打神经猫"></a>
+      <div class="gamename">
+        <h5>暴打神经猫</h5>
+        <p>8月12日更新<br /><em>39543</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bdsjm">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/iq"><img src="games/iq/icon.png" alt="智商测试"></a>
+      <div class="gamename">
+        <h5>智商测试</h5>
+        <p>8月11日更新<br /><em>78461</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/iq">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/gongfumao"><img src="games/gongfumao/icon.png" alt="功夫猫"></a>
+      <div class="gamename">
+        <h5>功夫猫</h5>
+        <p>8月11日更新<br /><em>82350</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/gongfumao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dwz"><img src="games/dwz/icon.png" alt="打蚊子"></a>
+      <div class="gamename">
+        <h5>打蚊子</h5>
+        <p>8月11日更新<br /><em>68296</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dwz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/diaoyu"><img src="games/diaoyu/icon.png" alt="钓鱼"></a>
+      <div class="gamename">
+        <h5>钓鱼</h5>
+        <p>8月11日更新<br /><em>63226</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/diaoyu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/heibai"><img src="games/heibai/icon.png" alt="黑白块"></a>
+      <div class="gamename">
+        <h5>黑白块</h5>
+        <p>8月11日更<br /><em>89315</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/heibai">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ld"><img src="games/ld/icon.png" alt="宇宙激战"></a>
+      <div class="gamename">
+        <h5>宇宙激战</h5>
+        <p>8月10日更新<br /><em>23168</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ld">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/kuaipao"><img src="games/kuaipao/icon.png" alt="快跑"></a>
+      <div class="gamename">
+        <h5>快跑</h5>
+        <p>8月10日更新<br /><em>57241</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/kuaipao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/kanshu"><img src="games/kanshu/icon.png" alt="砍树"></a>
+      <div class="gamename">
+        <h5>砍树</h5>
+        <p>8月10日更新<br /><em>76271</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/kanshu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jb"><img src="games/jb/icon.png" alt="Danger"></a>
+      <div class="gamename">
+        <h5>Danger</h5>
+        <p>8月10日更新<br /><em>75172</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jb">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qiexigua"><img src="games/qiexigua/icon.png" alt="切西瓜"></a>
+      <div class="gamename">
+        <h5>切西瓜</h5>
+        <p>8月09日更新<br /><em>40785</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qiexigua">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pigbaby"><img src="games/pigbaby/icon.png" alt="小猪宝宝"></a>
+      <div class="gamename">
+        <h5>小猪宝宝</h5>
+        <p>8月09日更新<br /><em>77048</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pigbaby">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mxcz"><img src="games/mxcz/icon.png" alt="梦想成真"></a>
+      <div class="gamename">
+        <h5>梦想成真</h5>
+        <p>8月09日更新<br /><em>91973</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mxcz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/shenjingmao-zhuangbiban"><img src="games/shenjingmao-zhuangbiban/icon.png" alt="神经猫-装逼版"></a>
+      <div class="gamename">
+        <h5>神经猫-装逼版</h5>
+        <p>8月08日更新<br /><em>66625</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/shenjingmao-zhuangbiban">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qixi1"><img src="games/qixi1/icon.png" alt="七夕跳跳跳"></a>
+      <div class="gamename">
+        <h5>七夕跳跳跳</h5>
+        <p>8月08日更新<br /><em>38987</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qixi1">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jg"><img src="games/jg/icon.png" alt="激光战警"></a>
+      <div class="gamename">
+        <h5>激光战警</h5>
+        <p>8月07日更新<br /><em>81563</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jg">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/money"><img src="games/money/icon.png" alt="捡钱大战"></a>
+      <div class="gamename">
+        <h5>捡钱大战</h5>
+        <p>8月07日更新<br /><em>95452</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/money">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/ygj"><img src="games/ygj/icon.png" alt="一根筋玩到底"></a>
+      <div class="gamename">
+        <h5>一根筋玩到底</h5>
+        <p>8月07日更新<br /><em>91704</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/ygj">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xxoo"><img src="games/xxoo/icon.png" alt="看你能XXOO多少次"></a>
+      <div class="gamename">
+        <h5>看你能XXOO多少次</h5>
+        <p>8月07日更新<br /><em>56662</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xxoo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/hl"><img src="games/hl/icon.png" alt="小鳄鱼"></a>
+      <div class="gamename">
+        <h5>小鳄鱼</h5>
+        <p>8月07日更新<br /><em>67708</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/hl">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zuqiu"><img src="games/zuqiu/icon.png" alt="滚滚足球"></a>
+      <div class="gamename">
+        <h5>滚滚足球</h5>
+        <p>8月07日更新<br /><em>31558</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zuqiu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yibihua"><img src="games/yibihua/icon.png" alt="一笔画"></a>
+      <div class="gamename">
+        <h5>一笔画</h5>
+        <p>8月07日更新<br /><em>32229</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yibihua">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/duolao"><img src="games/duolao/icon.png" alt="看你有多老"></a>
+      <div class="gamename">
+        <h5>看你有多老</h5>
+        <p>8月07日更新<br /><em>17671</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/duolao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/shit"><img src="games/shit/icon.png" alt="炸屎奇遇记"></a>
+      <div class="gamename">
+        <h5>炸屎奇遇记</h5>
+        <p>8月06日更新<br /><em>15584</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/shit">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qifu"><img src="games/qifu/icon.png" alt="为云南鲁甸县祈"></a>
+      <div class="gamename">
+        <h5>为云南鲁甸县祈</h5>
+        <p>8月06日更新<br /><em>28010</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qifu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/weidao"><img src="games/weidao/icon.png" alt="你在别人眼中味道"></a>
+      <div class="gamename">
+        <h5>你在别人眼中味道</h5>
+        <p>8月06日更新<br /><em>78787</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/weidao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zhaonimei"><img src="games/zhaonimei/icon.png" alt="微信找你妹"></a>
+      <div class="gamename">
+        <h5>微信找你妹</h5>
+        <p>8月06日更新<br /><em>74871</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zhaonimei">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zazhi"><img src="games/zazhi/icon.png" alt="微信杂志效果"></a>
+      <div class="gamename">
+        <h5>微信杂志效果</h5>
+        <p>8月06日更新<br /><em>70884</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zazhi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/naoyangyang"><img src="games/naoyangyang/icon.png" alt="疯狂挠痒痒"></a>
+      <div class="gamename">
+        <h5>疯狂挠痒痒</h5>
+        <p>8月06日更新<br /><em>64810</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/naoyangyang">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/honghaishilv"><img src="games/honghaishilv/icon.png" alt="红还是绿"></a>
+      <div class="gamename">
+        <h5>红还是绿</h5>
+        <p>8月06日更新<br /><em>79320</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/honghaishilv">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jianren"><img src="games/jianren/icon.png" alt="贱人配对"></a>
+      <div class="gamename">
+        <h5>贱人配对</h5>
+        <p>8月06日更新<br /><em>24063</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jianren">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/diandeng"><img src="games/diandeng/icon.png" alt="最强电灯泡"></a>
+      <div class="gamename">
+        <h5>最强电灯泡</h5>
+        <p>8月05日更新<br /><em>93354</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/diandeng">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/baozi"><img src="games/baozi/icon.png" alt="吃包子大赛"></a>
+      <div class="gamename">
+        <h5>吃包子大赛</h5>
+        <p>8月04日更新<br /><em>57780</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/baozi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/pigu"><img src="games/pigu/icon.png" alt="敢摸大老虎屁股吗"></a>
+      <div class="gamename">
+        <h5>敢摸大老虎屁股吗</h5>
+        <p>8月04日更新<br /><em>95413</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/pigu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/2048"><img src="games/2048/icon.png" alt="2048"></a>
+      <div class="gamename">
+        <h5>2048</h5>
+        <p>8月03日更新<br /><em>61650</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/2048">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/cjrst"><img src="games/cjrst/icon.png" alt="超级染色体"></a>
+      <div class="gamename">
+        <h5>超级染色体</h5>
+        <p>8月03日更新<br /><em>21005</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/cjrst">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/se2"><img src="games/se2/icon.png" alt="看你有多色II-双飞版"></a>
+      <div class="gamename">
+        <h5>看你有多色II-双飞版</h5>
+        <p>8月02日更新<br /><em>84727</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/se2">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/shenjingmao2"><img src="games/shenjingmao2/icon.png" alt="围住神经猫II-基友版"></a>
+      <div class="gamename">
+        <h5>围住神经猫II-基友版</h5>
+        <p>8月02日更新<br /><em>73818</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/shenjingmao2">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/fangyan"><img src="games/fangyan/icon.png" alt="新疆话方言八级考"></a>
+      <div class="gamename">
+        <h5>新疆话方言八级考</h5>
+        <p>8月01日更新<br /><em>67247</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/fangyan">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/shouzhi"><img src="games/shouzhi/icon.png" alt="疯狂手指"></a>
+      <div class="gamename">
+        <h5>疯狂手指</h5>
+        <p>8月01日更新<br /><em>60998</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/shouzhi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/dqe"><img src="games/dqe/icon.png" alt="打企鹅"></a>
+      <div class="gamename">
+        <h5>打企鹅</h5>
+        <p>7月更新<br /><em>48990</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/dqe">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zz"><img src="games/zz/icon.png" alt="Galactians"></a>
+      <div class="gamename">
+        <h5>Galactians</h5>
+        <p>7月更新<br /><em>97032</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zz">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zhuogui"><img src="games/zhuogui/icon.png" alt="捉鬼"></a>
+      <div class="gamename">
+        <h5>捉鬼</h5>
+        <p>7月更新<br /><em>38045</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zhuogui">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yh"><img src="games/yh/icon.png" alt="烟花"></a>
+      <div class="gamename">
+        <h5>烟花</h5>
+        <p>7月更新<br /><em>40962</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yh">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yao"><img src="games/yao/icon.png" alt="疯狂摇一摇"></a>
+      <div class="gamename">
+        <h5>疯狂摇一摇</h5>
+        <p>7月更新<br /><em>63657</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zhua"><img src="games/zhua/icon.png" alt="抓抓抓！"></a>
+      <div class="gamename">
+        <h5>抓抓抓！</h5>
+        <p>7月更新<br /><em>66032</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zhua">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/yang"><img src="games/yang/icon.png" alt="挠挠我"></a>
+      <div class="gamename">
+        <h5>挠挠我</h5>
+        <p>7月更新<br /><em>22525</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/yang">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qixi"><img src="games/qixi/icon.png" alt="七夕七夕"></a>
+      <div class="gamename">
+        <h5>七夕七夕</h5>
+        <p>7月更新<br /><em>59109</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qixi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/sheqiu"><img src="games/sheqiu/icon.png" alt="射球"></a>
+      <div class="gamename">
+        <h5>射球</h5>
+        <p>7月更新<br /><em>57735</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/sheqiu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/semo"><img src="games/semo/icon.png" alt="色魔"></a>
+      <div class="gamename">
+        <h5>色魔</h5>
+        <p>7月更新<br /><em>68187</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/semo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/zuiqiangyanli"><img src="games/zuiqiangyanli/icon.png" alt="最强眼力"></a>
+      <div class="gamename">
+        <h5>最强眼力</h5>
+        <p>7月更新<br /><em>26816</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/zuiqiangyanli">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xiongchumo"><img src="games/xiongchumo/icon.png" alt="3D熊出没"></a>
+      <div class="gamename">
+        <h5>3D熊出没</h5>
+        <p>7月更新<br /><em>78293</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xiongchumo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xiaopingguo"><img src="games/xiaopingguo/icon.png" alt="小苹果"></a>
+      <div class="gamename">
+        <h5>小苹果</h5>
+        <p>7月更新<br /><em>89417</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xiaopingguo">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/xiaoniaofeifei"><img src="games/xiaoniaofeifei/icon.png" alt="小鸟飞飞飞"></a>
+      <div class="gamename">
+        <h5>小鸟飞飞飞</h5>
+        <p>7月更新<br /><em>33487</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/xiaoniaofeifei">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/selang"><img src="games/selang/icon.png" alt="色狼划船"></a>
+      <div class="gamename">
+        <h5>色狼划船</h5>
+        <p>7月更新<br /><em>82878</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/selang">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/qingwa"><img src="games/qingwa/icon.png" alt="小青蛙过河"></a>
+      <div class="gamename">
+        <h5>小青蛙过河</h5>
+        <p>7月更新<br /><em>17426</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/qingwa">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mishi"><img src="games/mishi/icon.png" alt="密室逃亡"></a>
+      <div class="gamename">
+        <h5>密室逃亡</h5>
+        <p>7月更新<br /><em>12274</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mishi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/bunengsi"><img src="games/bunengsi/icon.png" alt="一个都不能死"></a>
+      <div class="gamename">
+        <h5>一个都不能死</h5>
+        <p>7月更新<br /><em>57749</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/bunengsi">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/mingxuanyixian"><img src="games/mingxuanyixian/icon.png" alt="命悬一线"></a>
+      <div class="gamename">
+        <h5>命悬一线</h5>
+        <p>7月更新<br /><em>77310</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/mingxuanyixian">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/jicilang"><img src="games/jicilang/icon.png" alt="一夜几次郎"></a>
+      <div class="gamename">
+        <h5>一夜几次郎</h5>
+        <p>7月更新<br /><em>66085</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/jicilang">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/feidegenggao"><img src="games/feidegenggao/icon.png" alt="飞的更高"></a>
+      <div class="gamename">
+        <h5>飞的更高</h5>
+        <p>7月更新<br /><em>37068</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/feidegenggao">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/duxinshu"><img src="games/duxinshu/icon.png" alt="神奇读心术"></a>
+      <div class="gamename">
+        <h5>神奇读心术</h5>
+        <p>7月更新<br /><em>90374</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/duxinshu">开始<span></span></a></div>
+    </div>
+      
+    <div class="game-item">
+      <a href="games/duimutou"><img src="games/duimutou/icon.png" alt="堆木头"></a>
+      <div class="gamename">
+        <h5>堆木头</h5>
+        <p>7月更新<br /><em>59439</em> 人玩过。</p>
+      </div>
+      <div class="game-go"><a href="games/duimutou">开始<span></span></a></div>
+    </div>
+      </div>
+</div>
+<div class="panel-footer text-center">
+  &copy; 2014 锦尚中国游戏 版权所有
+</div>
+</body>
+</html>

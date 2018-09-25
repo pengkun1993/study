@@ -1,0 +1,9 @@
+.c1,.c1:hover{
+	color: #F9F9F9;
+	background: #009AD7;
+}
+a.c1:hover{
+	color: #FFFFFF;
+	background: #008DC4;
+	filter: none;
+}

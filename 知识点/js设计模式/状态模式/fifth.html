@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>实例：自动糖果售卖机-前端网-老姚</title>
+</head>
+<style>
+	[type=button] {
+		width:120px;
+		height:30px;
+		background:#FF6100;
+		color:white;
+		margin:15px;
+		border: 1px solid #999999;
+	}
+	[type=button]:hover{
+		cursor: pointer;
+		background: #FF863E;
+	}
+</style>
+<body>
+	<section id="firstMachine">
+	<h2>第一台售卖机</h2>
+	<input type="button" class="insertQuarter" value="投币"/>
+	<input type="button" class="ejectQuarter" value="退钱"/>
+	<input type="button" class="turnCrank" value="转动曲柄"/>
+	<p class="mess"></p>
+	</section>
+	<section id="secondMachine">
+	<h2>第二台售卖机</h2>
+	<input type="button" class="insertQuarter" value="投币"/>
+	<input type="button" class="ejectQuarter" value="退钱"/>
+	<input type="button" class="turnCrank" value="转动曲柄"/>
+	<p class="mess"></p>
+	</section>
+</body>
+<script type="text/javascript">
+	/*自己写的*/
+	var HaveMoney={
+		init:function(machine){
+			this.machine=machine;
+			return this;
+		},
+		insertQuarter:function(){
+			this.machine.render.innerHTML='已经有钱了';
+		},
+		ejectQuarter:function(){
+			this.machine.setMoneyState(this.machine.noMoneyState);
+			this.machine.render.innerHTML='钱返回给你了';
+		},
+		turnCrank:function(){
+			if(this.machine.totalNum>0){
+				this.machine.render.innerHTML='正在出糖果....';
+				this.machine.setMoneyState(that.machine.noMoneyState);
+				var that=this;
+				setTimeout(function(){
+					that.machine.totalNum--;
+					that.machine.render.innerHTML='卡槽中有糖果了';
+				},2000);
+			}else{
+				this.machine.render.innerHTML='抱歉糖果卖完了';
+			}
+			
+		},
+	};
+	var NoMoney={
+		init:function(machine){
+			this.machine=machine;
+			return this;
+		},
+		insertQuarter:function(){
+			this.machine.setMoneyState(this.machine.haveMoneyState);
+			this.machine.render.innerHTML='投币成功';
+		},
+		ejectQuarter:function(){
+			this.machine.render.innerHTML='还没有塞硬币';
+		},
+		turnCrank:function(){
+			if(this.machine.totalNum>0){
+				this.machine.render.innerHTML='憋转了，你还没塞钱呢';
+			}else{
+				this.machine.render.innerHTML='抱歉糖果卖完了';
+			}
+		},
+	};
+	var VendingMachine={
+		init:function(num,render){
+			this.totalNum=num;
+			this.render=render;
+
+			this.haveMoneyState=Object.create(HaveMoney).init(this);
+			this.noMoneyState=Object.create(NoMoney).init(this);
+
+			this.setMoneyState(this.noMoneyState);
+
+		},
+		setMoneyState:function(state){
+			this.moneyState=state;
+		},
+		insert:function(){
+			this.moneyState.insertQuarter();
+		},
+		eject:function(){
+			this.moneyState.ejectQuarter();
+		},
+		turn:function(){
+			this.moneyState.turnCrank();
+		}
+	};
+	//应用
+	var machineFirstDom=document.getElementById('firstMachine');
+	var machineSecondDom=document.getElementById('secondMachine');
+
+	var imessFirst=machineFirstDom.querySelector('.mess');
+	var imessSecond=machineSecondDom.querySelector('.mess');
+
+	var machineFirst=Object.create(VendingMachine);
+	machineFirst.init(5,imessFirst);
+
+	var machineSecond=Object.create(VendingMachine);
+	machineSecond.init(5,imessSecond);
+	
+	machineFirstDom.onclick=function(event){
+		var className=event.target.getAttribute('class');
+		if(className=='insertQuarter'){
+			machineFirst.insert();
+		}else if(className=='ejectQuarter'){
+			machineFirst.eject();
+		}else if(className=='turnCrank'){
+			machineFirst.turn();
+		};
+	}
+	machineSecondDom.onclick=function(event){
+		var className=event.target.getAttribute('class');
+		if(className=='insertQuarter'){
+			machineSecond.insert();
+		}else if(className=='ejectQuarter'){
+			machineSecond.eject();
+		}else if(className=='turnCrank'){
+			machineSecond.turn();
+		};
+	}
+</script>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arguments详解</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	//arguments是一个对应于传递给函数的参数的类数组对象。arguments对象是所有（非箭头）函数中都可用的局部变量。你可以使用argument对象在函数中引用函数的参数。此对象包含传递给函数的每个参数的条目，第一个条目的索引从0开始，参数也可以被设置。
+			//argument对象不是一个Array。它类似Array,但除了length属性和索引元素之外没有任何Array属性。例如，它没有pop方法。但是他可以被转换成一个真正的数组：
+				//Array.prototype.slice.call(arguments);
+				//[].slice.call(arguments);
+				//Array.from(arguments);ES2015之后
+				//[...arguments]
+			//对参数使用slice会阻止某些JavaScript引擎中的优化 (比如 V8 - 更多信息)。如果你关心性能，尝试通过遍历arguments对象来构造一个新的数组。另一种方法是使用被忽视的Array构造函数作为一个函数：
+			//var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
+			//如果调用的参数多于正式声明接受的参数，则可以使用arguments对象。这种技术对于可以传递可变数量的参数的函数很有用。使用arguments.length来确定传递给函数参数的个数，然后使用arguments对象来处理每个参数。要确定函数签名中（输入）的参数数量，使用Function.length属性
+			(function(){
+				console.log('===========Arguments===========');
+				console.log(typeof arguments);//object
+				function test(a){
+					console.log(a,Object.prototype.toString.call(arguments));
+					console.log(arguments[0],arguments[1]);
+					console.log(typeof arguments[0]);
+				}
+				test(1);
+				/*
+				1 "[object Arguments]"
+				1 undefined
+				number
+				*/
+			})();
+</script>
+</html>

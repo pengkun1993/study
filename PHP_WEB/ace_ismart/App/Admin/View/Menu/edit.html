@@ -1,0 +1,55 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Menu_Bar">
+	<div class="item-title">
+		<h3>导航栏</h3>
+		<ul class="tab-base">
+			<if condition="Is_Auth('Admin/Menu/index')">
+			<li><a href="{:U('Admin/Menu/index')}"><span>列表</span></a></li>
+			</if>
+			<if condition="Is_Auth('Admin/Menu/add')">
+			<li><a href="{:U('Admin/Menu/add')}"><span>新增</span></a></li>
+			</if>
+			<li><a class="current" href="#"><span>更新</span></a></li>
+		</ul>
+	</div>
+</div>
+<form id="Menu_Form" method="post">
+<table class="table tb-type2 nobdb">
+	<tbody>
+	<tr>
+			<td colspan="2" class="required"><label for="for_name">导航名称:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="catname" type="text" class="easyui-textbox" style="height:30px;" value="{$_info["catname"]}" data-options="required:true"></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">顺序:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="sort" value="{$_info["sort"]}" type="text" class="easyui-numberbox" style="height:30px;" data-options="precision:'0',decimalSeparator:'.',groupSeparator:',',required:true"></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">父级导航:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><select name="pid" class="easyui-combotree" style="height:30px;" data-options="value:'{$_info["pid"]}',url:'{:U("Admin/Function/get_menu")}&pid=-1&r_type=json',multiple:false,required:true,editable:false"></select></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">图标:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><select name="icon" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["icon"]}',url:'{:U("Admin/Function/get_icon")}&r_type=json',valueField:'id',textField:'text',multiple:false,required:false,editable:false,
+			formatter: function(row){
+            var opts = $(this).combobox('options');
+            return '<i class=\'iconfont '+row[opts.textField]+'\'></i> '+row[opts.textField];
+            }
+			"></select></td>
+			<td class="vatop tips"></td>
+		</tr>	</tbody>
+	<tfoot>
+		<tr class="tfoot">
+			<td colspan="2"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="$('#Menu_Form').submit();" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></td>
+		</tr>
+	 </tfoot>
+</table>
+<input name="id" type="hidden" value="{:I('get.id')}" />
+</form></block>

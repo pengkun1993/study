@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSX</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<p>React使用JSX来代替常规的JavaScript。</p>
+	<p>JSX是一个看起来像xml的JavaScript语法扩展。</p>
+	<p>不需要一定使用JSX，但它有以下优点</p>
+	<ul>
+		<li>JSX执行更快，因为它在编译为JavaScript代码后进行了优化</li>
+		<li>它是类型安全的，在编译过程中就能发现错误</li>
+		<li>使用JSX编写模板更加简单快速</li>
+	</ul>
+	<h1>示例</h1>
+	<div id="example"></div>
+	<div id="example1"></div>
+	<div id="example2"></div>
+</body>
+<!-- React JSX代码也可以放在一个独立文件上。添加自定义属性需要使用 data- 前缀 -->
+<!-- 在JSX中可以使用JavaScript表达式。表达式写在{}中。 -->
+<!-- 在 JSX 中不能使用 if else 语句，但可以使用 conditional (三元运算) 表达式来替代 -->
+<script type="text/babel">
+	{/*React 推荐使用内联样式。我们可以使用 camelCase 语法来设置内联样式. React 会在指定元素数字后自动添加 px */}
+	var myStyle={
+		fontSize:100,
+		color:'#ff0000'
+	};
+	{/*jsx允许在模板中插入数组，数组会自动展开所有成员*/}
+	var arr=[
+		<p key='1'>数组成员1</p>,
+		<p key='2'>数组成员2</p>
+	];
+
+	var i=1;
+	ReactDOM.render(
+		<div>{/*此处必须使用一个标签包起所有标签*/}
+			<h1 style={myStyle}>菜鸟教程</h1>
+			<h2>欢迎学习 React</h2>
+			<h3>1+1={1+1}</h3>
+			<h4>{i == 1 ? 'true!' : 'false!'}</h4>
+			<h5>{arr}</h5>
+			<p data-myattribute = "somevalue">这是一个很不错的JavaScript库！</p>
+		</div>,
+		document.getElementById('example')
+	);
+	
+	{/*渲染 HTML 标签，只需在 JSX 里使用小写字母的标签名。*/}
+
+
+	var myDivElement=<div className='foo' />;
+	ReactDOM.render(myDivElement,document.getElementById('example1'));
+
+
+	{/*要渲染 React 组件，只需创建一个大写字母开头的本地变量。*/}
+
+	var MyComponent=React.createClass();
+	var myElement=<MyComponent someProperty={true} />;
+	ReactDom.render(myElement,document.getElementById('example2'));
+
+
+	{/*React 的 JSX 使用大、小写的约定来区分本地组件的类和 HTML 标签。*/)}
+	{/*由于 JSX 就是 JavaScript，一些标识符像 class 和 for 不建议作为 XML 属性名。作为替代，React DOM 使用 className 和 htmlFor 来做对应的属性。*/}
+</script>
+</html>
+
+
+
+
+
+
+

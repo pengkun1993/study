@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ref</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+</body>
+<script type="text/babel">
+	{/*React Refs
+	React支持一种非常特殊的属性Ref，你可以用来绑定到render()输出到任何组件上。
+	这个特殊属性允许你引用render()返回的相应的支撑示例(backing instance)。这样就可以确保在任何时间总是拿到正确的实例。
+	使用方法：绑定一个ref属性到render的返回值上
+	<input ref='myInput' />
+	在其他代码中，通过this.refs获取支撑实例：
+	var input =this.refs.myInput;
+	var inputValue=input.value;
+	var inputRect=input.getBoundingClientRect();*/}
+	{/*完整实例*/}
+	var MyComponent=React.createClass({
+		handleClick:function(){
+			//使用原生的DOM API获取焦点
+			this.refs.myInput.focus();
+		},
+		render:function(){
+			return(
+				<div>
+					<input type='text' ref='myInput' />
+					<input type='button' value='点我输入框获取焦点' onClick={this.handleClick}/>
+				</div>
+			)
+		}
+	});
+	ReactDOM.render(
+		<MyComponent />,
+		document.getElementById('example')
+	);
+</script>
+</html
+
+
+
+
+
+
+
+
+
+

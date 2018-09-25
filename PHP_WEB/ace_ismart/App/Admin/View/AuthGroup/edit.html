@@ -1,0 +1,59 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="AuthGroup_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/AuthGroup/index')}">用户组</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;编辑</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="AuthGroup_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">用户组标题:</label>
+
+					<div class="col-xs-11">
+						<input name="title" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["title"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">用户组状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="{$_info['status']}"><option value="0">禁用</option><option value="1">启用</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_status');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">用户权限:</label>
+
+					<div class="col-xs-11">
+						<select name="rules[]" class="col-xs-9 col-sm-2  easyui-combotree" data-options="value:'{$_info["rules"]}',url:'{:U("Admin/Function/get_auth_rule")}&r_type=json',valueField:'id',textField:'text',multiple:true,cascadeCheck:false,required:false,editable:false" style="height:30px;"></select>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">排序:</label>
+
+					<div class="col-xs-11">
+						<input name="sort" value="{$_info["sort"]}" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3">											</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#AuthGroup_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div></block>

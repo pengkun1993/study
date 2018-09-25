@@ -1,0 +1,46 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Menu_Bar">
+	<div class="item-title">
+		<h3>导航栏</h3>
+		<ul class="tab-base">
+			<li><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('Menu_Data_List');"><span>列表</span></a></li>
+			<if condition="Is_Auth('Admin/Menu/add')">
+			<li><a href="{:U('Admin/Menu/add')}"><span>新增</span></a></li>
+			</if>
+		</ul>
+	</div>
+</div>
+<table id="Menu_Data_List"></table>
+<script type="text/javascript">
+$(function() {
+	$("#Menu_Data_List").treegrid({
+		url : "{:U('Menu/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		idField:'id',
+		treeField:'catname',//应与需要树形显示的字段名一致
+		pagination : false,
+		toolbar : '#Menu_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+			{field : "catname",title : "导航名称",width :100,sortable:true},
+			{field : "sort",title : "顺序",width :100,sortable:true},
+			{field : "icon",title : "图标",width :100,sortable:true},			
+			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Menu/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Menu/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Menu_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

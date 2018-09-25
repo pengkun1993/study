@@ -1,0 +1,99 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="Addons_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/Addons/index')}">插件</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;编辑</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="Addons_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">插件名:</label>
+
+					<div class="col-xs-11">
+						<input name="name" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["name"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">中文名:</label>
+
+					<div class="col-xs-11">
+						<input name="title" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["title"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">插件描述:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="description" value="{$_info["description"]}"  style=" height:80px;">{$_info["description"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="{$_info['status']}"><option value="0">禁用</option><option value="1">启用</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_status');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">配置:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="config" value="{$_info["config"]}"  style=" height:80px;">{$_info["config"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">作者:</label>
+
+					<div class="col-xs-11">
+						<input name="author" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["author"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">版本号:</label>
+
+					<div class="col-xs-11">
+						<input name="version" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["version"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">安装时间:</label>
+
+					<div class="col-xs-11">
+						<input name="create_time" value="{$_info["create_time"]|date='Y-m-d H:i:s',###}" type="text" class="easyui-datetimebox col-xs-6 col-sm-3 col-lg-3 col-md-3"style="height:30px;" data-options="required:false">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">是否有后台列表:</label>
+
+					<div class="col-xs-11">
+						<select name="has_adminlist" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_has_adminlist"  def-data="{$_info['has_adminlist']}"><option value="0">否</option><option value="1">是</option></select><script type="text/javascript">
+		var sel=document.getElementById('s_has_adminlist');
+		var opt=sel.getElementsByTagName('option');
+		var def=sel.getAttribute('def-data');
+		for(var i=0;i<opt.length;i++){
+			if(def==opt[i].value){
+				opt[i].setAttribute("selected","selected");
+			};
+		}
+	</script>
+												</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#Addons_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div></block>

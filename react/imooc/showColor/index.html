@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>展示颜色</title>
+	<script type="text/javascript" src="js/react.js"></script>
+	<script type="text/javascript" src="js/react-dom.js"></script>
+	<script type="text/javascript" src="js/browser.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+		var ShowColor=React.createClass({
+			render:function(){
+				var theStyles={
+					width:200,
+					backgroundColor:this.props.color,
+					height:150,
+				};
+				return(
+					<div style={theStyles}></div>
+					);
+			}
+		});
+		var ShowLetter=React.createClass({
+			render:function(){
+				var theStyles={
+					padding:20,
+				};
+				return(
+					<div style={theStyles}>{this.props.color}</div>
+					)
+			}
+		});
+		var Wraper=React.createClass({
+			render:function(){
+				var theStyles={
+					width:200,
+					margin:50,
+					boxShadow:'0 0 20px #000'
+				}
+				return (
+					<div style={theStyles}>
+						<ShowColor {...this.props}/>
+						<ShowLetter {...this.props}/>
+					</div>
+					);
+			}
+		});
+		ReactDOM.render(
+			<Wraper color='#dd0912'/>,
+			document.getElementById('container')
+			);	
+	</script>
+</body>
+</html>

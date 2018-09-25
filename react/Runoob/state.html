@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>状态</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<h1>React State(状态)介绍</h1>
+	<p>React 把组件看成是一个状态机（State Machines）。通过与用户的交互，实现不同状态，然后渲染 UI，让用户界面和数据保持一致。</p>
+	<p>React 里，只需更新组件的 state，然后根据新的 state 重新渲染用户界面（不要操作 DOM）。</p>
+	<h2>实例</h2>
+	<div id="example"></div>
+</body>
+<script type="text/babel">
+	var LikeButton=React.createClass({
+		getInitialState:function(){
+			return {liked:false};
+		},
+		handleClick:function(event){
+			this.setState({liked:!this.state.liked});
+		},
+		render:function(){
+			var text=this.state.liked ? '喜欢' : '不喜欢';
+			return (
+				<p onClick={this.handleClick}>
+					你<b>{text}</b>我。点我切换状态.
+				</p>
+			);
+		}
+	});
+	ReactDOM.render(
+		<LikeButton />,
+		document.getElementById('example')
+	)
+</script>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>require.js</title>
+</head>
+<body>
+	<h1>官网：http://requirejs.org/</h1>
+	<p>require.js的诞生就是为了解决1、加载文件过多浏览器会停止网页渲染2、文件之间的加载顺序依赖性很大。
+	require.js实现js文件的异步加载，避免网页失去响应，管理模块之间的依赖性，便于代码的编写和维护。</p>
+</body>
+<!-- 加载require.js文件也可能造成网页是去响应，所以把它放在网页底部加载或者使用如下方式加载,async属性表名这个文件需要异步加载，避免网页失去响应。IE不支持async，只支持defer。加入自己的代码文件时main.js，那么只需要下面这样写 。-->
+<script type="text/javascript" src="js/require.js" defer async='true' data-main='js/main'></script>
+<!-- data-main的作用是指定网页程序的主模块。这个文件会第一个被require.js加载。由于require.js默认的文件后缀名是js，所以可以把main.js简写成main。这个被称为是主模块，意思是整个网页的入口代码，有点像c语言的main()函数，所有代码都从这里开始运行。 -->
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+	<script type="text/javascript" src="../dist/jquery.min.js"></script>
+</head>
+<body>
+	<div id='example'></div>
+</body>
+<script type="text/babel">
+	{/*React组件的数据可以通过componentDidMount方法中的Ajax来获取，当从服务端获取数据时可以将数据保存在stete中，再用this.setState方法重新渲染UI。
+	当使用异步加载数据时，在组件卸载前使用componentWillUnmount来取消未完成的请求。*/}
+	{/*示例一：获取GitHub用户最新gist共享描述*/}
+
+	var UserGist=React.createClass({
+		getInitialState:function(){
+			return {
+				username:'',
+				lastGistUrl:''
+			}
+		},
+		componentDidMount:function(){
+			this.serverRequest=$.get(this.props.source,function(result){
+				var lastGist=result[0];
+				this.setState({
+					username:lastGist.owner.login,
+					lastGistUrl:lastGist.html_url
+				});
+			}.bind(this));
+		},
+		componentWillUnmount:function(){
+			this.serverRequest.abort();
+		},
+		render:function(){
+			return (
+				<div>
+					{this.state.username} 用户最新的Gist共享地址：
+					<a href={this.state.lastGistUrl}>{this.state.lastGistUrl}</a>
+				</div>
+			);
+		}
+	});
+	ReactDOM.render(
+		<UserGist source='https://api.github.com/users/octocat/gists' />,
+		document.getElementById('example')
+	)
+</script>
+</html>
+
+
+
+
+
+

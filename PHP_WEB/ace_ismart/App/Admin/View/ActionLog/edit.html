@@ -1,0 +1,79 @@
+<extend name="Public/base"/>
+<block name="body">
+	<div class="fixed-bar" id="ActionLog_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1>
+					<a href="{:U('Admin/ActionLog/index')}">行为日志</a>
+					<small> <i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;查看详情</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<div class="form-group">
+			<p class="lead"> 
+			行为id:
+			<span class="remove_bold">
+				{:get_action($_info["action_id"],'title')}[{$_info["action_id"]}]
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<p class="lead"> 
+			执行用户:
+			<span class="remove_bold">
+				{:get_nickname($_info["user_id"])}[{$_info["user_id"]}]
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<p class="lead"> 
+			执行行为者ip:
+			<span class="remove_bold">
+				{$_info["action_ip"]}
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<p class="lead"> 
+			触发行为的表:
+			<span class="remove_bold">
+				{$_info["model"]}
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<p class="lead"> 
+			触发行为的数据id:
+			<span class="remove_bold">
+				{$_info["record_id"]}
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<p class="lead"> 
+			日志备注:
+			<span class="remove_bold">
+				{$_info["remark"]}
+			</span> 
+			</p>
+		</div>
+		<hr/>
+		<div class="clearfix">
+			<div class="col-md-offset-1 col-md-9">
+				<button class="btn btn-md btn-success" type="button" onclick="history.go(-1)" >
+					<i class="icon-arrow-left bigger-110"></i>
+					<span class="lead">返回</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</block>

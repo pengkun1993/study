@@ -1,0 +1,84 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="ActionLog_Bar">
+	<div class="item-title">
+		<div class="page-header">
+			<h1>行为日志
+				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;列表</span>
+					<a class="top_a" href="JavaScript:void(0);" onclick="Data_Search('ActionLog_Search_From','ActionLog_Data_List');"><span>搜索</span></a>
+				</small>
+			</h1>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+  <form id="ActionLog_Search_From" class="search_from">
+	
+    <div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 行为id : </label>
+
+			<div class="col-xs-10">
+				<input name="s_action_id" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 执行用户id : </label>
+
+			<div class="col-xs-10">
+				<input name="s_user_id" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 执行行为的时间 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_create_time_min" type="text" class="easyui-datetimebox" style="height:30px;"> - <input name="s_create_time_max" type="text" class="easyui-datetimebox" style="height:30px;">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/>  </form>
+</div>
+
+<table id="ActionLog_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#ActionLog_Data_List").datagrid({
+		url : "{:U('ActionLog/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#ActionLog_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "action_id",title : "行为id",width :100,sortable:true},{field : "user_id",title : "执行用户id",width :100,sortable:true},{field : "create_time",title : "执行行为的时间",width :150,sortable:true,formatter: function (value, row, index) {
+			return u_to_ymdhis(value)
+		}},			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/ActionLog/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >查看详情</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/ActionLog/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','ActionLog_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

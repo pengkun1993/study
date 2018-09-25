@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象的扩展</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// 一、属性的简洁表示
+			(function(){
+				//ES6允许直接写入变量和函数，作为对象的属性和方法。
+				const foo='bar';
+				const baz={foo};
+				console.log(baz);//{foo:bar}
+				//用在方法中
+				function f(x,y){
+					return {x,y};
+				}
+				console.log(f(1,2));//{x:1,y:2}
+				// 方法简写
+				const o={
+					method(){
+						return 'hello!';
+					},
+					foo:function(){//与上面其实相同
+						return 'world';
+					},
+					class (){//关键字也可以被当做属性名
+						return 'class';
+					},
+					extends:function(){
+						return 'extends';
+					},
+					* m(){//generator函数前面需加上星号
+						yield 'hello world';
+					}
+				}
+				console.log(o.method());//hello!
+				console.log(o.foo());//world
+				console.log(o.class());//class
+				console.log(o.extends());//extends
+			})();
+		// 二、属性名表达式
+			(function(){
+				console.log('二====================')
+				//1、ES6允许字面量定义对象时，用方法二作为对象的属性名，即把表达式放在方括号内。
+				let lastWord='last word';
+				const a={
+					'first word':'hello',
+					[lastWord]:'world',
+					['h'+'ello'](){//还可定义方法名
+						return 'hi';
+					}
+				};
+				console.log(a);//{first word:'hello',last word:'world',hello:f[...]}
+				//2、属性名表达式与简洁表示法，不能同时使用，会报错
+				const foo='bar';
+				const bar='abc';
+				//const baz={['fo'+'o']};//报错
+				const baz={['fo'+'o']:'abc'};//正确
+				console.log(baz);
+				//3、如果属性名是一个对象，默认情况下会自动将对象转为字符串[object Object]。
+				const keyA={a:1};
+				const keyB={b:2};
+				const myObject={
+					[keyA]:'valueA',
+					[keyB]:'valueB',
+				}
+				console.log(myObject);//{[object Object]:'valueB'}
+				//4、如果对象的方法使用了取值函数（getter）和存值函数（setter），则name属性不是在该方法上面，而是该方法的属性的描述对象的get和set属性上面，返回值是方法名前加上get和set
+				const obj={
+					get foo(){},
+					set foo(x){}
+				}
+				//console.log(obj.foo.name);//报错
+				//console.log(obj.foo.get.name);//报错
+				const descriptor=Object.getOwnPropertyDescriptor(obj,'foo');
+				console.log(descriptor.get.name);//get foo
+			})();
+		// 三、Object.is(),同值相等算法。由于==会自动转换，===不能对NaN正确判断，所以用这个表示严格相等。
+			(function(){
+				console.log('三===============');
+				console.log(Object.is('foo','foo'));//true
+				console.log(Object.is({},{}));//false
+				console.log({}=={});//false
+				console.log({}==={});//false
+				console.log(+0===-0);//true
+				console.log(Object.is(+0,-0));//false
+				console.log(NaN==NaN);//false
+				console.log(NaN===NaN);//false
+				console.log(Object.is(NaN,NaN));//true
+				// ES5可以通过下面方法实现该功能
+				// Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。
+				Object.defineProperty(Object,'is',{
+					value:function(x,y){
+						if(x===y){
+							// 针对+0 不等于 -0的情况
+							return x !==0 || 1/x ===1/y;
+						}
+						// 针对NaN的情况
+						return x!==x && y!==y;
+					},
+					configurable:true,
+					enumerable:false,
+					writable:true
+				});
+			})();
+		// 四、Object.assign()，方法用于对象的合并将源对象（source）的所有可枚举属性复制到目标对象（target）
+			(function(){
+				console.log('四================');
+				// 1、方法的第一个参数是目标对象，后面的参数都是源对象。如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。
+				// 2、如果只有一个参数，Object.assign会直接返回该参数
+				// 3、如果该参数不是对象，则会先转成对象，然后返回。
+				console.log(typeof Object.assign(2));//Object
+				//4、由于undefined和null无法转成对象，所以如果它们作为参数，就会报错。
+				//5、如果非对象参数出现在源对象的位置（即非首参数），那么处理规则有所不同。首先，这些参数都会转成对象，如果无法转成对象，就会跳过。这意味着，如果undefined和null不在首参数，就不会报错。
+				//6、其他类型的值（即数值、字符串和布尔值）不在首参数，也不会报错。但是，除了字符串会以数组形式，拷贝入目标对象，其他值都不会产生效果。因为只有字符串有可枚举属性。
+				console.log(Object(true));//{[[PrimitiveValue]]: true}
+				console.log(Object(10));//{[[PrimitiveValue]]: 10}
+				console.log(Object('abc'));// {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}
+				// 7、Object.assign拷贝的属性是有限制的，只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（enumberable:false)。
+				// 8、属性名为Symbol的属性，也会被拷贝
+				// 9、该方法进行的是浅拷贝，而不是深拷贝。
+				// 10、Object.assgn可以用来处理数组，但是会把数组视为对象。
+				Object.assign([1,2,3],[4,5]);//[4,5,3],0/1/2是键值，所以出现覆盖
+				// 11、只能进行值的复制，如果要复制的值是一个取值函数，那么将求值后再复制（运行后）
+				// 12、为对象添加属性，Object.assign(this,{x,y})
+				// 13、为对象添加方法 
+				Object.assign(Object.prototype,{
+					someMethod(arg1,arg2){
+						//...
+					}
+				});
+				//14、克隆对象
+				Object.assign({},{'a':1});
+				// 不过，采用这种方法克隆，只能克隆原始对象自身的值，不能克隆它继承的值。如果想要保持继承链，可以采用下面的代码。
+				function clone(origin) {
+				  let originProto = Object.getPrototypeOf(origin);
+				  return Object.assign(Object.create(originProto), origin);
+				}
+				//15、为属性指定默认值
+				function processContent(options) {
+				  options = Object.assign({}, DEFAULTS, options);
+				  console.log(options);
+				  // DEFAULTS是默认值，options是用户提供的参数
+				  // 
+				}
+			})();
+		// 五、属性的可枚举性和遍历
+			(function(){
+				//1、对象的每一个属性都有一个描述对象(Descriptor)，用来控制该属性的行为。Object.getOwnPropertyDescriptor方法可以获取该属性的描述对象。
+				let obj={foo:123};
+				console.log(Object.getOwnPropertyDescriptor(obj,'foo'));
+				/*{
+				  value: 123,
+				  writable: true,
+				  enumerable: true,
+				  configurable: true
+				}
+				描述对象的enumerable属性，称为“可枚举属性”，如果该属性为false，就表示某些操作会忽略当前属性。
+				目前，有四个操作会忽略enumerable为false的属性。
+					for...in循环：只遍历对象自身的和继承的可枚举的属性。
+					Object.keys()：返回对象自身的所有可枚举的属性的键名。
+					JSON.stringify()：只串行化对象自身的可枚举的属性。
+					Object.assign()： 忽略enumerable为false的属性，只拷贝对象自身的可枚举的属性。
+				ES6 规定，所有 Class 的原型的方法都是不可枚举的。
+				*/
+				//2、属性的遍历
+					// (1)、for...in循环遍历对象自身的和继承的可枚举属性（不含symbol属性。
+					// (2)、Object.keys(obj)返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含Symbol属性）的键名。
+					// (3)、Object.getOwnPropertyNames(obj)返回一个数组，包含对象自身的所有属性（不含symbol属性，但是包括不可枚举属性）的键名。
+					// (4)、Object.getOwnPropertySymbols(obj)返回一个数组，包含对象自身的所有symbol属性的键名
+					// (5)、reflect.ownKeys(obj)返回一个数组，包含对象自身的所有键名，不管键名是symbol或字符串，也不管是否可枚举。
+					// 以上的5中方法遍历对象的键名，都准守同样的属性遍历的次序规则
+						// 首先遍历所有的数字键，按照数值升序排列
+						// 其次遍历所有字符串键，按照加入时间升序排列
+						// 最后遍历所有symbol键，按照加入时间升序排列。
+					console.log(Reflect.ownKeys({ [Symbol()]:0, b:0, 10:0, 2:0, a:0 }));//["2", "10", "b", "a", Symbol()]
+			})();
+		// 六、Object.getOwnPropertyDescriptors()返回指定对象所有自身属性（非继承属性）的描述对象
+			(function(){
+				console.log('六===============');
+				const obj={
+					foo:123,
+					get bar(){return 'abc'}
+				}
+				console.log(Object.getOwnPropertyDescriptors(obj));
+				//该方法引入的目的主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
+				const source={
+					set foo(value){
+						console.log(value);
+					}
+				}
+				source.foo=10;//10
+				const target1={};
+				Object.assign(target1,source);
+				console.log(target1);//没有复制到get和set属性
+				//target.foo=20;//报错
+				console.log(Object.getOwnPropertyDescriptor(target1,'foo'));
+				// 正确实现拷贝的方法
+				const target2={};
+				Object.defineProperties(target2,Object.getOwnPropertyDescriptors(source));
+				console.log(Object.getOwnPropertyDescriptor(target2,'foo'));
+				// 上面代码中，两个对象合并的逻辑可以写成一个函数
+				const shallowMerge=(target,source)=>Object.defineProperties(target,Object.getOwnPropertyDescriptors(source));
+				//可以实现继承,ES6规定__proto__只有浏览器要部署，其他环境不用部署，所以下面的代码不建议使用。
+				const obj_e={
+					__proto__:target1,
+					foo:123
+				}
+				console.log(obj_e);
+				// 使用Object.getOwnPropertyDescriptors的写法
+				const obj_t=Object.create(
+					target1,
+					Object.getOwnPropertyDescriptors({
+						foo:123
+					})
+				);
+				console.log(obj_t);
+			})();
+		// 七、Javascript语言的对象继承是通过原型链实现的。ES6提供了更多原型对象的操作方法。
+			(function(){
+				console.log('七==============');
+				//1、__proto__属性用来读取或设置当前对象的prototype对象。该属性没有写入 ES6 的正文，而是写入了附录，原因是__proto__前后的双下划线，说明它本质上是一个内部属性，而不是一个正式的对外的 API，只是由于浏览器广泛支持，才被加入了 ES6。标准明确规定，只有浏览器必须部署这个属性，其他运行环境不一定需要部署，而且新的代码最好认为这个属性是不存在的。因此，无论从语义的角度，还是从兼容性的角度，都不要使用这个属性，而是使用下面的Object.setPrototypeOf()（写操作）、Object.getPrototypeOf()（读操作）、Object.create()（生成操作）代替。
+				//2、Object.setPrototypeOf(object,prototype);由于undefined和null无法转为对象，所以如果第一个参数是undefined或null，就会报错
+				//3、Object.getPrototypeOf(obj);读取一个对象的原型，如果参数不是对象会被自动转为对象,null和undefined无法转为对象，所以会报错
+				console.log(Object.getPrototypeOf(12));//Number
+				console.log(Object.getPrototypeOf('foo'));//String
+				console.log(Object.getPrototypeOf(false));//Boolean
+			})();
+		// 八、super关键字，指向当前对象的原型对象，只能用在对象的方法之中，用在其他地方都会报错，目前只有对象方法的简写法可以让JavaScript引擎确认，定义的是对象的方法。
+			(function(){
+				console.log('八===============');
+				const proto={
+					foo:'hello'
+				};
+				const obj={
+					foo:'world',
+					//foo:super.foo,//报错，因为这是用在属性里
+					/*foo:()=>{
+						super.foo;
+					},//报错,在一个函数里*/
+					/*foo:function(){
+						return super.foo;
+					},//报错,在一个函数里*/
+					find(){
+						return super.foo;
+					}
+				};
+				Object.setPrototypeOf(obj,proto);
+				console.log(obj.find());
+				//JavaScript引擎内部，super.foo等同于Object.getPrototypeOf(this).foo(属性)或Object.getPrototypeOf(this).foo.call(this)
+			})();
+		// 九、
+			(function(){
+				console.log('九================');
+				//1、Object.keys()返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的健名。
+				//2、Object.values()方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。
+					const obj=Object.create({},{p:{value:12}});
+					console.log(Object.values(obj));//[]
+					// 上面代码中，第二个参数添加的对象属性，如果不显式声明，默认是不可遍历的，因为p的属性描述对象的enumerable默认是false，Object.values不会返回这个属性。只要把enumerable改成true,就可以范湖p的值
+					const obj1=Object.create({},{p:{value:23,enumerable:true}});
+					console.log(Object.values(obj1));//[23]
+					//Object.values会过滤掉属性名为Symbol值的属性
+					//如果参数是一个字符串，会返回各个字符组成的一个数组。
+					//如果参数不是对象，Object.values会先将其转为对象。由于数值和布尔值的包装对象，都不会为实例添加非继承的属性。所以Object.values会返回空数组。
+					console.log(Object.values(43));//[]
+					console.log(Object.values(true));//[]
+				// 3、Object.entries方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历对象（enumerable）属性的键值对数组。除了返回值不一样，该方法与Object.values基本一致，限制约束都一样。
+			})();
+		// 十、对象的拓展运算符(...)
+			(function(){
+				console.log('十===============');
+				//1、结构赋值，下面变量z是结构赋值所在的对象。它获取等号右边的所有尚未读取的键，将他们连同值一起拷贝过来。
+					let {x1,y1,...z1}={y:1,a:3,b:4,x:2};
+					console.log(x1);//2
+					console.log(y1);//1
+					console.log(z1);//{a:3,b:4}
+					// 由于结构赋值要求等号右边是一个对象，所以如果等号右边是undefined或null，就会报错，因为他们无法转为对象
+					//解构赋值三点运算符必须是最后一个参数，否则会报错。
+					//结构赋值的拷贝是浅拷贝，如果一个键的值是复合类型的值，那么解构赋值拷贝的是这个值的引用，而不是这个值的副本。
+					//扩展运算符的解构赋值，不能复制继承自原型对象的属性。
+					const o=Object.create({x:1,y:2});
+					o.z=3;
+					let {x,...newObj}=o;
+					let {y,z}=newObj;
+					console.log(x);//1
+					console.log(y);//undefined
+					console.log(z);//3
+					//上面代码中，变量x是单纯的解构赋值，所以可以读取对象o继承的属性；变量y和z是扩展运算符的解构赋值，只能读取对象o自身的属性，所以变量z可以赋值成功，变量y取不到值。ES6 规定，变量声明语句之中，如果使用解构赋值，扩展运算符后面必须是一个变量名，而不能是一个解构赋值表达式，所以上面代码引入了中间变量newObj，如果写成下面这样会报错。
+					//let {x2,...{y2,z2}}=o;//Uncaught SyntaxError: `...` must be followed by an identifier in declaration contexts
+				//2、扩展运算符，对象的扩展运算符(...)用于取出参数对象的所有可遍历属性，拷贝到当前对象之中。
+					let z3={a:3,b:4};
+					Object.setPrototypeOf(z3,{text:'prop'});
+					console.log('z3',z3);
+					let n={...z3};
+					console.log('n',n);//{a:3,b:4}
+					//等同于使用Object.assign方法
+					let aClone=Object.assign({},z3);
+					console.log('aClone',aClone);//{a:3,b:4}
+					// 上面的例子知识拷贝了一个对象实例的属性，如果想克隆一个完整的对象，还拷贝对象原型的属性，写法如下
+						// 写法一
+						const clone1={
+							__proto__:Object.getPrototypeOf(z3),
+							...z3
+						}
+						console.log('clone1',clone1);
+						//写法二
+						const clone2=Object.assign(
+							Object.create(Object.getPrototypeOf(z3)),
+							z3
+						);
+						console.log('clone2',clone2);
+						//写法三
+						const clone3=Object.create(
+							Object.getPrototypeOf(z3),
+							Object.getOwnPropertyDescriptors(z3)
+						);
+						console.log('clone3',clone3);
+					//合并两个对象,下面两种效果相同
+						let z1z3={...z1,...z3};
+						console.log('z1z3',z1z3);
+						let z1z=Object.assign({},z1,z);
+						console.log('z1z',z1z);
+					// 与数组的扩展运算符一样，对象的扩展运算符后面可以跟表达式。
+						const obj={
+							...(x>1?{a:1}:{}),
+							b:2
+						};
+						console.log('obj',obj);
+					// 如果扩展运算符的参数是null或undefined，这个值会被忽略，不会报错
+						let emptyObj={...null,...undefined};
+						console.log('emptyObj',emptyObj);//{};
+					//如果有取值函数get，这个函数会执行
+						let aWithGetter={
+							...z,
+							get x(){
+								throw new Error('not throw yet');
+							}
+						};
+						// 上面的并不会报错，但是下面的会，因为下面会导致执行
+						/*let runtimeError={
+							...z,
+							...{
+								get x(){
+									throw new Error('throw now');
+								}
+							}
+						}*/
+			})();
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

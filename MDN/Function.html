@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function详解</title>
+</head>
+<body>
+	<h1>Function构造函数创建一个新的Function对象。在JavaScript中，每个函数实际上都是一个Function对象</h1>
+</body>
+<script type="text/javascript">
+	//描述：使用Function构造函数生成的Function对象是在函数创建时解析的。这比你使用函数声明或者函数表达式并在你的代码中调用更为低效，因为使用后者创建的函数是跟其他代码一起解析的。
+	//所有被传递到构造函数中的参数，都将被视为将被创建的函数的参数，并且是相同的标识符名称和传递顺序。
+	//注意：使用Function构造器生成的函数，并不会在创建他们的上下文中创建闭包；他们一般在全局作用域中被创建。当运行这些函数的时候，他们只能访问自己的本地变量和全局变量，不能访问Function构造器被调用产生的上下文的作用域。这和使用带有函数表达式代码的eval不同。
+	//以调用函数的方式调用Function的构造函数（不是用new关键字）跟以构造函数来调用是一样的
+	//语法：new Function([arg1[,arg2[,...argN]],] functionBody);
+	//属性
+		//Function.arguments已弃用，被argument替代
+		//Function.caller 返回调用指定函数的函数。
+		//描述：如果一个函数f是在全局作用于内被调用的，则f.caller为null，相反，如果一个函数是在另一个函数作用域内被调用的，则f.caller指向调用它的那个函数。
+		//该属性的常用形式arguments.callee.caller替代了被废弃的arguments.caller
+		(function(){
+			console.log('=============Function.caller===========');
+			//例一：检测一个函数的caller属性的值
+			function myFunc(){
+				if(myFunc.caller==null){
+					return ('该函数在全局作用域内被调用!');
+				}else{
+					return ('该函数的调用函数是'+myFunc.caller);
+				}
+			}
+		})();
+		//Function.length属性指明函数的形参个数,该特性是非标准的，请尽量不要在生产环境使用
+		//Function.length属性的属性特性：writable->false,enumerable->false,configurable->true
+		//length是函数对象的一个属性值，指该函数有多少个必须要传入的参数，即形参的个数。
+		//形参的数量不包括剩余参数的个数，仅包括第一个具有默认值之前的参数个数。
+		//与之对比的是，arguments.length是函数被调用时实际传参的个数。
+		//Function构造器的属性
+		//Function构造器本身也是个Function。他的length属性值为1.该属性Writable:false,Enumberable:false,Configurable:true.
+		//Function原型对象的length属性值为0
+		(function(){
+			console.log('=========Function.length==========')
+			console.log(Function.length);//1
+			console.log((function(){}).length);//0
+			console.log((function(a){}).length);//1
+			console.log((function(a,b){}).length);//2
+			console.log((function(...args){}).length);//0
+			console.log((function(a,b=1,c){}).length);//1
+			console.log((function(a = 1, b, c) {}).length) // 0
+			console.log((function(b, a = 1, c) {}).length) // 1
+			console.log((function(b, c, a = 1) {}).length) // 2
+		})();
+		//Function.name属性返回函数实例的名称
+		//属性特性：writable:false,enumerable:false,configurable:true
+		(function(){
+			console.log('========Function.name===========');
+			//函数声明的名称
+			function doSomething(){};
+			console.log(doSomething.name);//doSomething
+			// 构造函数的名称，使用new Function(...)语法创建的函数或只是Function(...) create Function对象及其名称为“anonymous”。
+			console.log((new Function).name);//anonymous
+			//推断函数名称，变量和方法可以从语句位置判断匿名函数的名称（ES5新增）
+			var f=function(){};
+			var object={
+				someMethod:function(){},
+			};
+			console.log(f.name);//f
+			console.log(object.someMethod.name);//someMethod
+			//可以在函数表达式中定义函数的名称
+			var obj={
+				someMethod:function object_someMethod(){},
+			}
+			console.log(obj.someMethod.name);//object_someMethod
+			//不能更改函数的名称，因为它是只读的，除非使用Object.defineProperty()，因为它可配置
+			//绑定函数的名称，Function.bind()所创建的函数将会在函数的名称前加上"bound"。
+			console.log(f.bind({}).name);//bound f
+			//getters和setters的函数名
+			var o={
+				get foo(){},
+				set foo(x){}
+			}
+			console.log(o);
+			var descriptor=Object.getOwnPropertyDescriptor(o,'foo');
+			console.log(descriptor.get.name);//get foo
+			console.log(descriptor.set.name);//set foo
+			// 类中的函数名称，可以使用obj.constructor.name 来检查对象的’类‘
+			function Foo(){};
+			var fooInstance=new Foo();
+			console.log(fooInstance.constructor.name);//Foo
+			//警告：脚本解释器只有在函数没有名为name的属性时才会设置内置的Function.name属性。但是，ES2015规定由关键字static修饰的静态方法也会被认为是类的属性
+			//因此我们无法获取具有静态方法属性name()的几乎任何类的类名称
+			class Fo{
+				constructor(){}
+				static name(){}
+			}
+			// 使用static name()方法Foo.name不再保存实际的类名称，而是引用name()函数对象
+			fooInstance=new Fo();
+			console.log(fooInstance);//Fo {}
+			console.log(fooInstance.constructor.name);//ƒ name(){}
+			//注意： 由于name属性的可配置参数为true，故可以该为可写的，所以不能依赖内置的Function.name属性来保持一个类的名称
+			//Symbol作为函数名称，如果Symbol被用于函数名称，并且这个symbol具有相应的描述符，那么方法的名字就是方括号中的描述符。
+			var sym1=Symbol('foo');
+			var sym2=Symbol();
+			var o={
+				[sym1]:function(){},
+				[sym2]:function(){}
+			};
+			console.log(o[sym1].name);//[foo]
+			console.log(o[sym2].name);//''
+		})();
+		//Function.prototype属性存储了Function的原型对象。
+		//Function.prototype.apply()方法调用一个函数，其具有一个指定的this值，以及作为一个数组（或类似数组的对象）提供的参数。
+		//注意：call方法和apply方法类似，只有一个区别，就是call方法接受的是若干个参数的列表，而apply方法接受的是一个包含多个参数的数组。
+		//语法：func.apply(thisArg,[argsArray])
+		//参数：thisArg可选的。在func函数运行时使用的this值。需要注意的是，使用的this值并不一定是该函数执行时真正的this值，如果这个函数处于非严格模式下，则指定为null或undefined时会自动替换为指向全局对象，同时值为原始值（数字，字符串，布尔值）的this会指向该原始值的包装对象。
+		//参数：argsArray可选的。一个数组或者类数组对象，其中的数组元素将作为单独的参数传递给func函数。如果该参数为null或undefined，则表示不需要传入任何参数。从ECMAScript2015开始可以使用功能类数组对象。
+		//返回值：调用有指定this值和参数的函数的结果。
+		//描述：在调用一个存在的函数时，你可以为其指定一个this对象。this指当前对象，也就是正在调用这个函数的对象。使用apply，你可以只写一次这个方法然后再另一个对象中继承它，而不用在新对象中重复写该方法。
+		//apply与call非常相似，不同之处在于提供参数的方式。apply使用参数数组而不是一组参数列表。apply可以使用数组字面量或数组对象。
+		(function(){
+			console.log('==============Function.prototype.apply===============')
+			//使用apply来链接构造器，接下来的例子中会创建一个全局Function对象的construct方法，来使你能够在构造器中使用一个类数组对象而非参数列表。
+				//使用Object.create
+				Function.prototype.construct=function(aArgs){
+					var oNew=Object.create(this.prototype);
+					this.apply(oNew,aArgs);
+					return oNew;
+				}
+				console.log(Function.prototype);//ƒ () { [native code] }
+				console.log(Function.prototype.construct);//ƒ (aArgs){var oNew=Object.create(this.prototype);this.apply(oNew,aArgs);return oNew;}
+				//使用Object.__proto__
+				Function.prototype.construct=function(aArgs){
+					var oNew={};
+					oNew.__proto__=this.prototype;
+					this.apply(oNew,aArgs);
+					return oNew;
+				}
+				//使用闭包
+				Function.prototype.construct=function(aArgs){
+					var fConstructor=this,fNewConstr=function(){
+						fConstructor.apply(this,aArgs);
+					};
+					fNewConstr.prototype=fConstructor.prototype;
+					return new fNewConstr();
+				};
+				// 使用Function构造器
+				Function.prototype.construct=function(aArgs){
+					var fNewConstr=new Function('');
+					fNewConstr.prototype=this.prototype;
+					var oNew=new fNewConstr();
+					this.apply(oNew,aArgs);
+					return oNew;
+				}
+				//应用
+				function MyConstructor(){
+					for(var nProp=0;nProp<arguments.length;nProp++){
+						this['property'+nProp]=arguments[nProp];
+					}
+				}
+				var myArray=[4,'hello world!',false];
+				var myInstance=MyConstructor.construct(myArray);
+				console.log(myInstance.property1);//'hello world'
+				console.log(myInstance instanceof MyConstructor);//true
+				console.log(myInstance.constructor);//MyConstructor
+			//使用apply和内置函数，apply允许在某些本来需要写成遍历数组变量的任务中使用内建的函数。
+				var numbers=[2,3,9,3,0];
+				var max=Math.max.apply(null,numbers);
+				console.log(max);//9
+				//使用这种方式要注意方法的参数个数越界的问题。当你对一个方法传入非常多的参数是，就非常有可能会导致越界问题，这个临界值是根据不同的JavaScript引擎而定的（JavaScript核心中已经做了硬编码参数个数限制在65536），因为这个限制（实际上也是任何超大栈空间的行为的自然表现）是未指定的。有些引擎会抛出异常，更糟糕的是其他引擎会直接限制传入的参数个数，导致参数丢失。 
+		})();
+		// Function.prototype.call()调用一个函数，其具有一个指定的this值和分别地提供的参数。
+		// 语法：func.call(thisArg,arg1,arg2,arg3,...)
+		// 返回值：调用的方法的返回值，若该方法没有返回值，返回undefined
+		(function(){
+			console.log('==========Function.prototype.call==============')
+			//使用call方法调用父构造函数，在一个子构造函数中可以通过使用父构造函数的call方法来实现继承。
+				function Product(name,price){
+					this.name=name;
+					this.price=price;
+					if(price<0){
+						throw RangeError('Cannot create product'+this.name+'with a negative price');
+					}
+				}
+				function Food(name,price){
+					Product.call(this,name,price);
+					this.category='food';
+				}
+				var food=new Food('面包',10);
+				console.log(food);//Food {name: "面包", price: 10, category: "food"}
+				function Toy(name,price){
+					Product.call(this,name,price);
+					this.category='toy';
+				}
+				var toy=new Toy('robot',40);
+				console.log(toy);//Toy {name: "robot", price: 40, category: "toy"}
+			// 使用call方法调用匿名函数
+				var animals=[
+					{species:'Lion',name:'king'},
+					{species:'Whale',name:'Fail'}
+				];
+				for(var i=0;i<animals.length;i++){
+					(function(i){
+						this.print=function(){
+							console.log('#'+i+' '+this.species+': '+this.name);
+						}
+						this.print();
+					}).call(animals[i],i);
+				};
+				//#0 Lion: king
+				//#1 Whale: Fail
+			//使用call方法调用函数并且指定上下文的'this'
+				function greet(){
+					var reply=[this.person,'Is An Awesome',this.role].join(' ');
+					console.log(reply);
+				}
+				var i={
+					person:'Douglas Crockford',role:'Javascript Developer'
+				}
+				greet.call(i);//Douglas Crockford Is An Awesome Javascript Developer
+		})();
+		//Function.prototype.bind()创建一个新的函数，当被调用时，将其this关键字设置为提供的值，在调用新函数时，在任何提供之前提供一个给定的参数序列。
+		//语法:func.bind(thisArg[,arg1[,arg2[,...]]]);
+		//参数：thisArg当绑定函数被调用时，该参数会作为原函数运行时的this指向。当使用new 操作符调用绑定函数时，该参数无效。
+		//arg1,arg2,... 当绑定函数被调用时，这些参数将置于实参之前传递给被绑定的方法。
+		//返回值：返回由指定的this值和初始化参数改造的原函数拷贝
+		//描述：bing函数会创建一个新函数（称为绑定函数），新函数与被调函数具有相同的函数体。当新函数被调用时this值绑定到bind()的第一个参数，该参数不能被重写。绑定函数被调用时，bind()也接受预设的参数提供给原函数。一个绑定函数也能使用new操作符创建对象那个：这种行为就像把原函数当成构造器。提供的this值被忽略，同时调用时的参数被提供给模拟函数。
+		(function(){
+			console.log('=========Function.prototype.bind===========')
+			//创建绑定函数，bind最简单的调用就是创建一个函数，使这个函数不论怎么调用都有同样的this值。
+				this.x=9;
+				var module={
+					x:81,
+					getX:function(){return this.x}
+				}
+				console.log(module.getX());//81
+				var retrieveX=module.getX;
+				console.log(retrieveX());//9，此时指向全局
+				var boundGetX=retrieveX.bind(module);
+				console.log(boundGetX());//81
+			//偏函数，bind的另一个简单的用法是使一个函数拥有预设的初始参数。
+				function list(){
+					return Array.prototype.slice.call(arguments);
+				}
+				var list1=list(1,3,4,5);
+				console.log(list1);//[1, 3, 4, 5]
+				var leadingThrtysevenList=list.bind(undefined,37);
+				var list2=leadingThrtysevenList();
+				var list3=leadingThrtysevenList(1,3,4);
+				console.log(list2);//[37]
+				console.log(list3);//[37, 1, 3, 4]
+			//配合setTimeout,在默认情况下，使用window.setTimeout()时，this关键字会指向window（或全局）对象。当使用类的方法时，需要this引用类的实例，你可能需要显式地吧this绑定到回调函数以便继续使用实例。
+				function LateBloomer(){
+					this.petalCount=Math.ceil(Math.random()*12)+1;
+				}
+				LateBloomer.prototype.bloom=function(){
+					window.setTimeout(this.declare.bind(this),1000);
+				}
+				LateBloomer.prototype.declare=function(){
+					console.log('I am a beautiful flower with '+this.petalCount+' petals');
+				}
+				var flower=new LateBloomer();
+				flower.bloom();//I am a beautiful flower with 2 petals
+			//Polyfill(腻子)
+				function polyfill_bind(){
+					if (!Function.prototype.bind) {
+					  Function.prototype.bind = function(oThis) {
+					    if (typeof this !== 'function') {
+					      // closest thing possible to the ECMAScript 5
+					      // internal IsCallable function
+					      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+					    }
+
+					    var aArgs   = Array.prototype.slice.call(arguments, 1),
+					        fToBind = this,
+					        fNOP    = function() {},
+					        fBound  = function() {
+					          return fToBind.apply(this instanceof fNOP
+					                 ? this
+					                 : oThis,
+					                 // 获取调用时(fBound)的传参.bind 返回的函数入参往往是这么传递的
+					                 aArgs.concat(Array.prototype.slice.call(arguments)));
+					        };
+
+					    // 维护原型关系
+					    if (this.prototype) {
+					      // Function.prototype doesn't have a prototype property
+					      fNOP.prototype = this.prototype; 
+					    }
+					    fBound.prototype = new fNOP();
+
+					    return fBound;
+					  };
+					}
+				}
+		})();
+		//Function.prototype.toSource()，返回函数的源代码的字符串表示。该特性是非标准的，尽量不要在生产环境使用。
+		//语法：function.toSource();Function.toSource();
+		//返回值：对于内置的Function对象，toSource返回下面的字符串：function Function() {[native code]}
+		//对于自定义函数来说，toSource返回能定义该函数的JavaScript源码
+		//Function.prototype.toString()该方法返回一个表示当前函数源代码的字符串。
+		//语法：function.toString();
+		//返回值：表示函数源代码的一个字符串
+		//描述：Function 对象覆盖了从 Object 继承来的 Object.prototype.toString 方法。函数的 toString 方法会返回一个表示函数源代码的字符串。具体来说，包括 function关键字，形参列表，大括号，以及函数体中的内容。
+		//在函数需要转换为字符串是，通常会自动调用函数的toString方法。
+		//若this不是Function对象，则toString()方法将抛出TypeError异常
+		//如果是在内置函数或由Function.prototype.bind返回的函数上调用toString()，则toString()返回原声代码字符串，如下
+		//"function () {\n    [native code]\n}"
+		//若是在由Function构造器生成的函数上调用toString()，则toString()返回创建后的函数源码，包括形参和函数体，函数名为“anonymous”
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

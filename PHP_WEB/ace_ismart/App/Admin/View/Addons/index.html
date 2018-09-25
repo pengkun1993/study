@@ -1,0 +1,178 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Addons_Bar">
+	<div class="item-title">
+		<div class="page-header">
+			<h1>插件				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;列表</span>
+					<a class="top_a" href="JavaScript:void(0);" onclick="Data_Search('Addons_Search_From','Addons_Data_List');"><span>搜索</span></a>
+					<if condition="Is_Auth('Admin/Addons/add')">
+					<a class="top_a" href="{:U('Admin/Addons/add')}"><span>新增</span></a>
+					</if>
+				</small>
+			</h1>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+  <form id="Addons_Search_From" class="search_from">
+	
+    <div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 插件名 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_name" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 中文名 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_title" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 插件描述 : </label>
+
+			<div class="col-xs-10">
+				<textarea class="col-xs-10 " name="description" style=" height:80px;"></textarea>			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 状态 : </label>
+
+			<div class="col-xs-10">
+				<select name="status" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_status"  def-data="1"><option value="0"
+				>禁用</option><option value="1"
+				>启用</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_status');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+						</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 配置 : </label>
+
+			<div class="col-xs-10">
+				<textarea class="col-xs-10 " name="config" style=" height:80px;"></textarea>			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 作者 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_author" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 版本号 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_version" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 安装时间 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_create_time_min" type="text" class="easyui-datetimebox" style="height:30px;"> - <input name="s_create_time_max" type="text" class="easyui-datetimebox" style="height:30px;">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 是否有后台列表 : </label>
+
+			<div class="col-xs-10">
+				<select name="has_adminlist" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_has_adminlist"  def-data="0"><option value="0"
+				>否</option><option value="1"
+				>是</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_has_adminlist');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+						</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/>  </form>
+</div>
+
+<table id="Addons_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#Addons_Data_List").datagrid({
+		url : "{:U('Addons/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#Addons_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "name",title : "插件名",width :100,sortable:true},{field : "title",title : "中文名",width :100,sortable:true},{field : "description",title : "插件描述",width :100,sortable:true},{field : "status",title : "状态",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_status=new Array()
+			op_status["0"]="禁用"
+			op_status["1"]="启用"
+			
+			return op_status[value];
+			}},
+			{field : "config",title : "配置",width :100,sortable:true},{field : "author",title : "作者",width :100,sortable:true},{field : "version",title : "版本号",width :100,sortable:true},{field : "create_time",title : "安装时间",width :100,sortable:true,formatter: function (value, row, index) {
+			return u_to_ymdhis(value)
+		}},{field : "has_adminlist",title : "是否有后台列表",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_has_adminlist=new Array()
+			op_has_adminlist["0"]="否"
+			op_has_adminlist["1"]="是"
+			
+			return op_has_adminlist[value];
+			}},
+						{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Addons/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Addons/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Addons_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

@@ -1,0 +1,142 @@
+#thumbnails{overflow:hidden; height:100%;}
+#thumbnails ul{overflow:hidden; height:100%; padding:0px; margin:0px; list-style:none; margin-top:10px;}
+#thumbnails li{list-style:none; float:left; margin-right:8px; margin-left:8px; width:100px; height:118px; position:relative; display:inline;}
+.clearfix{
+    overflow:hidden;
+    clear:both;
+}
+
+/*自动隐藏控制图标*/
+.album li{
+    background:#f4f4f4;
+}
+.album li:hover .control a{
+    display:inline;
+}
+.control{
+    display:block;
+    height:25px;
+	font-family:Arial;
+}
+/*.control a{
+    display:none;
+}*/
+
+.album li.hover .control a{
+    display:inline;
+}
+.album li div.cb{
+	display:none;
+	position:absolute;
+	left:6px;
+	top:6px;
+	padding-left:5px;
+	padding-top:5px;
+	width:25px;
+	height:25px;
+	z-index:10;
+	background:#fff;
+	opacity: 0.7;
+	filter:alpha(opacity=70);
+}
+.album li:hover div.cb,.album li.hover div.cb{
+    display:block;
+}
+.album li div.selected{
+	width:30px;
+	height:30px;
+	background:url(../images/checked.png) no-repeat !important;
+	position:absolute;
+	left:47px;
+	top:20px;
+	display:none;
+	z-index:2;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/checked.png', sizingMethod='scale');
+	_background:none;
+}
+
+.album li div.priv{
+    display:block;
+	position:absolute;
+	width:25px;
+	height:25px;
+	z-index:10;
+	background:#fff;
+    background:url(lock.gif) no-repeat center;    
+}
+
+.ipt_2 {
+border:1px solid #BDC7D8;
+padding:1px;
+width:100px;
+}
+
+#copytocpbord,#movetoalbum,#reuploadpic{
+    border:1px solid #999;
+    padding:10px;
+    background:#fff;
+    position:absolute;z-index:95;
+}
+#reuploadpic .uploading{
+    position:absolute;z-index:97;
+    width:300px;
+    height:24px;
+    background:#fff;
+    text-align:center;
+}
+#copyedok{
+    position:absolute;z-index:97;
+    border:1px solid #eee;
+    background:#ffe;
+    padding:10px;
+}
+#info_msg{
+    border:1px solid #eee;
+    background:#ffe;
+    padding:0px;
+	width:100px;
+    position:absolute;z-index:90;
+}
+#album_nav{
+    border:1px solid #eee;
+    background:#F7F7F7;
+    padding:5px;
+    margin-bottom:10px;
+    height:23px;
+    line-height:23px;
+    position:relative;
+}
+#album_nav.album_detail{
+    height:50px;
+}
+#album_nav span.total_count{
+    font-size:12px;
+    padding-left:20px;
+}
+#album_nav input.btn{
+    /*margin-left:30px;*/
+    position:absolute;
+    right:30px;
+    bottom:5px;
+}
+#album_nav input.bt2{
+    right:120px;
+}
+#album_nav div.photoinfo{
+    padding-left:20px;
+}
+
+input.btn{
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    background:url("../images/gray-btn.png") repeat-x;
+    border:1px solid #BBBBBB;
+    line-height:14px;
+    overflow:visible;
+    padding:2px 10px;
+    width:auto;
+    cursor:pointer;
+}
+input.btn:hover{
+    border:1px solid #CEE1EE;
+}

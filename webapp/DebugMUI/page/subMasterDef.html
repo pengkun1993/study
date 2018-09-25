@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>子页母版（默认）</title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a id="cmBack" class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a>
+			<h1 id="cmTitle" class="mui-title"></h1>
+		</header>
+
+		<div style="text-align:center; font-size: 0.9rem; color: #999999; margin-top: 40%;">
+			加载中...
+		</div>
+		<script type="text/javascript" charset="UTF-8">
+			var titleElem = document.getElementById("cmTitle");
+			var wvContent = null;
+			 //返回事件，隐藏模板父页面，并在窗体动画结束（0.2s）后，隐藏共用子页面
+			mui.back = function() {
+				var wvHeader = plus.webview.currentWebview();
+				wvHeader.hide('auto');
+				setTimeout(function() {
+					titleElem.innerHTML = "";
+					titleElem.className = "mui-title mui-fadeout";
+					if (wvContent == null) {
+						wvContent = wvHeader.children()[0];
+					}
+					wvContent.hide("none");
+				}, 200);
+			};
+			 //模版页自定义事件，更新Header
+			window.addEventListener("updateHeader", function(e) {
+				titleElem.innerHTML = e.detail.title;
+				titleElem.className = "mui-title mui-fadein";
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,163 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Applicant_Bar">
+	<div class="item-title">
+		<div class="page-header">
+			<h1>应聘者信息
+				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;列表</span>
+					<a class="top_a" href="JavaScript:void(0);" onclick="Data_Search('Applicant_Search_From','Applicant_Data_List');"><span>搜索</span></a>
+				</small>
+			</h1>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+  <form id="Applicant_Search_From" class="search_from">
+	<form id="{$ModelInfo['name']}_Search_From" class="search_from">
+	
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">应聘职位 :  </label>
+
+			<div class="col-xs-10">
+				<input name="s_position" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">姓名 :  </label>
+
+			<div class="col-xs-10">
+				<input name="s_name" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">籍贯 :  </label>
+
+			<div class="col-xs-10">
+				<input name="s_native" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">联系电话 :  </label>
+
+			<div class="col-xs-10">
+				<input name="s_tel" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">电子邮箱 :  </label>
+
+			<div class="col-xs-10">
+				<input name="s_email" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">学历 : </label>
+
+			<div class="col-xs-10">
+				<select name="degree" class="col-xs-10" id="s_degree"  def-data=""><option value="0"
+    				>博士</option><option value="1"
+    				>硕士</option><option value="2"
+    				>本科</option><option value="3"
+    				>大专</option><option value="4"
+    				>高中</option><option value="5"
+    				>其他</option></select><script type="text/javascript">
+    			var sel=document.getElementById('s_degree');
+    			var opt=sel.getElementsByTagName('option');
+    			var def=sel.getAttribute('def-data');
+    			for(var i=0;i<opt.length;i++){
+    				if(def==opt[i].value){
+    					opt[i].setAttribute("selected","selected");
+    				};
+    			}
+    			</script>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">专业 :</label>
+
+			<div class="col-xs-10">
+				<input name="s_major" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">学校 :</label>
+
+			<div class="col-xs-10">
+				<input name="s_school" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+		<div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1">通讯地址 :</label>
+
+			<div class="col-xs-10">
+				<input name="s_address" type="text" class="col-xs-10">
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<hr/>
+  </form>
+</div>
+
+<table id="Applicant_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#Applicant_Data_List").datagrid({
+		url : "{:U('Applicant/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#Applicant_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "position",title : "应聘职位",width :100,sortable:true},{field : "name",title : "姓名",width :100,sortable:true},{field : "degree",title : "学历",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_degree=new Array()
+			op_degree["0"]="博士"
+			op_degree["1"]="硕士"
+			op_degree["2"]="本科"
+			op_degree["3"]="大专"
+			op_degree["4"]="高中"
+			op_degree["5"]="其他"
+			
+			return op_degree[value];
+			}},
+			{field : "major",title : "专业",width :100,sortable:true},{field : "school",title : "学校",width :100,sortable:true},			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Applicant/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >查看详情</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Applicant/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Applicant_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

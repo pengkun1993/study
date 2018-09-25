@@ -1,0 +1,80 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Example_Bar">
+	<div class="item-title">
+		<h3>案例</h3>
+		<ul class="tab-base">
+			<li><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('Example_Data_List');"><span>列表</span></a></li>
+			<li><a href="JavaScript:void(0);" onclick="Data_Search('Example_Search_From','Example_Data_List');"><span>搜索</span></a></li>
+			<if condition="Is_Auth('Admin/Example/add')">
+			<li><a href="{:U('Admin/Example/add')}"><span>新增</span></a></li>
+			</if>
+		</ul>
+	</div>
+</div>
+<div style="display: none">
+  <form id="Example_Search_From" class="search_from">
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+    <tr>
+			<th>标题 : </th>
+			<td><input name="s_title" type="text" class="easyui-textbox" style="height:30px;"></td>
+		</tr><tr>
+			<th>所属栏目 : </th>
+			<td><select name="s_pid" class="easyui-combotree" style="height:30px;" data-options="value:'',url:'{:U("Admin/Function/get_categroy")}&pid=-1&r_type=json',multiple:false,required:false,editable:false"></select></td>
+		</tr><tr>
+			<th>图片 : </th>
+			<td><input name="s_picture" type="text" class="easyui-textbox" style="height:30px;"></td>
+		</tr><tr>
+			<th>内容 : </th>
+			<td><input name="s_content" type="text" class="easyui-textbox" style="height:30px;"></td>
+		</tr><tr>
+			<th>状态 : </th>
+			<td><select name="s_status" class="easyui-combobox" style="height:30px;" data-options="value:'',multiple:false,required:true,editable:false"><option value="" >请选择一个选项</option><option value="0" >隐藏</option><option value="1" >显示</option></select></td>
+		</tr><tr>
+			<th>显示顺序呢 : </th>
+			<td><input name="s_sort" type="text" class="easyui-textbox" style="height:30px;"></td>
+		</tr>    </table>
+  </form>
+</div>
+
+<table id="Example_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#Example_Data_List").datagrid({
+		url : "{:U('Example/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#Example_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "title",title : "标题",width :100,sortable:true},{field : "picture",title : "图片",width :100,sortable:true},{field : "content",title : "内容",width :100,sortable:true},{field : "status",title : "状态",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_status=new Array()
+			op_status["0"]="隐藏"
+			op_status["1"]="显示"
+			
+			return op_status[value];
+			}},
+			{field : "sort",title : "显示顺序呢",width :100,sortable:true},			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Example/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Example/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Example_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

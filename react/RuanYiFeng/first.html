@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<div id="example1"></div>
+	<div id="example2"></div>
+	<script type="text/babel">
+		{/*ReactDOM.render是react的最基本方法，用于将模板转为HTML语言，并插入指定的DOM节点。
+		JSX语法就是HTML语言直接写在JavaScript语言中，不加任何引号，它允许HTML和Javascript混写。*/}
+		var names=['Alice','Emily','Kate'];
+		ReactDOM.render(
+			<div>
+			{
+				names.map(function(name){
+					return <div> 'hello' {name}</div>;
+				})
+			}
+			</div>,
+			document.getElementById('example1')
+		);
+		{/*React.createClass方法用于生成一个组件类，所有的组件都必须有自己的render方法，用于输出组件，组件类的第一个字母必须大写，组件只能包含一个顶层标签。*/}
+
+		{/*this.props队形的属性与组件的属性一一对应，但是有一个例外，就是this.props.children属性，它表示组件的所有子节点。
+		this.props.children的值有三种可能：如果当前组件没有子节点，它就是undefined；如果有一个子节点它就是object；如果有多个子节点，它就是array。
+		React提供一个工具方法React.Children来处理this.props.children。我们可以用React.Children.map来遍历子节点，这是Reac.Children自己的一个方法，而不用担心this.props.children的数据类型是什么。*/}
+		var NotesList=React.createClass({
+			render:function(){console.log(React.Children);
+				return(
+					<ol>
+					{
+						React.Children.map(this.props.children,function(child){
+							return <li>{child}</li>
+						})
+					}
+					</ol>
+				);
+			}
+		});
+		ReactDOM.render(
+			<NotesList>
+				<span>hello</span>
+				<span>world</span>
+			</NotesList>,
+			document.getElementById('example2')
+		);
+
+		{/*组件类的propTypes属性，就是用来验证组件示例的属性是否符合要求，下面示例要求title必须为字符串且必须存在*/}
+		{/*getDefaultProps方法可以用来设置组件属性的默认值*/}
+		var MyTile=React.createClass({
+			propTypes:function(){
+				title:React.PropTypes.string.isRequired,
+			},
+			getDefaultProps:function(){
+				return {title:'hello'};
+			},
+			render:function(){
+				return(
+					<h1>{this.props.title}</h1>
+				)
+			}
+		});
+		
+		{/*组件并不是真实的DOM节点，而是存在于内存之中的一种数据结构，叫做虚拟DOM。只有当它插入文档以后，才会变成真实的DOM。根据React的设计，所有的DOM变动，都现在虚拟DOM上放生，然后再将实际发生变动的部分，反应在真实DOM上，这种算法叫做DOM diff，它可以极大提高网页的性能表现*/}
+
+	    {/*获取DOM的真实节点就需要用到ref了，例如菜鸟教程中获取焦点的例子。需要注意的是由于this.refs.[refName]属性获取的是真实DOM，所以必须等到虚拟DOM插入文档以后，才能使用这个属性，否则会报错。*/}
+
+	    {/*组件避免不了要与用户互动，React就是将组件看成一个状态机，一开始有一个初始状态，然后用户互动，导致状态变化，从而触发重新渲染UI。
+	    由于this.props和this.state都用于描述组件的特性，可能会产生混淆。一个简单的区分方法是，this.props表示那些一旦定义，就不再改变的额特性，而this.state是会随着用户互动而产生变化的特性。*/}
+
+	    {/*用户在输入表单属于用户同组件的互动，所以不能用this.props读取。文本框中输入的值不能用this.props.value读取，而要定义一个onChange事件的回调函数，通过event.target.value读取用户输入的值。textarea元素、select元素、radio元素都属于这种情况。*/}
+	</script>
+</body>
+</html>
+
+
+
+

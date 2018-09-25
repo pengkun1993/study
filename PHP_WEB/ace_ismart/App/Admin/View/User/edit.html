@@ -1,0 +1,79 @@
+<extend name="Public/base"/><block name="body">	<div class="fixed-bar" id="User_Bar">
+		<div class="item-title">
+			<div class="page-header">
+				<h1><a href="{:U('Admin/User/index')}">用户</a>
+					<small>
+						<i class="icon-double-angle-right"></i>
+						<span class="lead">&nbsp;&nbsp;编辑</span>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12 marg-top">
+		<form class="form-horizontal" role="form" method="POST" id="User_Form">
+			<div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">用户名:</label>
+
+					<div class="col-xs-11">
+						<input name="username" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["username"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">昵称/姓名:</label>
+
+					<div class="col-xs-11">
+						<input name="nickname" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["nickname"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">密码:</label>
+
+					<div class="col-xs-11">
+						<input name="password" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["password"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">邮箱:</label>
+
+					<div class="col-xs-11">
+						<input name="email" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3" value="{$_info["email"]}" >											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">备注:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="remark" value="{$_info["remark"]}"  style=" height:80px;">{$_info["remark"]}</textarea>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">余额:</label>
+
+					<div class="col-xs-11">
+						<input name="amount" value="{$_info["amount"]}" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">积分:</label>
+
+					<div class="col-xs-11">
+						<input name="point" value="{$_info["point"]}" type="text" class="col-xs-10 col-sm-3 col-lg-3 col-md-3">											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">状态:</label>
+
+					<div class="col-xs-11">
+						<select name="status" class="col-xs-9 col-sm-2  easyui-combobox" data-options="value:'{$_info["status"]}',url:'{:U("Admin/Function/get_field_option")}&f_id=83&r_type=json',valueField:'key',textField:'val',multiple:false,required:false,editable:false" style="height:30px;"></select>											</div>
+				</div>
+				<hr/><div class="form-group">
+					<label class="col-xs-5 col-sm-1 control-label no-padding-right" for="form-field-1">信息:</label>
+
+					<div class="col-xs-11">
+						<textarea class="col-xs-10 col-sm-3 col-lg-3 col-md-3" name="info" value="{$_info["info"]}"  style=" height:80px;">{$_info["info"]}</textarea>											</div>
+				</div>
+				<hr/>			<div class="clearfix">
+				<div class="col-md-offset-1 col-md-9">
+					<button class="btn btn-lg btn-success" type="button" onclick="$('#User_Form').submit();">
+						<i class="icon-ok bigger-110"></i>
+						<span class="lead">提交</span>
+					</button>
+				</div>
+			</div>
+			<input name="id" type="hidden" value="{:I('get.id')}" />
+		</form>
+	</div></block>

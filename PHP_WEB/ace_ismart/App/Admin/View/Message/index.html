@@ -1,0 +1,81 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Message_Bar">
+	<div class="item-title">
+		<div class="page-header">
+			<h1>留言				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;列表</span>
+					<a class="top_a" href="JavaScript:void(0);" onclick="Data_Search('Message_Search_From','Message_Data_List');"><span>搜索</span></a>
+				</small>
+			</h1>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+  <form id="Message_Search_From" class="search_from">
+	
+    <div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 姓名 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_username" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 邮箱 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_email" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 留言 : </label>
+
+			<div class="col-xs-10">
+				<textarea class="col-xs-10 " name="message" style=" height:200px;"></textarea>			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/>  </form>
+</div>
+
+<table id="Message_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#Message_Data_List").datagrid({
+		url : "{:U('Message/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#Message_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "username",title : "姓名",width :100,sortable:true},{field : "email",title : "邮箱",width :100,sortable:true},{field : "message",title : "留言",width :100,sortable:true},			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Message/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >查看详情</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Message/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Message_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

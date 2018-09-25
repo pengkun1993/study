@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>状态模式实例-对讲机-前端网-老姚</title>
+</head>
+<style type="text/css">
+	body{
+		font-size:30px;
+		color:red;
+	}
+	input[type=button]{
+		width:200px;
+		border:none;
+		background:blue;
+		margin:50px 10px;
+		color:#fff;
+		padding:10px 20px;
+		cursor:pointer;
+	}
+	::selection{
+		color:#FFF;
+		background:#FF6100
+	}
+	button{
+		width:120px;
+		margin:10px; 
+		height:20px;
+		background:blue;
+		color:white;
+		outerline:none;
+	}
+</style>
+<body>
+	当前用户的对讲操作界面
+	<br />
+	<input type="button" value="nobody is talking"/>
+	<hr />
+	上下3组按钮，来模拟程序中其他人开始和结束讲话消息来源，以及空格快捷键。
+	<br />
+	<button id="lowStart">low start</button>
+	<button id="spaceStart">me space start</button>
+	<button id="highStart">high start</button>
+	<br />
+	<button id="lowStop">low stop</button>
+	<button id="spaceStop">me space stop</button>
+	<button id="highStop">high stop</button>
+</body>
+<script type="text/javascript">
+	/*总体需求是这样的，一个群里，一个时间点只能有一个人在讲话。等级高的可以打断等级低的。
+
+	具体说来
+	1. 每个人的页面上有个对讲按钮，共有两个状态，没人讲话（蓝色）和有人讲话（红色）
+	2. 如果一开始时，没人讲话，任何一个人讲话，变成正在讲话状态，其结束讲话时，变回无人讲话状态。
+	3. 如果某人（当前用户或者其他人）正在讲话，对方的权限如果比当前讲话者的权限高，可以打断其讲话，通知之前讲话者，你被我打断了。
+	4. 如果对方的权限没有当前讲话者的权限高，通知对方，请等待正在讲话者讲话结束
+	5. 别人讲话的开始和结束的操作，有消息推送，包括相关信息，比如名字和讲话等级。
+	6. 自己讲话，可以点击按钮，第一次开始，第二次结束 也可以按快捷键：空格*/
+	//当前讲话者信息
+	var currentName;
+	var currentLevel;
+
+	// 无人使用状态
+	var silentState={
+		startSpeak:function(name,level){
+			console.log(name+' is talking');
+			talkCtl.setStartStyle(name,level);
+			talkCtl.setCurrentState(speakingState);
+		},
+		stopSpeak:function(){
+			//do nothing
+		},
+		click:function(name,level){
+			this.startSpeak(name,level);
+		}
+	}
+	//有人讲话状态
+	var speakingState={
+		startSpeak:function(name,level){
+			if(level>currentLevel){
+				console.log(name+'interupt '+currentName);
+				talkCtl.setStartStyle(name,level);
+				talkCtl.setCurrentState(speakingState);
+			}else{
+				console.log('waiting for '+currentName);
+			}
+		},
+		stopSpeak:function(name,level){
+			if(name == currentName){
+				console.log(name +'stop talking');
+				talkCtl.setStopStyle(name,level);
+				talkCtl.setCurrentState(silentState);
+			}else{
+				console.log('waiting for '+currentName);
+			}
+		},
+		click:function(name,level){
+			if(currentName==name){
+				this.stopSpeak(name,level);
+			}else{
+				this.startSpeak(name,level);
+			}
+		}
+	}
+	//操作按钮封装
+	var talkCtl={
+		init:function(render){
+			this.render=render;
+			this.CurrentState=silentState;
+		},
+		startSpeak:function(name,level){
+			this.CurrentState.startSpeak(name,level);
+		},
+		stopSpeak:function(name,level){
+			this.CurrentState.stopSpeak(name,level);
+		},
+		setStartStyle:function(name,level){
+			currentName=name;
+			currentLevel=level;
+			this.render.style.background='red';
+			this.render.value=name+'is talking';
+		},
+		setStopStyle:function(name,level){
+			currentName='';
+			currentLevel='';
+			this.render.style.background='blue';
+			this.render.value='nobody is talking';
+		},
+		setCurrentState:function(state){
+			this.CurrentState=state;
+		},
+		click:function(name,level){
+			this.CurrentState.click(name,level);
+		}
+	}
+	// 客户端使用模拟
+	var speakBtn = document.querySelector('[type=button]');
+	var spacekeyStart=document.getElementById('spaceStart');
+	var spacekeyStop=document.getElementById('spaceStop');
+	var hightStart=document.getElementById('highStart');
+	var highStop=document.getElementById('highStop');
+	var lowStart=document.getElementById('lowStart');
+	var lowStop=document.getElementById('lowStop');
+
+	talkCtl.init(speakBtn);
+	speakBtn.onclick=function(){
+		talkCtl.click('me',2);
+	};
+	spacekeyStart.onclick=function(){
+		talkCtl.startSpeak('me',2);
+	};
+	spacekeyStop.onclick=function(){
+		talkCtl.stopSpeak('me',2);
+	};
+	
+	// 模拟推送来的消息
+	highStart.onclick = function() {
+		talkCtl.startSpeak('high', 3);
+	};
+
+	highStop.onclick = function() {
+		talkCtl.stopSpeak('high', 3);
+	};
+
+	lowStart.onclick = function() {
+		talkCtl.startSpeak('low', 1);
+	}
+
+	lowStop.onclick = function() {
+		talkCtl.stopSpeak('low', 1);
+	}
+</script>
+</html>
+
+
+
+
+
+

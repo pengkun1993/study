@@ -1,0 +1,26 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="JoinUs_Bar">
+	<div class="item-title">
+		<h3>加入我们</h3>
+		<ul class="tab-base">
+			<if condition="Is_Auth('Admin/JoinUs/index')">
+			<li><a href="{:U('Admin/JoinUs/index')}"><span>列表</span></a></li>
+			</if>
+			<if condition="Is_Auth('Admin/JoinUs/add')">
+			<li><a href="{:U('Admin/JoinUs/add')}"><span>新增</span></a></li>
+			</if>
+			<li><a class="current" href="#"><span>更新</span></a></li>
+		</ul>
+	</div>
+</div>
+<form id="JoinUs_Form" method="post">
+<table class="table tb-type2 nobdb">
+	<tbody>
+		</tbody>
+	<tfoot>
+		<tr class="tfoot">
+			<td colspan="2"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="$('#JoinUs_Form').submit();" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></td>
+		</tr>
+	 </tfoot>
+</table>
+<input name="id" type="hidden" value="{:I('get.id')}" />
+</form></block>

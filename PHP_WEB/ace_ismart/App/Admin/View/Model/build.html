@@ -1,0 +1,114 @@
+<extend name="Public/base" />
+
+<block name="body">
+<!-- page specific plugin styles -->
+
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/jquery-ui-1.10.3.custom.min.css" />
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/chosen.css" />
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/datepicker.css" />
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/bootstrap-timepicker.css" />
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/daterangepicker.css" />
+		<link rel="stylesheet" href="__STATIC__/aceAdmin/css/colorpicker.css" />
+
+		<div class="fixed-bar" id="Model_Bar">
+			<div class="item-title">
+				<div class="page-header">
+					<h1><a href="{:U('Admin/Model/index')}">模型管理</a>
+						<small>
+							<i class="icon-double-angle-right"></i>
+							<span class="lead">&nbsp;&nbsp;生成模型</span>
+						</small>
+					</h1>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 marg-top">
+			<form class="form-horizontal" role="form" method="POST" id="Model_Form">
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成控制器文件: </label>
+
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-1" name="build_action">
+							<option value="0" >不生成</option>
+                			<option value="1" selected>生成</option>
+						</select>	
+					</div>
+				</div>
+				<hr/>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成模型文件:</label>
+
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-2" name="build_model" data-options="value:'1'">
+							<option value="0" >不生成</option>
+                			<option value="1" selected>生成</option>
+						</select>
+					</div>
+				</div>
+				<hr/>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成菜单:
+					</label>
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-3" name="build_rule">
+							<option value="0" selected>不生成</option>
+                			<option value="1" >生成</option>
+						</select>
+						<span class="help-inline col-xs-12 col-sm-9	">
+							<span class="middle" style="color:red;">新增菜单后会默认增加到 "系统->系统设置" 下，创建菜单后请移动到需要的对应菜单下
+							</span>
+						</span>
+					</div>
+				</div>
+				<hr/>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成列表文件:
+					</label>
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-4" name="build_tpl_index">
+							<option value="0" >不生成</option>
+                			<option value="1" selected>生成</option>
+						</select>
+					</div>
+				</div>
+				<hr/>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成新增文件:
+					</label>
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-5" name="build_tpl_add">
+							<option value="0" >不生成</option>
+                			<option value="1" selected>生成</option>
+						</select>
+					</div>
+				</div>
+				<hr/>
+
+				<div class="form-group">
+					<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 生成更改文件:
+					</label>
+					<div class="col-xs-11">
+						<select class="col-xs-7 col-sm-3" id="form-field-select-5" name="build_tpl_edit">
+							<option value="0" >不生成</option>
+                			<option value="1" selected>生成</option>
+						</select>
+					</div>
+				</div>
+				<hr/>
+
+				<div class="clearfix">
+					<div class="col-md-offset-1 col-md-9">
+						<button class="btn btn-lg btn-success" type="button" onclick="$('#Model_Form').submit();">
+							<i class="icon-ok bigger-110"></i>
+							<span class="lead">提交</span>
+						</button>
+					</div>
+				</div>
+				<input name="model_id" type="hidden" value="{$model_id}" />
+			</form>
+		</div>
+</block>

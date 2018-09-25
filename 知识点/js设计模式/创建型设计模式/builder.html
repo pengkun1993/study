@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>建造者模式-《JavaScript设计模式》</title>
+</head>
+<body>
+	<p>将一个复杂对象的构建层与其表示层分离，同样的构建过程可采用不同的表示。</p>
+</body>
+<script type="text/javascript">
+	/*工厂模式主要是为了创建对象实例或者类簇（抽象工厂），关心的是最终产出的是什么，不关心创建的过程，通过工厂模式我们得到的都是对象实例或者类簇。然而建造者模式在创建对象是要更为复杂一些，虽然其目的也是为了创建对象，但它更多的是关心创建这个对象的整个过程以及细节。*/
+	//创建一位人类
+	var Human=function(param){
+		//技能,如果存在param并且存在skill属性，就用这个属性赋值给this的skill属性，否者将默认设置为‘保密’;
+		this.skill=param && param.skill || '保密';
+		//兴趣爱好
+		this.hobby=param && param.hobby || '保密';
+	}
+	//人类原型方法
+	Human.prototype={
+		getSkill:function(){
+			return this.skill;
+		},
+		getHobby:function(){
+			return this.hobby;
+		}
+	}
+	//创建姓名类
+	var Named=function(name){
+		var that=this;
+		//构造器
+		//构造函数解析姓名的姓与名
+		(function(name,that){
+			that.wholeName=name;
+			if(name.indexOf(' ') > -1){
+				that.FirstName=name.slice(0,name.indexOf(' '));
+				that.secondName=name.slice(name.indexOf(' '));
+			}
+		})(name,that);
+		/*不清楚为何不如此写
+		this.wholeName=name;
+		if(name.indexOf(' ')>-1){
+			this.FirstName=name.slice(0,name.indexOf(' '));
+			this.secondName=name.slice(name.indexOf(' '));
+		}*/
+	};
+	//创建职位类
+	var Work=function(work){
+		var that=this;
+		//构造器
+		//构造函数中通过传入的职位特征来设置相应职位以及描述
+		(function(work,that){
+			switch(work){
+				case 'code':
+					that.work='工程师';
+					that.workDescript='每天沉醉于编程';
+					break;
+				case 'UI':
+				case 'UE':
+					that.work='设计师';
+					that.workDescript='设计更似一种艺术';
+					break;
+				case 'teach':
+					that.work='教师';
+					that.workDescript='分享也是一种快乐';
+					break;
+				default:
+					that.work=work;
+					that.workDescript='对不起，我们还不清楚您所选择这位的相关描述';
+			}
+		})(work,that);
+	}
+	//更换期望的职位
+	Work.prototype.changeWork=function(work){
+		this.work=work;
+	}
+	//添加对职位的描述
+	Work.prototype.cahngeDescript=function(setence){
+		this.workDescript=setence;
+	}
+	//创建建造者类，应聘者建造者
+	var Person=function(name,work){
+		//创建应聘者缓存对象
+		var _person=new Human();
+		//创建应聘者姓名解析对象
+		_person.name=new Named(name);
+		//创建应聘者期望职位
+		_person.work=new Work(work);
+		//将创建的应聘者对象返回
+		return _person;
+	}
+	var person=new Person('xiao ming','code');
+	console.log(person);
+	/*回忆之前学过的集中工厂模式，他们都有一个共同特点，就是创建的结果都是一个完整的个体，我们对创建过程不得而知。而在建造者模式中我们关心的是对象创建过程，因此我们通过将创建对象的类模块化，这样使被创建的类的每一个模块都可以得到灵活的运用与高质量的复用。*/
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

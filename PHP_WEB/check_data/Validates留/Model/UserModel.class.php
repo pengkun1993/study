@@ -1,0 +1,139 @@
+<?php
+	namespace Validates\Model;
+	use Think\Model;
+	/**
+	* 
+	*/
+	class UserModel extends Model
+	{
+		protected $patchValidate=true;
+		protected $_validate=array(
+			array(
+				'username',
+				'require',
+				'用户名必须填写',
+				self::EXISTS_VALIDATE,
+				'regex',
+				self::MODEL_INSERT
+			),
+			array(
+				'username',
+				'/^jike_[A-Za-z]+$/',
+				'用户名必须以(jike_)开头'
+			),
+			array(
+				'username',
+				'filter_username',
+				'含有敏感字眼',
+				self::EXISTS_VALIDATE,
+				'callback',
+			),
+			array(
+				'username',
+				'',
+				'用户名被别人占用了',
+				self::EXISTS_VALIDATE,
+				'unique',
+				self::MODEL_INSERT,
+			),
+			array(
+				'password',
+				'require',
+				'密码必须填写',
+			),
+			array(
+				'confirm_password',
+				'password',
+				'确认密码不一致',
+				self::MUST_VALIDATE,
+				'confirm',
+				self::MODEL_INSERT
+			),
+			array(
+				'email',
+				'require',
+				'电子邮件必须填写'
+			),
+			array(
+				'email',
+				'email',
+				'电子邮件格式不正确'
+			),
+			array(
+				'email',
+				'',
+				'电子邮件已被占用',
+				self::EXISTS_VALIDATE,
+				'unique',
+				self::MODEL_INSERT
+			),
+			array(
+				'sex',
+				'0,1,2',
+				'请不要篡改性别',
+				self::VALUE_VALIDATE,
+				'in',
+				self::MODEL_BOTH,
+			),
+			array(
+				'birthday',
+				'checkBirthday',
+				'生日超出可能范围',
+				self::VALUE_VALIDATE,
+				'callback',
+				self::MODEL_BOTH
+			),
+			array(
+				'birthday',
+				'require',
+				'生日不能为空',
+			),
+			array(
+				'friends',
+				'checkMaxCount',
+				'不可能更多了',
+				self::VALUE_VALIDATE,
+				'callback',
+				self::MODEL_BOTH
+			),
+		);
+		
+		function checkBirthday($value){
+			$start=strtotime('1900-1-1');
+			$end=NOW_TIME;
+			$value_time=strtotime($value);
+			return $value_time>=$start&&$value_time<=$end;
+		}
+		function checkMaxCount($value){
+			$count=$this->count();
+			return $value<=$count;
+		} 
+		function filter_username($value){
+		return stripos($value,'boss')===false;
+		}
+		protected $_auto=array(
+			array(
+				'password',
+				'md5',
+				self::MODEL_BOTH,
+				'function'
+			),
+			array(
+				'create_time',
+				'time',	
+				self::MODEL_BOTH,
+				'funtion'
+			),
+			array(
+				'status',
+				1
+			),
+			array(
+				'ip',
+				'get_client_ip',
+				self::MODEL_BOTH,
+				'funcion'
+			)
+		);
+	}
+?>

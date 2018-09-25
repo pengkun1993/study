@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>箭头函数</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+	//箭头函数表达式的语法比函数表达式更短，并且没有自己的this,arguments,super或new.target。这些函数表达式跟适用于那些本来要匿名函数的地方，并且他们不能用作构造函数。
+	//语法：
+		//(x1,x2,x3,...,xN)=>{函数声明}
+		//(x1,x2,...,xN)=>表达式（单一）<==> (x1,x2,...,xN)=>{return 表达式}
+		//单个参数，可省略括号，x1=>{函数声明}
+		//没有参数则适用空括号，()=>{函数声明}
+		//加括号的函数体被当做一个对象返回，()=>({a:1});
+		//可以使用剩余参数和默认参数 (x1,x2,...reset)=>{函数声明};(x1=0,x2,x3,...,xN=4)=>{函数声明}
+		//同样支持参数列表结构赋值,
+		let f=([a,b]=[1,2],{x:c}={x:a+b})=>a+b+c;
+		console.log(f());
+	// 描述
+		// 引入箭头函数有两个方面的作用：更简短的函数并且不绑定this。
+		// 在箭头函数出现之前，每个新定义的函数都有它自己的this值（在构造函数的情况下是一个新对象，在严格模式的函数调用中为undefined，如果该函数被称为“对象方法”则为基础对象等）。This被证明是令人厌烦的面向对象风格的编程。
+		function Person(){
+			//Person()构造函数定义this作为它自己的实例
+			this.age=0;
+			setInterval(function growUp(){
+				//在非严格模式下，growUp()函数定义this作为全局对象
+				//与在Person()构造函数中定义的this并不相同
+				//console.log(this.age);
+				this.age++;
+			},1000);
+		}
+		var p=new Person();
+		console.log(p);//Person {age: 0}
+		setTimeout(function(){
+			console.log('p',p.age);//NaN
+			console.log('age',age);//NaN
+		},2000);
+		// 箭头函数不会创建自己的this，它只会从自己的作用域链的上一层继承this。因此，在下面的代码中，传递给setinterval的函数内的this与封闭函数中的this值相同。
+		function Person1(){
+			this.age=0;
+			setInterval(()=>{
+				this.age++;// |this| 正确地指向person 对象
+			},1000);
+		}
+		var p1=new Person1();
+		setTimeout(function(){
+			console.log('p1',p1.age);
+		},2000)
+		// 与严格模式的关系：鉴于this是词法层面的，严格模式中与this相关的规则都将被忽略
+		function Person2(){
+			this.age=0;
+			var closure='123'
+			let timer=setInterval(function growUp(){
+				this.age++;
+				console.log('p2_clousre',closure);
+			},1000);
+			setTimeout(function(){
+				clearInterval(timer);
+			},2000);
+		}
+		var p2=new Person2();
+		function PersonX(){
+			'use strict'
+			this.age=0;
+			var closure='123'
+			let timer=setInterval(()=>{
+				this.age++;
+				console.log('px',closure);
+			},1000);
+			setTimeout(function(){
+				clearInterval(timer);
+			},2000);
+		}
+		var px=new PersonX();
+		// 通过call或apply调用
+		// 由于箭头函数没有自己的this指针，通过call()或apply()方法调用一个函数时，只能传递参数（不能绑定this）他们的第一个参数会被忽略。（这种现象对于bind方法同样成立）
+		var adder={
+			base:1,
+			add:function(a){
+				var f=v=>v+this.base;
+				return f(a);
+			},
+			addThruCall:function(a){
+				var f=v=>v+this.base;
+				var b={
+					base:2
+				};
+				return f.call(b,a);
+			}
+		}
+		console.log('adder.add',adder.add(1));//2
+		console.log('adder.addThruCall',adder.addThruCall(1));//2,b被忽略，但必须有一个暂用位置
+	//不绑定arguments，箭头函数不绑定arguments对象。因此，在本示例中，arguments只是引用了封闭作用域内的arguments:
+		var arguments=[1,2,3];
+		var arr=()=>arguments;
+		console.log(arr());//[1,2,3]
+		function foo(n){
+			var f=()=>arguments[0]+n;
+			return f();
+		}
+		console.log(foo(1));//2
+	// 向函数一样使用箭头函数，箭头函数表达式对非方法函数是最合适的。
+		(function(){
+			'use strict';
+			var obj={
+				i:10,
+				b:()=>console.log(this.i,this),
+				c:function(){
+					console.log(this.i,this);
+				}
+			}
+			//obj.b();//TypeError: Cannot read property 'i' of undefined
+			obj.c();//10 {i: 10, b: ƒ, c: ƒ}
+		})();
+	// 箭头函数没有定义this绑定。另一个涉及Object.defineProperty()的示例
+		(function(){
+			'use strict';
+			var obj={
+				a:10
+			}
+
+			Object.defineProperty(obj,'b',{
+				get:()=>{
+					console.log(this.a,typeof this.a,this);
+					return this.a+10;
+				}
+				//代表全局对象'Window',因此'this.a'返回undefined
+			})
+		})();
+	//箭头函数不能使用new，箭头函数没有prototype属性。
+		var foo=()=>{};
+		console.log(foo.prototype);//undefined
+		//var Foo=new foo();//TypeError: foo is not a constructor
+	//箭头函数在参数和箭头之间不能换行
+		//var func=()
+				//=>1;//SyntaxError: Unexpected token =>
+		var func2=()=>
+	            2;
+	    console.log(func2());//2,箭头和函数体之间可以换行
+
+		let callback;
+		callback=callback || function(){};
+		console.log(callback);//ƒ (){}
+		//callback=callback || ()=>{};//SyntaxError: Unexpected token )
+		callback=1 || (()=>{console.log('=======>')});//1，并不会运行箭头函数
+	// 更多示例
+		let empty=()=>{};
+		console.log(empty());//undefined,空的箭头函数返回undefined
+		let empty2=function(){};
+		console.log(empty2());//undefined,普通函数也是返回undefined
+		// 立即执行函数
+		let fob=(()=>'foobar')();
+		console.log(fob);//foobar
+		
+		let simple=a=>a>15?15:a;
+		console.log(simple(16));//15
+		console.log(simple(10));//10
+
+		let array=[5,6,13,0,1,18,23];
+		let sum=array.reduce((a,b)=>a+b);
+		console.log(sum);//66
+		let even=array.filter(v=>v%2==0);
+		console.log(even);//[6, 0, 18]
+		let double=array.map(v=>v*2);
+		console.log(double);//[10, 12, 26, 0, 2, 36, 46]
+		console.log(array);//[5, 6, 13, 0, 1, 18, 23]
+	//箭头函数内定义的变量及其作用域，类似普通函数
+	// 箭头函数使用闭包
+		// 标准闭包函数
+		function A(){
+			var i=0;
+			return function b(){
+				return (++i);
+			}
+		}
+		var v=A();
+		console.log(v());//1
+		console.log(v());//2
+		//箭头函数体的闭包
+		var Add=(i=0)=>{return (()=>(++i))};
+		var vd=Add();
+		console.log(vd());//1
+		console.log(vd());//2
+		// 因为只有一个返回，return及括号()也可以省略
+		var Add=(i=0)=>()=>(++i);
+	//箭头函数递归
+		var fact=(x)=>(x==0?1:x*fact(x-1));
+		fact(5);//5*4*3*2*1*1=120
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+

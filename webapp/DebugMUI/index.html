@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>首页导航</title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<div style="text-align:center; font-size: 0.9rem; color: #999999; margin-top: 40%;">
+			初始化...
+		</div>
+
+		<script type="text/javascript" charset="utf-8">
+			mui.plusReady(function() {
+				//系统初始化时预加载3级子页面母版及其母版子页面
+				createSubMasterDef("Lv1");
+				createSubMasterDef("Lv2");
+				createSubMasterDef("Lv3");
+				
+				//根据各种条件判断跳转到欢迎页、登录页还是首页
+				var tagetWebView = mui.preload({
+					url: "page/login.html",
+					id: "page-login",
+					styles: {
+						scrollIndicator: "none"
+					}
+				});
+				tagetWebView.addEventListener("loaded", function() {
+					tagetWebView.show("none", 0, function() {
+						plus.navigator.closeSplashscreen();
+					});
+				});
+			});
+			
+			 //创建子页母版页
+			function createSubMasterDef(level) {
+				var wvHeader = mui.preload({
+					url: "page/subMasterDef.html",
+					id: "subMasterDef" + level,
+					styles: {
+						scrollIndicator: "none"
+					}
+				});
+				var wvContent = mui.preload({
+					url: "",
+					id: "subMasterDef" + level + "Children",
+					styles: {
+						top: "45px",
+						bottom: "0",
+						scrollIndicator: "none"
+					}
+				});
+				wvContent.addEventListener("loaded", function() {
+					setTimeout(function() {
+						wvContent.show("none");
+					}, 50);
+				});
+				wvContent.hide("none");
+				wvHeader.append(wvContent);
+			}
+		</script>
+
+	</body>
+
+</html>

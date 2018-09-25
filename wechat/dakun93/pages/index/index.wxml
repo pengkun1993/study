@@ -1,0 +1,3 @@
+<view>
+	<button bind:tap="testShow">弹窗</button>
+</view>

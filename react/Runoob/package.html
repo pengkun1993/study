@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件</title>
+	<script type="text/javascript" src="../dist/react.js"></script>
+	<script type="text/javascript" src="../dist/react-dom.js"></script>
+	<script type="text/javascript" src="../dist/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<div id="example1"></div>
+</body>
+<script type="text/babel">
+	var HelloMessage=React.createClass({
+		render:function(){
+			return <h1>Hello {this.props.name}!</h1>
+		}
+	});
+	ReactDOM.render(
+		<HelloMessage name='world'/>,
+		document.getElementById('example')
+	);
+	{/*React.createClass 方法用于生成一个组件类 HelloMessage。
+		<HelloMessage /> 实例组件类并输出信息。
+		注意，原生 HTML 元素名以小写字母开头，而自定义的 React 类名以大写字母开头，比如 HelloMessage 不能写成 helloMessage。除此之外还需要注意组件类只能包含一个顶层标签，否则也会报错。
+		如果我们需要向组件传递参数，可以使用 this.props 对象。
+		注意，在添加属性时， class 属性需要写成 className ，for 属性需要写成 htmlFor ，这是因为 class 和 for 是 JavaScript 的保留字。
+	*/}
+
+	{/*复合组件*/}
+	var Name=React.createClass({
+		render:function(){
+			return (
+				<h1>{this.props.name}</h1>
+			);
+		},
+	});
+	var Link=React.createClass({
+		render:function(){
+			return(
+				<a href="{this.props.site}">
+					{this.props.site}
+				</a>
+			);
+		},
+	});
+	var WebSite=React.createClass({
+		render:function(){
+			return (
+				<div>
+					<Name name={this.props.name} />
+					<Link site={this.props.site} />
+				</div>
+			)
+		}/*此处是对象格式，不可画分号，使用逗号或者不画*/
+	});
+	ReactDOM.render(
+		<WebSite name='百度' site='http://www.baidu.com' />,
+		document.getElementById('example1')
+	)
+</script>
+</html>

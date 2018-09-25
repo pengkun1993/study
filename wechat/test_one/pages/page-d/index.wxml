@@ -1,0 +1,11 @@
+<view  class="container">
+	<text>页面D</text>
+	<button bind:tap="navigateToC">navigateTo pageC</button>
+	<button bind:tap="redirectToC">redirectTo pageC</button>
+	<button bind:tap="reLaunchToC">reLaunchTo pageC</button>
+
+	<text>---------------</text>
+
+	<button bind:tap="switchTabToA">switchTabTo pageA</button>
+	<button bind:tap="switchTabToB">switchTabTo pageB</button>
+</view>

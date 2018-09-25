@@ -1,0 +1,55 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="JoinUs_Bar">
+	<div class="item-title">
+		<h3>加入我们</h3>
+		<ul class="tab-base">
+			<li><a class="current" href="JavaScript:void(0);" onclick="Data_Reload('JoinUs_Data_List');"><span>列表</span></a></li>
+			<li><a href="JavaScript:void(0);" onclick="Data_Search('JoinUs_Search_From','JoinUs_Data_List');"><span>搜索</span></a></li>
+			<if condition="Is_Auth('Admin/JoinUs/add')">
+			<li><a href="{:U('Admin/JoinUs/add')}"><span>新增</span></a></li>
+			</if>
+		</ul>
+	</div>
+</div>
+<div style="display: none">
+  <form id="JoinUs_Search_From" class="search_from">
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+        </table>
+  </form>
+</div>
+
+<table id="JoinUs_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#JoinUs_Data_List").datagrid({
+		url : "{:U('JoinUs/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#JoinUs_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+			{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/JoinUs/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/JoinUs/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','JoinUs_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

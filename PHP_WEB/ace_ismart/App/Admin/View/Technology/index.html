@@ -1,0 +1,121 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Technology_Bar">
+	<div class="item-title">
+		<div class="page-header">
+			<h1>核心技术				<small>
+					<i class="icon-double-angle-right"></i>
+					<span class="lead">&nbsp;&nbsp;列表</span>
+					<a class="top_a" href="JavaScript:void(0);" onclick="Data_Search('Technology_Search_From','Technology_Data_List');"><span>搜索</span></a>
+					<if condition="Is_Auth('Admin/Technology/add')">
+					<a class="top_a" href="{:U('Admin/Technology/add')}"><span>新增</span></a>
+					</if>
+				</small>
+			</h1>
+		</div>
+	</div>
+</div>
+<div style="display: none">
+  <form id="Technology_Search_From" class="search_from">
+	
+    <div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 标题 : </label>
+
+			<div class="col-xs-10">
+				<input name="s_title" type="text" class="col-xs-10">			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 内容 : </label>
+
+			<div class="col-xs-10">
+				
+	<div class="col-xs-12">
+	<div class="wysiwyg-editor editor" id="content_editor"></div>
+	<textarea style="display:none" id="editor_content" name="content"></textarea>
+	<script type="text/javascript">
+		$("#content_editor").blur(function()
+		{
+			$("#editor_content").html($("#content_editor").html());
+		})
+
+	</script>
+	</div>			</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/><div class="form-group">
+			<label class="col-xs-2 control-label no-padding-right" for="form-field-1"> 状态 : </label>
+
+			<div class="col-xs-10">
+				<select name="state" class="col-xs-7 col-sm-3 col-lg-3 col-md-3" id="s_state"  def-data="1"><option value="1"
+				>显示</option><option value="0"
+				>隐藏</option></select><script type="text/javascript">
+			var sel=document.getElementById('s_state');
+			var opt=sel.getElementsByTagName('option');
+			var def=sel.getAttribute('def-data');
+			for(var i=0;i<opt.length;i++){
+				if(def==opt[i].value){
+					opt[i].setAttribute("selected","selected");
+				};
+			}
+			</script>
+						</div>
+		</div>
+		<div style="clear:both;">
+			
+		</div>
+		<hr/>  </form>
+</div>
+
+<table id="Technology_Data_List"></table>
+
+<script type="text/javascript">
+$(function() {
+	$("#Technology_Data_List").datagrid({
+		url : "{:U('Technology/index')}",
+		fit : true,
+		striped : true,
+		border : false,
+		pagination : true,
+		pageSize : 20,
+		pageList : [ 10, 20, 50 ],
+		pageNumber : 1,
+		sortName : 'id',
+		sortOrder : 'desc',
+		toolbar : '#Technology_Bar',
+		singleSelect : true,
+		columns : [[
+            {field : 'id',title : 'ID',width : 40,sortable:true},
+{field : "title",title : "标题",width :100,sortable:true},{field : "state",title : "状态",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_state=new Array()
+			op_state["1"]="显示"
+			op_state["0"]="隐藏"
+			
+			return op_state[value];
+			}},
+			{field : "show_index",title : "首页展示",width :100,sortable:true,formatter: function (value, row, index) {
+			var op_show_index=new Array()
+			op_show_index["0"]="不展示"
+			op_show_index["1"]="展示"
+			
+			return op_show_index[value];
+			}},
+						{field : "operate",title : "操作",width : 200,formatter: function (value, row, index) {
+				operate_menu='';
+				
+				<if condition="Is_Auth('Admin/Technology/edit')">
+				operate_menu = operate_menu+"<a href='<?php echo U('edit'); ?>&id="+row.id+"' >编辑</a>";
+				</if>
+
+				<if condition="Is_Auth('Admin/Technology/del')">
+				operate_menu = operate_menu+" | <a href='#' onclick=\"Data_Remove('<?php echo U('del'); ?>&id="+row.id+"','Technology_Data_List');\">删除</a>";
+				</if>
+
+				return operate_menu;
+			}}
+		]]
+	});
+})
+</script></block>

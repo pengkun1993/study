@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>渐进的状态模式-前端网-老姚</title>
+</head>
+<style type="text/css">
+	body{
+		background: :#f6f6f6;
+		font:12px 微软雅黑;
+	}
+	div{
+		width: 220px;
+		border: 1px solid #e6e6e6;
+		height: 220px;
+		background: gray;
+		display: table;
+		border-radius: 50%;
+		margin: 0 auto;
+	}
+	div:hover{
+		cursor:pointer;
+	}
+	p{
+		font-size: 20px;
+		margin: 5px;
+		text-align: center;
+		color:white;
+		font-weight: bold;
+		vertical-align: middle;
+		display: table-cell;
+	}
+</style>
+<body>
+	<section>
+		<div id="light">
+			<p>我是个灯泡</p>
+		</div>
+	</section>
+</body>
+<script type="text/javascript">
+	//简单模式
+	function sample(){
+		var isOpen=false;
+		var light=document.getElementById('light');
+		light.onclick=function(){
+			if(isOpen){
+				this.style.backgroundColor='gray';
+				//isOpen=false;
+			}else{
+				this.style.backgroundColor='yellow';
+				//isOpen=true;
+			}
+			isOpen=!isOpen;//顶替上面两句
+		}
+	};
+	//sample();
+	//面向对象写法
+	function faceObj(){
+		var App={};
+		App.Light={
+			init:function(render){
+				this.render=render;
+				this.isOpen=false;
+			},
+			toggle:function(){
+				if(this.isOpen){
+					this.off();
+				}else{
+					this.on();
+				}
+			},
+			on:function(){
+				this.render.style.backgroundColor='yellow';
+				this.setState(true);
+			},
+			off:function(){
+				this.render.style.backgroundColor='gray';
+				this.setState(false);
+			},
+			setState:function(flag){
+				this.isOpen=flag;
+			},
+			getState:function(){
+				return this.isOpen;
+			}
+		}
+		var lightDom=document.getElementById('light');
+		var light=Object.create(App.Light);//此处使用new报错，不是function
+		light.init(lightDom);
+		lightDom.onclick=function(){
+			light.toggle();
+		}
+	}
+	//faceObj();
+	//状态模式
+	function stateModel(){
+		var App={};
+		App.lightOn={
+			init:function(light){
+				this.light=light;
+				return this;
+			},
+			on:function(){
+				//已经亮着，不需要修改
+			},
+			off:function(){
+				this.light.offCss();
+				this.light.setState(this.light.lightOff);
+			},
+			click:function(){
+				this.off();
+			}
+		};
+		App.lightOff={
+			init:function(light){
+				this.light=light;
+				return this;
+			},
+			on:function(){
+				this.light.onCss();
+				this.light.setState(this.light.lightOn);
+			},
+			off:function(){
+				//本身为熄灭，不需要操作
+			},
+			click:function(){
+				this.on();
+			}
+		};
+		App.Light={
+			init:function(render){
+				this.render=render;
+
+				this.lightOn=Object.create(App.lightOn).init(this);
+				this.lightOff=Object.create(App.lightOff).init(this);
+			
+				this.state=this.lightOff;
+			},
+			click:function(){
+				this.state.click();
+			},
+			on:function(){
+				this.state.on();
+			},
+			off:function(){
+				this.state.off();
+			},
+			setState:function(state){
+				this.state=state;
+			},
+			//也可以写在state类里面
+			onCss:function(){
+				this.render.style.background='yellow';
+			},
+			offCss:function(){
+				this.render.style.background='gray';
+			}
+		}
+		var lightDom=document.getElementById('light');
+		var light=Object.create(App.Light);
+		light.init(lightDom);
+		lightDom.onclick=function(){
+			light.click();
+		}
+	}
+	//stateModel();
+	//需求变更
+	/*新增一中状态，变暗，三种状态可以由任意一个切换到另一个
+	任意切换通过遥控器按钮来实现，未添加按钮你不做实现
+	点击灯泡时逻辑是：由关到暗，由暗到亮，由亮到关*/
+	function changeReq(){
+		var App={};
+		App.lightDim={
+			init:function(light){
+				this.light=light;
+				return this;
+			},
+			on:function(){
+				this.light.onCss();
+				this.light.setState(this.light.lightOn);
+			},
+			off:function(){
+				this.light.offCss();
+				this.light.setState(this.light.lightOff);
+			},
+			dim:function(){
+				//自身状态，不需要操作
+			},
+			click:function(){
+				this.on();
+			}
+		};
+		App.lightOn={
+			init:function(light){
+				this.light=light;
+				return this;
+			},
+			on:function(){
+				//已经亮着，不需要修改
+			},
+			off:function(){
+				this.light.offCss();
+				this.light.setState(this.light.lightOff);
+			},
+			dim:function(){
+				this.light.dimCss();
+				this.light.setState(this.light.lightDim);
+			},
+			click:function(){
+				this.off();
+			}
+		};
+		App.lightOff={
+			init:function(light){
+				this.light=light;
+				return this;
+			},
+			on:function(){
+				this.light.onCss();
+				this.light.setState(this.light.lightOn);
+			},
+			off:function(){
+				//本身为熄灭，不需要操作
+			},
+			dim:function(){
+				this.light.dimCss();
+				this.light.setState(this.light.lightDim);
+			},
+			click:function(){
+				this.dim();
+			}
+		};
+		App.Light={
+			init:function(render){
+				this.render=render;
+
+				this.lightOn=Object.create(App.lightOn).init(this);
+				this.lightOff=Object.create(App.lightOff).init(this);
+				this.lightDim=Object.create(App.lightDim).init(this);
+
+				this.state=this.lightOff;
+			},
+			click:function(){
+				this.state.click();
+			},
+			on:function(){
+				this.state.on();
+			},
+			off:function(){
+				this.state.off();
+			},
+			dim:function(){
+				this.state.dim();
+			},
+			setState:function(state){
+				this.state=state;
+			},
+			//也可以写在state类里面
+			onCss:function(){
+				this.render.style.background='yellow';
+			},
+			offCss:function(){
+				this.render.style.background='gray';
+			},
+			dimCss:function(){
+				this.render.style.background='green';
+			}
+		}
+		var lightDom=document.getElementById('light');
+		var light=Object.create(App.Light);
+		light.init(lightDom);
+		lightDom.onclick=function(){
+			light.click();
+		}
+	}
+	changeReq();
+	// 总结
+	/*看完上述例子后，你可以试想一下，如果从一种情况（这里称为if else），去改写到最后那个需求，代码会怎么写。
+改起来是否很累。最关键的是，又有需求变更了，还要来个最强光high，比on还要亮，是不是状态模式比较好改写比较方便呢？
+再试想一下，需求又变了。dim不能直接变成high，必须经过on才行。是不是在状态模式继承上改方便。
+过两天儿，领导一看效果，还是改回去吧。刚说完，别改了，又说，关闭之前都变成dim，才能关闭。
+假如你一开始的实现是写几个if else的函数，你在听到这几句话时，脑海里肯定波涛时起时落，我靠！！
+其实状态模式对开闭原则支持不太好的一个设计模式。那也比最开始的代码那种写法要好。
+所以有时，初学者总会想，那点功能有啥了不起的，比一些经验多的写得还快！
+刚入门时，俺也是这么想的。但是需求变得时候，才能看出自己写得多垃圾。人家随便改改就ok了。
+而我们要改时，却好像动一个大手术似的，小心翼翼的，恐怕会切了大动脉，或者干脆推到重来。
+重构是比不可少的环节，时间花在前面还是花在后面的问题呀！
+谁在说设计模式没用，我只能说，你是不是敲完代码后，都交给别人维护了。而别人骂你垃圾时，你却听不到呢。
+设计模式看重的意图，不是形式。
+理解精髓，才能无招胜有招，精髓就是设计原则。不要读死书，不要硬套，这才是大道。
+但是从不想去研究的话，别人看你代码时，心想，你完成点功能还可以。其余呵呵。*/ 
+</script>
+</html>
+
+
+
+
+
+
+

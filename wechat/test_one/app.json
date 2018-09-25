@@ -1,0 +1,26 @@
+{
+  "pages":[
+    "pages/page-a/index",
+    "pages/page-b/index",
+    "pages/page-c/index",
+    "pages/page-d/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "list":[{
+      "pagePath":"pages/page-a/index",
+      "text":"page_A"
+    },{
+      "pagePath":"pages/page-b/index",
+      "text":"page_B"
+    }],
+    "color":"#000",
+    "selectedColor":"#f00",
+    "backgroundColor":"#fff"
+  }
+}

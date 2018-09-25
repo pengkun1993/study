@@ -1,0 +1,62 @@
+<extend name="Public/base"/><block name="body"><div class="fixed-bar" id="Example_Bar">
+	<div class="item-title">
+		<h3>案例</h3>
+		<ul class="tab-base">
+			<if condition="Is_Auth('Admin/Example/index')">
+			<li><a href="{:U('Admin/Example/index')}"><span>列表</span></a></li>
+			</if>
+			<if condition="Is_Auth('Admin/Example/add')">
+			<li><a href="{:U('Admin/Example/add')}"><span>新增</span></a></li>
+			</if>
+			<li><a class="current" href="#"><span>更新</span></a></li>
+		</ul>
+	</div>
+</div>
+<form id="Example_Form" method="post">
+<table class="table tb-type2 nobdb">
+	<tbody>
+	<tr>
+			<td colspan="2" class="required"><label for="for_name">标题:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="title" type="text" class="easyui-textbox" style="height:30px;" value="{$_info["title"]}" data-options="required:true"></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">所属栏目:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><select name="pid" class="easyui-combotree" style="height:30px;" data-options="value:'{$_info["pid"]}',url:'{:U("Admin/Function/get_categroy")}&pid=-1&r_type=json',multiple:false,required:false,editable:false"></select></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">图片:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input id="img_picture_box" name="picture" value="{$_info["picture"]}" class="easyui-textbox" data-options="buttonText:'选择',buttonIcon:'iconfont icon-pic',prompt:'上传图片...',onClickButton:function(){updata_image('img_picture_box')}" style="width:250px;height:24px;"></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">内容:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><textarea id="editor_content" name="content" config_date="0" style="width:700px;height:300px;" class="easyui-kindeditor">{$_info["content"]}</textarea></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">状态:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><select name="status" class="easyui-combobox" style="height:30px;" data-options="value:'{$_info["status"]}',multiple:false,required:true,editable:false"><option value="0" >隐藏</option><option value="1" >显示</option></select></td>
+			<td class="vatop tips"></td>
+		</tr><tr>
+			<td colspan="2" class="required"><label for="for_name">显示顺序呢:</label></td>
+		</tr>
+		<tr class="noborder">
+			<td class="vatop rowform"><input name="sort" type="text" class="easyui-textbox" style="height:30px;" value="{$_info["sort"]}" data-options="required:true"></td>
+			<td class="vatop tips"></td>
+		</tr>	</tbody>
+	<tfoot>
+		<tr class="tfoot">
+			<td colspan="2"><a class="easyui-linkbutton" href="JavaScript:void(0);" onclick="$('#Example_Form').submit();" data-options="iconCls:'iconfont icon-edit'"><span style="font-size: 14px; font-weight: 600;">提交</span></a></td>
+		</tr>
+	 </tfoot>
+</table>
+<input name="id" type="hidden" value="{:I('get.id')}" />
+</form></block>

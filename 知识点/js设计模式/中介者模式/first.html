@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中介者模式</title>
+	<style type="text/css">
+		.title{
+			font-size: 30px;
+			color:#555555;
+			font-weight: bold;
+			margin-left: 30px;
+		}
+		.team{
+			height: 100px;
+			width: 410px;
+			padding: 5px;
+			display: inline-block;
+		}
+		.team.red{
+			border: 1px solid red;
+		}
+		.team.blue{
+			border:1px solid blue;
+		}
+		.player{
+			width: 100px;
+			height: 100px;
+			display: table;
+			float: left;
+		}
+		.player input[type=checkbox]{
+			display: none;
+		}
+		.player span{
+			display: table-cell;
+			vertical-align: middle;
+			text-align: center;
+			height: inherit;
+			width: inherit;
+			border-radius: 50px;
+			color: white;
+			cursor: pointer;
+		}
+		.player.red span{
+			background: red;
+		}
+		.player.blue span{
+			background: blue;
+		}
+		.player.dead span{
+			background: gray;
+		}
+		.player.win span{
+			background: yellow;
+		}
+		.player.lose span{
+			background: black;
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<p class="title">红蓝两队PK，按死对方！某一队赢了会变成黄色</p>
+		<div class="team red">
+			<label class="player red">
+				<input type="checkbox">
+				<span>红队选手1</span>
+			</label>
+			<label class="player red">
+				<input type="checkbox">
+				<span>红队选手2</span>
+			</label>
+			<label class="player red">
+				<input type="checkbox">
+				<span>红队选手3</span>
+			</label>
+			<label class="player red">
+				<input type="checkbox">
+				<span>红队选手4</span>
+			</label>
+		</div>
+		<div class="team blue">
+			<label class="player blue">
+				<input type="checkbox">
+				<span>蓝队选手5</span>
+			</label>
+			<label class="player blue">
+				<input type="checkbox">
+				<span>蓝队选手6</span>
+			</label>
+			<label class="player blue">
+				<input type="checkbox">
+				<span>蓝队选手7</span>
+			</label>
+			<label class="player blue">
+				<input type="checkbox">
+				<span>蓝队选手8</span>
+			</label>
+		</div>
+	</section>
+</body>
+<script type="text/javascript">
+	var Player={
+		create:function(){
+			var player=Object.create(this);
+			player.init.apply(player,arguments);
+
+			// 向中介者传递消息
+			playerDirector.receiveMessage('addPlayer',player);
+			return player;
+		},
+		init:function(config){
+			this.teamColor=config.teamColor;
+			this.render=config.render;
+			this.state='alive';
+
+			this.bindEvent();
+		},
+		bindEvent:function(){
+			var self=this;
+			this.render.querySelector('[type=checkbox]').onchange=function(){
+				if(self.gameOver) return;
+
+				this.checked && (this.disabled=true);
+				self.die();
+			}
+		},
+		win:function(){
+			this.gameOver=true;//为了修改结束后还能点击的bug
+			this.render.className='player win';
+		},
+		lose:function(){
+			this.gameOver=true;
+			this.render.className='player lose';
+		},
+		die:function(){
+			this.state='dead';
+			this.render.className='player dead';
+			// 向中介者传递消息
+			playerDirector.receiveMessage('playerDead',this);
+		}
+	}
+	var playerDirector=(function(){
+		var teams={
+			'red':[],
+			'blue':[]
+		};
+		var operations={
+			addPlayer:function(player){
+				teams[player.teamColor].push(player);
+			},
+			playerDead:function(player){
+				var teamColor=player.teamColor;
+				var team=teams[teamColor];
+				var all_dead =team.every(function(player){
+					return player.state==='dead';
+				});
+				if(!all_dead) return;
+
+				//自己队输
+				team.forEach(function(player){
+					player.lose();
+				});
+
+				// 其余队赢
+				for(var color in teams){
+					if(color !== teamColor){
+						teams[color].forEach(function(player){
+							player.win();
+						});
+					}
+				}
+			},
+		};
+		return {
+			receiveMessage:function(){
+				var msg=[].shift.call(arguments);
+				operations[msg].apply(null,arguments);
+			}
+		};
+	})();
+
+	//客户端
+	var redPlayerViews=document.querySelectorAll('.team.red .player');
+	for(var i=0;i<redPlayerViews.length;i++){
+		Player.create({
+			teamColor:'red',
+			render:redPlayerViews[i]
+		});
+	}
+	var bluePlayerViews=document.querySelectorAll('.team.blue .player');
+	for(var i=0;i<bluePlayerViews.length;i++){
+		Player.create({
+			teamColor:'blue',
+			render:bluePlayerViews[i]
+		});
+	}
+</script>
+</html>
+
+
+
+
+
+
+

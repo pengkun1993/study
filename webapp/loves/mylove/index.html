@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="Zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X_UA_Compatitle" content="chrom=1,IE=edge">
+	<meta name="formate_detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width,height=device-height,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<title>不布是个小公举</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+	<div class="image">
+		<audio autoplay="autoplay">
+			<source src="audio/GoodTime.mp3" type="audio/mpeg" id="audio_goodtime">
+		</audio>
+		<img src="images/music_disc.png" class="play" alt="光碟" id="music">
+		<img src="images/music_pointer.png">
+	</div>
+	<!-- <div  id="page_load">
+		资源加载中。。。
+	</div> -->
+	<div class="page" id="page1">
+		<div class="bg"></div>
+		<div class="p1_lantern"></div>
+		<div class="ilike">送给亲爱的媳妇儿<br /> 碰一碰我爱你的心</div>
+		<div class="p1_imooc"></div>
+		<div class="p1_words">爱你宝贝儿</div>
+	</div>
+	<div class="page" id="page2">
+		<div class="bg"></div>
+		<div class="p2_circle"></div>
+		<div class="p2_2016"></div>
+		<div class="p2_word">不知道从何时开始<br/>整个世界都围绕着你旋转</div>
+	</div>
+	<div class="page" id="page3">
+		<div class="bg"></div>
+		<div class="p3_word typewriter">一路走来不容易，谢谢你的宽容和你的原谅，人生还很长，我们一起成长，爱你——坤</div>
+		<div class="total_time" id="ourTime"></div>
+		<div class="p3_left"></div>
+		<div class="p3_center"></div>
+		<div class="p3_right"></div>
+	</div>
+	<!-- 模拟打字 -->
+	<script>
+     function writeLetter(){
+       var typewriter=document.querySelector(".typewriter"),
+       code=typewriter.innerHTML,
+       pos=0,
+       len=code.length;
+       typewriter.innerHTML="";
+       typewriter.style.display="block";       
+       function typewriting(){
+         pos++;
+         if(pos<=len)
+         {
+           switch(code.charAt(pos))
+           {
+             case "<":
+               pos=code.indexOf(">",pos);
+             break;
+             case "&":
+               pos=code.indexOf(";",pos);
+             break;
+           }
+           typewriter.innerHTML=code.substring(0,pos);
+           setTimeout(typewriting,200);
+         }
+         else
+         {
+           typewriter.classList.add("gameover");
+         }
+       }
+       typewriting();
+     };
+
+  </script>
+</body>
+</html>

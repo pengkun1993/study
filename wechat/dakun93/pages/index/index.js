@@ -1,0 +1,12 @@
+Page({
+	testShow:function(){
+		wx.showModal({
+			title:'测试',
+			content:'小影大傻',
+			showCancel:true,
+			cancelText:'绝对是',
+			confirmText:'同意',
+			icon:'success'
+		})
+	}
+})
