@@ -1,0 +1,3 @@
+<view class="wrapper">
+	<text>这里是component-1组件,在{{innerText}}</text>
+</view>

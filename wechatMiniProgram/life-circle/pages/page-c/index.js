@@ -29,34 +29,46 @@ Page({
 	//自定义方法
 	navigateToD:function(){
 		//保留当前页面，跳转到应用内的某个页面，但是不能跳到 tabbar 页面。使用 wx.navigateBack 可以返回到原页面。
+		console.log('%cpageC==============navigateToD=============','color:red');
 		wx.navigateTo({
 			url:'/pages/page-d/index'
 		});
 	},
 	redirectToD:function(){
 		//关闭当前页面，跳转到应用内的某个页面，但是不允许跳转到tabbar页面
+		console.log('%cpageC==============redirectToD=============','color:red');
 		wx.redirectTo({
 			url:'/pages/page-d/index'
 		});
 	},
 	reLaunchToD:function(){
 		//关闭所有页面，打开到应用内的某个页面
+		console.log('%cpageC==============reLaunchToD=============','color:red');
 		wx.reLaunch({
 			url:'/pages/page-d/index'
 		});
 	},
 	switchTabToA:function(){
 		//跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+		console.log('%cpageC==============switchTabToA=============','color:red');
 		wx.switchTab({
 			url:'/pages/page-a/index'
 		});
 	},
 	switchTabToB:function(){
 		//跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+		console.log('%cpageC==============switchTabToB=============','color:red');
 		wx.switchTab({
 			url:'/pages/page-b/index'
 		});
-	}
+	},
+	navigateToC:function(){
+		//保留当前页面，跳转到应用内的某个页面，但是不能跳到 tabbar 页面。使用 wx.navigateBack可以返回到原页面。
+		console.log('%cpageC==============navigateToC=============','color:red');
+		wx.navigateTo({
+			url:'/pages/page-c/index'
+		});
+	},
 });
 
 

@@ -1,3 +1,6 @@
 {
-	
+	"usingComponents":{
+		"component-1":"/components/component-1/index",
+		"component-2":"/components/component-2/index"
+	}
 }

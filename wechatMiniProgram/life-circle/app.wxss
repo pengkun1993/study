@@ -11,8 +11,13 @@ text{
 	width: 100%;
 	text-align: center;
 }
+
 button{
 	width: 400rpx;
 	margin: 20rpx;
 }
 
+input {
+  width:400rpx;
+  border: 1rpx solid #ccc;
+}

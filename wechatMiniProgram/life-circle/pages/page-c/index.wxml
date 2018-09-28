@@ -8,4 +8,13 @@
 
 	<button bind:tap="switchTabToA">switchTabTo pageA</button>
 	<button bind:tap="switchTabToB">switchTabTo pageB</button>
+
+	<text>--------------------------</text>
+
+	<input type="text" placeholder="请输入"/>
+	<button bind:tap="navigateToC">navigateTo pageC</button>
+
+	<text>--------------------------</text>
+
+	<component-1 innerText="pageA"></component-1>
 </view>

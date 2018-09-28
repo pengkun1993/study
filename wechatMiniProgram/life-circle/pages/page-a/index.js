@@ -29,18 +29,21 @@ Page({
 	// 自定义方法
 	navigateToC:function(){
 		//保留当前页面，跳转到应用内的某个页面，但是不能跳到 tabbar 页面。使用 wx.navigateBack 可以返回到原页面。
+		console.log('%cpageA==========navigateToC===========','color:red');
 		wx.navigateTo({
 			url:'/pages/page-c/index'
 		});
 	},
 	redirectToC:function(){
 		//关闭当前页面，跳转到应用内的某个页面，但是不允许跳转到tabbar页面
+		console.log('%cpageA==========redirectToC===========','color:red');
 		wx.redirectTo({
 			url:'/pages/page-c/index'
 		});
 	},
 	reLaunchToC:function(){
 		//关闭所有页面，打开到应用内的某个页面
+		console.log('%cpageA==========reLaunchToC===========','color:red');
 		wx.reLaunch({
 			url:'/pages/page-c/index'
 		})
