@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <router-link to="/hello">go to hello</router-link>
-    <router-link to="/world">go to world</router-link>
-    <navigation> 
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <navigation>
       <router-view/>
     </navigation>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
 
 <style>
 #app {

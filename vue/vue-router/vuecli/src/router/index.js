@@ -2,22 +2,22 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 
+import Index from '@/pages/index'
+import Hello from '@/pages/hello/index'
+import World from '@/pages/world/index' 
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component:require('@/pages/index/index')
-    },{
     	path:'/hello',
     	name:'hello',
-    	component:require('@/pages/hello/index')
+    	component:Hello
     },{
     	path:'/world',
     	name:'world',
-    	component:require('@/pages/world/index')
+    	component:World
     }
   ]
 })
