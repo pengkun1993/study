@@ -1,0 +1,22 @@
+dependencies:
+  '@farmfriend/ff-utils-time': 10.0.1.12+7001/@farmfriend/ff-utils-time/1.0.3
+packages:
+  /vue/2.5.17:
+    dev: false
+    resolution:
+      integrity: sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
+  10.0.1.12+7001/@farmfriend/ff-utils-time/1.0.3:
+    dependencies:
+      vue: 2.5.17
+    dev: false
+    name: '@farmfriend/ff-utils-time'
+    resolution:
+      integrity: sha1-7zZoOD3hTX5tWTKCtpzYDkTUHPg=
+      registry: 'http://10.0.1.12:7001/'
+      tarball: 'http://10.0.1.12:7001/@farmfriend/ff-utils-time/download/@farmfriend/ff-utils-time-1.0.3.tgz'
+    version: 1.0.3
+registry: 'http://registry.npmjs.org/'
+shrinkwrapMinorVersion: 9
+shrinkwrapVersion: 3
+specifiers:
+  '@farmfriend/ff-utils-time': ^1.0.3

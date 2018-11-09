@@ -2,14 +2,11 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/lib/index.js',
+  entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename:'toastPanel.js',
-    library:'toastPanel',//library指定的就是使用require时的模块名
-    libraryTarget:'umd',//librayTarget会生成不同的UMD的代码，可以只是commonjs标准的，也可以只amd标准的，也可以只是通过script标签引入的。
-    umdNamedDefine:true//会对umd的构建过程的amd模块进行命名。否则就使用匿名的define。
+    filename: 'build.js'
   },
   module: {
     rules: [
