@@ -1,6 +1,3 @@
-# 使用webpack从无到有搭建一个简单项目
-
-> 参考文档 : [官方文档](https://www.webpackjs.com/guides/)
 
 ## webpack版本：v4.23.1
 
@@ -36,6 +33,7 @@
 
 
 ## 第二步，创建几个基本的目录以及相应的文件
+#### sinon是根目录文件名
 
 ![dir](https://upload-images.jianshu.io/upload_images/10187278-562e0139315a367a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -60,14 +58,14 @@
 	}
 
 	#下面我们就可以使用npm run build 来构建项目了
-	#webpac后面加 --watch，可以是webpack进入观察者模式，这样当我们修改文件内容的时候，不需要每次都执行npm run build，直接刷新浏览器即可。
+	#webpack后面加 --watch，可以是webpack进入观察者模式，这样当我们修改文件内容的时候，不需要每次都执行npm run build，直接刷新浏览器即可。
 ```
 
-### 执行完上面的命令后可以在文件夹中看到，多出了dist目录，里面后有一个mian.js，也就是说该命令和将我们的脚本作为入口起点，软后输出为main.js。
+### 执行完上面的命令后可以在文件夹中看到，多出了dist目录，里面后有一个mian.js，也就是说该命令和将我们的脚本作为入口起点，然后输出为main.js。
 
 ## 第四步，添加webpack配置文件
 
-### webpack现在随后支持无配置文件也可运行的情况，但是我们的需求各不相同，所以基本上我们都需要配置自己的webpack配置文件。
+### webpack现在支持无配置文件也可运行的情况，但是我们的需求各不相同，所以基本上我们都需要配置自己的webpack配置文件，根目录下创建webpack.config.js。
 
 ```javascript
 	//webpack.config.js
@@ -86,7 +84,7 @@
 	}
 ```
 
-## 第五步安装一些方便我们开发的插件
+## 第五步，安装一些方便我们开发的插件
 
 ### html-webpack-plugin , 自动在dist目录生成index.html文件，而且会自动更新，不需要我们手动添加或修改index.html文件。
 
@@ -98,7 +96,8 @@
 
 	plugins:[
 		new HtmlWebpackPlugin({
-			title:'hello world'
+			title:'hello world',
+            template:'index.html'//模板文件，将根据这个文件生成
 		})
 	]
 ```
@@ -158,7 +157,7 @@
 
 ### 开启模块热替换（HMR:Hot Module Replacement)
 
-#### 由于现在的webpack-dev-server封装了webpack-dev-middle和webpack-dev-middleware，所以我们不需要安装插件，可以直接开启HMR。
+#### 完成上面配置后，修改index.js文件刷新页面并不会更新，需要重新启动项目才可把更新同步过去，为了方便开发避免每次修改都重启项目，所以就有了模块热替换。现在webpack-dev-server封装了webpack-dev-middle和webpack-dev-middleware，所以我们不需要安装插件，可以直接开启HMR。
 
 ```javascript
 	//webpack.config.js
@@ -240,3 +239,7 @@
 		}
 	}
 ```
+
+#### 这篇笔记记录了使用webapck一步一步搭建一个项目，关于文章中的各个配置项说明，详见另一篇文章：[webpack配置整理](https://www.jianshu.com/p/78e4815889e1)
+
+> 参考文档：[https://www.webpackjs.com/guides/](https://www.webpackjs.com/guides/)

@@ -20,7 +20,7 @@
 				'process.env.NODE_ENV':JSON.stringify('production')
 			})
 		]
-	})
+	});
 ```
 
 #### `NODE_ENV`是一个由node.js暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境下，服务器工具、构建脚本和客户端library的行为。然而，与预期不同的是，无法再构建脚本webpack.config.js中，将process.env.NODE_ENV设置为'production'，因此，例如`process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` 这样的条件语句，在 webpack 配置文件中，无法按照预期运行。

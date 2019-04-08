@@ -1,6 +1,25 @@
 {
   "pages": [
     "pages/myPage/index/index",
+    "pages/myPage/tab1/index",
+    "pages/myPage/tab2/index",
+    "pages/myPage/tab3/index",
+    "pages/myPage/page1/index",
+    "pages/myPage/page2/index",
+    "pages/myPage/page3/index",
+    "pages/myPage/page4/index",
+    "pages/myPage/page5/index",
+    "pages/myPage/page6/index",
+    "pages/myPage/page7/index",
+    "pages/myPage/page8/index",
+    "pages/myPage/page9/index",
+    "pages/myPage/page10/index",
+    "pages/myPage/page11/index",
+    "pages/myPage/page12/index",
+    "pages/myPage/page13/index",
+    "pages/myPage/page14/index",
+    "pages/myPage/page15/index",
+
     "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
@@ -13,7 +32,24 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "维护栈",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "list":[
+      {
+        "pagePath":"pages/myPage/index/index",
+        "text":"首页"
+      },{
+        "pagePath":"pages/myPage/tab1/index",
+        "text":"tab1"
+      },{
+        "pagePath":"pages/myPage/tab2/index",
+        "text":"tab2"
+      },{
+        "pagePath":"pages/myPage/tab3/index",
+        "text":"tab3"
+      }
+    ]
   }
 }

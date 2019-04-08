@@ -1,11 +1,13 @@
-# webpack配置整理
+
+## 开始准备
+
 ## 开始准备
 
 ---
 
 ```bash
-	npm init -y
-	npm install webpack webpack-cli --save-dev
+	npm init -y    #简单初始化一个项目
+	npm install webpack webpack-cli --save-dev  #安装webpack相关开发依赖
 
 	npx webpack --config webpack.config.js #可以将脚本作为入口起点，然后输出为main.js，如果webpack.config.js存在，将默认使用它，这里使用--config是为了表明可以传递任何名称的配置文件。
 
@@ -16,7 +18,7 @@
 	#这时我们就可以使用npm run build命令来替代我们之前使用的npx命令。
 ```
 
-### 为了从JavaScript模块中import一个CSS文件，需要在module配置中安装并添加style-loader和css-loader，并引入规则。同样的道理，加载图片也需要使用图片加载器file-loader。
+### 为了从JavaScript模块中import一个CSS文件，需要安装并添加style-loader和css-loader并在webpack.config.js文件的中进行配置，并引入规则。同样的道理，加载图片也需要使用图片加载器file-loader。
 
 ```javascript
 	//npm install --save-dev style-loader css-loader file-loader
@@ -144,7 +146,7 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
   		allowExternal:false,
   		//在文件被发送的output文件夹之前执行清理
   		beforeEmit:false
-	}
+	}；
 ```
 
 ## 使用source map
@@ -192,7 +194,7 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
 
 ##### `eval-source-map` - 每个模块使用`eval()`执行，并且source map转换为DataUrl后添加到eval()中。初始化source map时比较慢，但是会在重新构建时提供比较快的速度，并且生成实际的文件。行数能够正确映射，因为会映射到原始代码中。它会生成用于开发环境的最佳品质的source map。
 
-##### `cheap-eval-source-map` - 类似eval-source-map，每个模块使用eval()执行。这是"cheap(低开销)"的source map，应为它没有生成列映射，只是映射行数。它会忽略源自loader的source map，并且仅显示转译后的代码，就像`eval`devtool.
+##### `cheap-eval-source-map` - 类似eval-source-map，每个模块使用eval()执行。这是"cheap(低开销)"的source map，因为它没有生成列映射，只是映射行数。它会忽略源自loader的source map，并且仅显示转译后的代码，就像`eval`devtool.
 
 ##### `cheap-module-eval-source-map` - 类似 `cheap-eval-source-map` ，并且在这种情况下，源自loader的source map会得到更好的处理结果。然而，loader  source map会被简化为每行一个映射。
 
@@ -396,7 +398,7 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
 			})
 		}
 		//还有部分配置项，详情见：https://www.webpackjs.com/configuration/dev-server/
-	}
+	}；
 ```
 
 ## 使用webpack-dev-middleware
@@ -468,7 +470,7 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
 			...
 			"server:express":"node server.js"
 		}
-	}
+	}；
 	//运行npm run server:express 便一个在浏览器中通过访问localhost:3000访问到该服务器
 ```
 
@@ -530,7 +532,7 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
 		// fullBuildTimeout(number)：当multiStep启用时，表示两步构建之间的延时
 		// requestTimeout(number)：下载manifest的延时
 		// 这些选项属于实验性内容，因此以后可能会被弃用。就如同上文所说的那样，这些选项通常情况下都是没有必要设置的，仅仅是设置一下 new webpack.HotModuleReplacementPlugin() 在大部分情况下就足够了。
-	})
+	})；
 ```
 
 #### NamedModulesPlugin插件，当开启HMR的时候使用该插件会显示模块的相对路径，建议用于开发环境
@@ -597,5 +599,9 @@ xhtml|Boolean|false|如果为`true`设置link标签为自动关闭|
 
 	server.listen(5000,'localhost',()=>{
 		console.log('dev server listening on port 5000');
-	})
+	})；
 ```
+### 结语：工作中发现对公司项目的结构不是特别熟悉，故而整理了webpack相关的一些配置和内容，大体对项目从无到有有了一个概念，这篇笔记是将配置单拎出来整理的，有另一篇系统地走整个流程的文章：[使用webpack从无到有搭建一个简单项目](https://www.jianshu.com/p/38abbdb5f265).
+### 把笔记分享出来，希望能给人帮助，以及希望能有人指出其中的错误和不足，欢迎指正交流。
+
+> 参考文档：[webpack官方文档](https://www.webpackjs.com/concepts/)

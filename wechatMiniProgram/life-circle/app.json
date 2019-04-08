@@ -22,5 +22,8 @@
     "color":"#000",
     "selectedColor":"#f00",
     "backgroundColor":"#fff"
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx04e4b35c8d659783" 
+  ]
 }

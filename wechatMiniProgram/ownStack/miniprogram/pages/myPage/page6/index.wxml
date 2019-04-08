@@ -1,3 +1,3 @@
-<view>
-	<button>首屏</button>
+<view class="container">
+	<button bindtap="nt7">navigateTo page7</button>
 </view>

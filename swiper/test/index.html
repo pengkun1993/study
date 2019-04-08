@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./swiper.min.css">
+</head>
+<body>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">Slide 1</div>
+			<div class="swiper-slide">Slide 2</div>
+			<div class="swiper-slide">Slide 3</div>
+		</div>
+
+		<!-- 分页器 -->
+		<div class="swiper-pagination">
+			
+		</div>
+		<!-- 导航按钮 -->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+
+		<!-- 滚动条 -->
+		<div class="swiper-scrollbar"></div>
+	</div>
+
+
+	<script type="text/javascript" src="./swiper.min.js"></script>
+	<script>
+		window.onload=function(){
+			let mySwiper = new Swiper('.swiper-container',{
+				direction:'vertical',
+				loop:true,
+
+				// 分页 
+				pagination:{
+					el:'.swiper-pagination',
+				},
+
+				// 导航按钮
+				navigation:{
+					nextEl:'.swiper-button-next',
+					prevEl:'.swiper-button-prev',
+				},
+
+				// 滚动条
+				scrollbar:{
+					el:'.swiper-scrollbar',
+				}
+			})
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -456,7 +456,7 @@
 					//value该属性对应的值。可以是任何有效的JavaScript值。默认为undefined
 					//writable当且仅当该属性的writable为true时，value才能被赋值运算符改变。默认为false
 					//存取描述符同时具有以下可选键值：
-					//get一个给属性提供getter的方法，如果没有getter则为undefined。当访问该属性是，该方法会被执行，方法执行时没有参数传入，但是会传入this对象（由于继承关系，这里的this不一定是定义该属性的对象）。默认为undefined
+					//get一个给属性提供getter的方法，如果没有getter则为undefined。当访问该属性时，该方法会被执行，方法执行时没有参数传入，但是会传入this对象（由于继承关系，这里的this不一定是定义该属性的对象）。默认为undefined
 					//set一个给属性提供setter的方法，如果没有setter则为undefined。当属性值改变时，触发执行该方法。该方法将接受唯一参数，即该属性新的参数值。默认为undefined。
 					//如果一个属性描述符不具有value,writable,get和set任意一个关键字，那么它将被认为是一个数据描述符。如果一个描述符同时有(value或writable)和(get或set)关键字，将会产生一个异常。
 					//这些选项不一定是自身属性，如果是继承的也要考虑。为了确认保留这些默认值，你可能需要在这之前冻结Object.prototype，明确指定所有的选项，或者将__proto__属性指向null。
