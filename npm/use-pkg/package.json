@@ -1,0 +1,15 @@
+{
+  "name": "use-pkg",
+  "version": "1.0.0",
+  "description": "使用pkg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ppkun",
+  "license": "ISC",
+  "dependencies": {
+    "@ppkun/babel": "^1.0.0",
+    "ppkun-test-pkg": "^1.1.0"
+  }
+}

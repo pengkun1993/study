@@ -1,38 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <title>Document</title>
 </head>
 <body>
-	<script type="text/javascript">
-		function Fn(){
-			this.name = 'kkun';
-		}
-
-		Fn.prototype.say = function() {
-			console.log('hi');
-		};
-
-		let nFn = new Fn();
-		console.dir(nFn);
-	</script>
 </body>
+<script>
+  async  function a() {
+    console.log(1);
+    await new Promise((resolve, reject) => {
+       setTimeout(function() {
+        console.log(2);
+        resolve('2');
+      }, 2000);
+    });
+    console.log(4);
+    await console.log(3);
+  }
+  a();
+</script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

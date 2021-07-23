@@ -1,0 +1,15 @@
+{
+  "name": "ppkun-test-pkg",
+  "version": "1.1.0",
+  "description": "学习npm发包",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "study",
+    "npm"
+  ],
+  "author": "pipikun",
+  "license": "ISC"
+}

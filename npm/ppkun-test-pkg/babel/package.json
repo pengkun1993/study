@@ -1,0 +1,16 @@
+{
+  "name": "@ppkun/babel",
+  "version": "1.0.0",
+  "description": "my scoped test package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm",
+    "packge",
+    "bale"
+  ],
+  "author": "ppkun",
+  "license": "ISC"
+}
